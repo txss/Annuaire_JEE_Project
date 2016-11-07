@@ -3,10 +3,10 @@ package fr.univ.annuaire.beans;
 public class Personne {
 	
 	private int id;
-	private String passWord;
+	private String passWord; // TODO crypt this password
 	private String firstName;
 	private String lastName;
-	private String birthDate;
+	private String birthDate; // TODO type date
 	private String email;
 	private String webSite;
 	
@@ -15,7 +15,7 @@ public class Personne {
 	/**
 	 * Default constructor
 	 */
-	public void Personne(){
+	public Personne(){
 		
 	}
 	

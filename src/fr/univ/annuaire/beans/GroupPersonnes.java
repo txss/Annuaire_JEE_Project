@@ -12,7 +12,10 @@ public class GroupPersonnes {
 	/**
 	 * Default constructor
 	 */
-	public void GroupPersonnes() { }
+	public GroupPersonnes() { }
+	
+	
+	// BEGIN getter and setter
 	
 	public int getId() {
 		return id;
@@ -37,5 +40,7 @@ public class GroupPersonnes {
 	public void setPersonneInGroup(ArrayList<Personne> personneInGroup) {
 		this.personneInGroup = personneInGroup;
 	}
+	
+	// END getter and setter
 	
 }
