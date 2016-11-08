@@ -1,4 +1,4 @@
-package fr.univ.annuaire.test.jdbcTools;
+package fr.univ.annuaire.test.svg;
 
 import java.util.Collection;
 

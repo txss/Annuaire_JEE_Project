@@ -18,10 +18,11 @@ public class JdbcTools {
 	private String password;
 	
 	
-	/**
+	/** 
 	 * Contstructeur par defaut
 	 */
 	public JdbcTools () {}
+	
 	
 	// BEGIN getter and setter
 	public String getDriver() {
@@ -60,12 +61,12 @@ public class JdbcTools {
 
 
 	public void init() throws ClassNotFoundException {
-		System.out.println("Initializing JDBCTOOLS...");
+		System.out.println("Initializing JDBCTOOLS..."); // TODO
 		loadDriver();
 	}
 	
 	public void close(){
-		System.out.println("Closing JDBCTOOLS...");
+		System.out.println("Closing JDBCTOOLS..."); // TODO
 	}
 	
 	private void loadDriver() throws ClassNotFoundException {
@@ -77,7 +78,8 @@ public class JdbcTools {
 	    Connection conn = DriverManager.getConnection(url, user, password);
 	    return conn;
 	}
-	
+
+	// TODO CODE MORT????
 	public void quietClose(Connection c) throws SQLException {
 		if (c != null) c.close();
 	}
@@ -95,11 +97,14 @@ public class JdbcTools {
 //	        }
 		
 			PreparedStatement st = connect.prepareStatement(query);
-			
+
 			for(int i = 0; i < parameters.length; i++) {
 				
 				if (parameters[i] instanceof Integer)
 					st.setInt(i+1, (int) parameters[i]);
+				
+				if (parameters[i] instanceof java.sql.Date) // TODO DATE
+					st.setDate(i+1, (java.sql.Date) parameters[i]);
 				
 				if (parameters[i] instanceof String)
 					st.setString(i+1, (String) parameters[i]);
@@ -107,10 +112,7 @@ public class JdbcTools {
 				if (parameters[i] instanceof Boolean)
 					st.setBoolean(i+1, (Boolean) parameters[i]);
 			}
-			st.execute();
-			
-			//System.out.println(nb + " ligne(s) insérée(s)");
-			
+			st.execute();			
 			st.close();
 		}
 		

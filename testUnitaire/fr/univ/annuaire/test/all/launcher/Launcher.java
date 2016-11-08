@@ -2,18 +2,15 @@ package fr.univ.annuaire.test.all.launcher;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
-
-import fr.univ.annuaire.test.javabeans.GroupPersonnesTest;
-import fr.univ.annuaire.test.javabeans.PersonneTest;
-import fr.univ.annuaire.test.jdbcTools.JdbcToolsTest;
+import fr.univ.annuaire.test.javabeans.beansLauncherTest;
+import fr.univ.annuaire.test.svg.svgLauncherTest;
 
 
 @RunWith(Suite.class)
 
 @Suite.SuiteClasses({
-	PersonneTest.class,
-	GroupPersonnesTest.class,
-	JdbcToolsTest.class
+	beansLauncherTest.class,
+	svgLauncherTest.class
 })
 
 public class Launcher {

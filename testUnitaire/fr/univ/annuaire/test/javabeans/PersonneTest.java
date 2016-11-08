@@ -2,6 +2,8 @@ package fr.univ.annuaire.test.javabeans;
 
 import static org.junit.Assert.*;
 
+import java.sql.Date;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -44,7 +46,9 @@ public class PersonneTest {
 	
 	@Test
 	public void birthDateTest(){
-		fail("Not yet implemented");
+		Date date = new Date(2016, 10, 28);
+		p.setBirthDate(date);
+		assertEquals(date, p.getBirthDate());
 	}
 	
 	@Test
@@ -57,6 +61,12 @@ public class PersonneTest {
 	public void webSiteTest(){
 		p.setWebSite("https://dearwood.fr/");
 		assertEquals("https://dearwood.fr/", p.getWebSite());
+	}
+	
+	@Test
+	public void idGroupTest(){
+		p.setIdGroup(5);
+		assertEquals(5, p.getIdGroup());
 	}
 	
 }

@@ -2,6 +2,7 @@ package fr.univ.annuaire.beans;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 
 import fr.univ.annuaire.svg.IResultSetToBean;
 
@@ -11,9 +12,10 @@ public class Personne implements IResultSetToBean<Personne>{
 	private String passWord; // TODO crypt this password
 	private String firstName;
 	private String lastName;
-	private String birthDate; // TODO type date
+	private Date birthDate;
 	private String email;
 	private String webSite;
+	private int idGroup;
 	
 	
 	
@@ -58,11 +60,15 @@ public class Personne implements IResultSetToBean<Personne>{
 		this.lastName = lastName;
 	}
 	
-	public String getBirthDate() {
+	public Date getBirthDate() {
 		return birthDate;
 	}
 	
-	public void setBirthDate(String birthDate) {
+	public int getIdGroup() {
+		return idGroup;
+	}
+	
+	public void setBirthDate(Date birthDate) {
 		this.birthDate = birthDate;
 	}
 	
@@ -81,11 +87,15 @@ public class Personne implements IResultSetToBean<Personne>{
 	public void setWebSite(String webSite) {
 		this.webSite = webSite;
 	}
+	
+	public void setIdGroup(int idGroup){
+		this.idGroup = idGroup;
+	}
 	// END Getters and Setters
 	
 
 	public String toString(){
-		return "\n"+"id: " + this.id + " \n nom: " + this.lastName + "\n prenom: " + this.firstName + "\n email: " + this.email + "\n webSite: " + this.webSite;
+		return "\n"+"id: " + this.id + " \n nom: " + this.lastName + "\n prenom: " + this.firstName + "\n email: " + this.email + "\n webSite: " + this.webSite + "\n Groupe: " + this.idGroup;
 	}
 
 	@Override
