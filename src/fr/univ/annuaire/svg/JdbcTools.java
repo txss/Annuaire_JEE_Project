@@ -39,7 +39,6 @@ public class JdbcTools {
 		return password;
 	}
 	
-	
 	public void setDriver(String driver) {
 		this.driver = driver;
 	}
@@ -57,6 +56,8 @@ public class JdbcTools {
 	}
 
 	// END getter and setter
+	
+	
 
 	public void init() throws ClassNotFoundException {
 		System.out.println("Initializing JDBCTOOLS...");

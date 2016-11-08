@@ -1,4 +1,4 @@
-package javabeans.test;
+package fr.univ.annuaire.test.javabeans;
 
 import static org.junit.Assert.*;
 

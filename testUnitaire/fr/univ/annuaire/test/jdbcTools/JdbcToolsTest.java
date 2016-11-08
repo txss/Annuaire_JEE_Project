@@ -1,4 +1,4 @@
-package jdbcTools_Test;
+package fr.univ.annuaire.test.jdbcTools;
 
 import static org.junit.Assert.*;
 
