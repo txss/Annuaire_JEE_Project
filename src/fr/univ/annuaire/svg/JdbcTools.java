@@ -5,28 +5,29 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Collection;
+
 
 
 public class JdbcTools {
 
-	private String driver;
+	private String driver = "com.mysql.jdbc.Driver";
 	private String url;
 	private String user;
 	private String password;
+	
 	
 	/**
 	 * Contstructeur par defaut
 	 */
 	public JdbcTools () {}
 	
-	
 	// BEGIN getter and setter
-	
 	public String getDriver() {
 		return driver;
 	}
-	
+
 	public String getUrl() {
 		return url;
 	}
@@ -56,8 +57,7 @@ public class JdbcTools {
 	}
 
 	// END getter and setter
-	
-	
+
 
 	public void init() throws ClassNotFoundException {
 		System.out.println("Initializing JDBCTOOLS...");
@@ -67,7 +67,6 @@ public class JdbcTools {
 	public void close(){
 		System.out.println("Closing JDBCTOOLS...");
 	}
-	
 	
 	private void loadDriver() throws ClassNotFoundException {
 	    Class.forName(driver);
@@ -84,29 +83,56 @@ public class JdbcTools {
 	}
 	
 	
-	public int executeUpdate(String query/*,Object... parameters*/) throws SQLException {
-		Connection connect = null;
+	public int executeUpdate(String query, Object... parameters) throws SQLException {
 		int nb = 0;
 		
-		try {
-			connect = newConnection();
-			PreparedStatement st = connect.prepareStatement(
-					"UPDATE personne SET Age = ? " +
-				    "WHERE Nom = ? "
-			);
-			/*ResultSet rs = st.executeQuery(query);
+		try(Connection connect = newConnection();) {
+//			Statement st = connect.createStatement();
+//			ResultSet rs = st.executeQuery();
+//			while (rs.next()) {
+//	            System.out.printf("%-20s | %-20s | %3d\n", //
+//	                    rs.getString(1), rs.getString(2), rs.getInt(3));
+//	        }
+		
+			PreparedStatement st = connect.prepareStatement(query);
 			
-			while (rs.next()) {
-	            System.out.printf("%-20s | %-20s | %3d\n", //
-	                    rs.getString(1), rs.getString(2), rs.getInt(3));
-	        }
-			*/
+			for(int i = 0; i < parameters.length; i++) {
+				
+				if (parameters[i] instanceof Integer)
+					st.setInt(i+1, (int) parameters[i]);
+				
+				if (parameters[i] instanceof String)
+					st.setString(i+1, (String) parameters[i]);
+				
+				if (parameters[i] instanceof Boolean)
+					st.setBoolean(i+1, (Boolean) parameters[i]);
+			}
+			st.execute();
+			
+			//System.out.println(nb + " ligne(s) insérée(s)");
+			
 			st.close();
-		} finally {
-			quietClose(connect);
 		}
 		
 		return nb;
 	}
+	
+	
+	public <T> Collection<T> findBeans(String sql, IResultSetToBean<T> mapper) throws DaoException {
+		Collection <T> beans = new ArrayList<T>();
+		
+		try(Connection connect = newConnection();) {
+			PreparedStatement st = connect.prepareStatement(sql);
+			ResultSet rs = st.executeQuery();
+			
+			beans.add(mapper.toBean(rs));
+			
+			st.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return beans;
+	}//findBeans
 	
 }

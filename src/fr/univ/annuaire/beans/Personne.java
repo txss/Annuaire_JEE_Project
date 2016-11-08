@@ -1,6 +1,11 @@
 package fr.univ.annuaire.beans;
 
-public class Personne {
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import fr.univ.annuaire.svg.IResultSetToBean;
+
+public class Personne implements IResultSetToBean<Personne>{
 	
 	private int id;
 	private String passWord; // TODO crypt this password
@@ -76,7 +81,22 @@ public class Personne {
 	public void setWebSite(String webSite) {
 		this.webSite = webSite;
 	}
-	
 	// END Getters and Setters
 	
+
+	public String toString(){
+		return "\n"+"id: " + this.id + " \n nom: " + this.lastName + "\n prenom: " + this.firstName + "\n email: " + this.email + "\n webSite: " + this.webSite;
+	}
+
+	@Override
+	public Personne toBean(ResultSet rs) throws SQLException {
+		
+		while (rs.next()) {
+			this.setId(rs.getInt(1) );
+			this.setFirstName(rs.getString(2) );
+			this.setFirstName(rs.getString(3) );
+        }
+		
+		return this;
+	}
 }
