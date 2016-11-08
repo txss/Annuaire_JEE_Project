@@ -9,13 +9,13 @@ import fr.univ.annuaire.svg.IResultSetToBean;
 public class Personne implements IResultSetToBean<Personne>{
 	
 	private int id;
-	private String passWord; // TODO crypt this password
 	private String firstName;
 	private String lastName;
 	private Date birthDate;
 	private String email;
 	private String webSite;
 	private int idGroup;
+	private String passWord; // TODO crypt this password
 	
 	
 	
@@ -100,11 +100,16 @@ public class Personne implements IResultSetToBean<Personne>{
 
 	@Override
 	public Personne toBean(ResultSet rs) throws SQLException {
-		
+
 		while (rs.next()) {
 			this.setId(rs.getInt(1) );
-			this.setFirstName(rs.getString(2) );
+			this.setLastName(rs.getString(2) );
 			this.setFirstName(rs.getString(3) );
+			this.setEmail(rs.getString(4));
+			this.setWebSite(rs.getString(5));
+			this.setBirthDate(rs.getDate(6));
+			this.setIdGroup(rs.getInt(7));
+			this.setPassWord(rs.getString(8));
         }
 		
 		return this;

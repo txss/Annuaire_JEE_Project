@@ -109,8 +109,8 @@ public class JdbcTools {
 				if (parameters[i] instanceof String)
 					st.setString(i+1, (String) parameters[i]);
 				
-				if (parameters[i] instanceof Boolean)
-					st.setBoolean(i+1, (Boolean) parameters[i]);
+//				if (parameters[i] instanceof Boolean)
+//					st.setBoolean(i+1, (Boolean) parameters[i]);
 			}
 			st.execute();			
 			st.close();

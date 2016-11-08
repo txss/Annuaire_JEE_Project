@@ -108,7 +108,7 @@ public class JdbcToolsTest extends JdbcTools {
 		String password = "";
 		String firstname = "claude";
 		String email = "test.test@gmail.com";
-		String website = "testdusoteinternet.com";
+		String website = "testdusiteinternet.com";
 		Date birthdate = new Date(1993, 01, 18);
 		int idgroup = 5;
 
@@ -127,10 +127,10 @@ public class JdbcToolsTest extends JdbcTools {
 
 	@Test (timeout = 2000)
 	public void findBeans() throws DaoException{
-		String query = "SELECT id, lastname, firstname, FROM Personnes";
+		String query = "SELECT id, lastname, firstname, email, website, birthdate, idgroup, passWord FROM Personnes";
 		IResultSetToBean<Personne> mapper = new Personne();
 		Collection<Personne> person = newTool.findBeans(query, mapper);
-		System.out.println(person);
+//		System.out.println(person);
 	}
 	
 	
