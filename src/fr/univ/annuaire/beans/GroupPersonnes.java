@@ -1,12 +1,8 @@
 package fr.univ.annuaire.beans;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
-import fr.univ.annuaire.svg.IResultSetToBean;
-
-public class GroupPersonnes implements IResultSetToBean<GroupPersonnes>{
+public class GroupPersonnes{
 
 	private int id;
 	private String name;
@@ -48,18 +44,20 @@ public class GroupPersonnes implements IResultSetToBean<GroupPersonnes>{
 	// END getter and setter
 	
 	public String toString (){
-		return "id: " + this.id + "\n nom: " + this.name;
+		return "id: " + this.id + "\nnom: " + this.name;
 	}
 	
-	@Override
-	public GroupPersonnes toBean(ResultSet rs) throws SQLException {
-		
-		while (rs.next()) {
-			this.setId(rs.getInt(1) );
-			this.setName(rs.getString(2) );
-//			this.setFirstName(rs.getString(3) );
-        }
-		
-		return this;
-	}
+	
+//	@Override
+//	public GroupPersonnes toBean(ResultSet rs) throws SQLException {
+//		
+//		while (rs.next()) {
+//			this.setId(rs.getInt(1) );
+//			this.setName(rs.getString(2) );
+////			this.setFirstName(rs.getString(3) );
+//        }
+//		
+//		return this;
+//	}
+	
 }

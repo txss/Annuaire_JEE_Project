@@ -73,4 +73,13 @@ public class GroupPersonnesTest {
 		g.setPersonneInGroup(listPersone2);
 		assertEquals(listPersone2, g.getPersonneInGroup());
 	}
+	
+	@Test
+	public void toStringTest(){
+		g.setId(2);
+		g.setName("ISL");
+
+		assertEquals("id: 2\nnom: ISL", g.toString());
+	}
+	
 }

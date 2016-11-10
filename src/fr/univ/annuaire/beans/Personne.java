@@ -1,12 +1,8 @@
 package fr.univ.annuaire.beans;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.Date;
 
-import fr.univ.annuaire.svg.IResultSetToBean;
-
-public class Personne implements IResultSetToBean<Personne>{
+public class Personne {
 	
 	private int id;
 	private String firstName;
@@ -95,23 +91,24 @@ public class Personne implements IResultSetToBean<Personne>{
 	
 
 	public String toString(){
-		return "\n"+"id: " + this.id + " \n nom: " + this.lastName + "\n prenom: " + this.firstName + "\n email: " + this.email + "\n webSite: " + this.webSite + "\n Groupe: " + this.idGroup;
+		return "\n"+"id: " + this.id + "\nprenom: " + this.firstName + "\nnom: " + this.lastName + "\nemail: " + this.email + "\nwebSite: " + this.webSite + "\nGroupe: " + this.idGroup;
 	}
 
-	@Override
-	public Personne toBean(ResultSet rs) throws SQLException {
-
-		while (rs.next()) {
-			this.setId(rs.getInt(1) );
-			this.setLastName(rs.getString(2) );
-			this.setFirstName(rs.getString(3) );
-			this.setEmail(rs.getString(4));
-			this.setWebSite(rs.getString(5));
-			this.setBirthDate(rs.getDate(6));
-			this.setIdGroup(rs.getInt(7));
-			this.setPassWord(rs.getString(8));
-        }
-		
-		return this;
-	}
+	// TODO suppre this
+//	@Override
+//	public Personne toBean(ResultSet rs) throws SQLException {
+//
+//		while (rs.next()) {
+//			this.setId(rs.getInt(1) );
+//			this.setLastName(rs.getString(2) );
+//			this.setFirstName(rs.getString(3) );
+//			this.setEmail(rs.getString(4));
+//			this.setWebSite(rs.getString(5));
+//			this.setBirthDate(rs.getDate(6));
+//			this.setIdGroup(rs.getInt(7));
+//			this.setPassWord(rs.getString(8));
+//        }
+//		
+//		return this;
+//	}
 }

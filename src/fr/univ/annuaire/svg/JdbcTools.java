@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 
 
 
@@ -103,7 +104,7 @@ public class JdbcTools {
 				if (parameters[i] instanceof Integer)
 					st.setInt(i+1, (int) parameters[i]);
 				
-				if (parameters[i] instanceof java.sql.Date) // TODO DATE
+				if (parameters[i] instanceof Date)
 					st.setDate(i+1, (java.sql.Date) parameters[i]);
 				
 				if (parameters[i] instanceof String)

@@ -68,5 +68,18 @@ public class PersonneTest {
 		p.setIdGroup(5);
 		assertEquals(5, p.getIdGroup());
 	}
+
+	@Test
+	public void toStringTest(){
+		p.setFirstName("jean");
+		p.setLastName("christophe");
+		p.setId(0);
+		p.setBirthDate(new java.util.Date(1782, 12, 5));
+		p.setEmail("test.test@test.com");
+		p.setWebSite("monbeausite.com");
+		p.setIdGroup(5);
+
+		assertEquals("\nid: 0\nprenom: jean\nnom: christophe\nemail: test.test@test.com\nwebSite: monbeausite.com\nGroupe: 5", p.toString());
+	}
 	
 }
