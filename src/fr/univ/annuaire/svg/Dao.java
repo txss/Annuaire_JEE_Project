@@ -11,7 +11,6 @@ import fr.univ.annuaire.beans.Personne;
 
 public class Dao extends JdbcTools {
 	
-	
 	public Collection<Personne> findPersons() throws DaoException {
 		Collection <Personne> personnes = new ArrayList<Personne>();
 		

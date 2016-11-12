@@ -12,8 +12,10 @@ import java.util.Date;
 
 
 public class JdbcTools {
+	public static final String POSTGRESQL_DRIVER = "org.postgresql.Driver";
+	public static final String MYSQL_DRIVER = "com.mysql.jdbc.Driver";
 
-	private String driver = "com.mysql.jdbc.Driver";
+	private String driver;
 	private String url;
 	private String user;
 	private String password;
@@ -25,7 +27,7 @@ public class JdbcTools {
 	public JdbcTools () {}
 	
 	
-	// BEGIN getter and setter
+	// BEGIN getters and setters
 	public String getDriver() {
 		return driver;
 	}
@@ -58,7 +60,7 @@ public class JdbcTools {
 		this.password = password;
 	}
 
-	// END getter and setter
+	// END getters and setters
 
 
 	public void init() throws ClassNotFoundException {
