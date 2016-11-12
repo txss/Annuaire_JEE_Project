@@ -27,10 +27,10 @@ public class JdbcToolsPGTest {
 		cal.set(Calendar.DAY_OF_MONTH, day);
 		
 		return cal;
-	}
+	}//initAndGetCalendar()
 
 	@BeforeClass
-	public static void initialisation() throws ClassNotFoundException{
+	public static void initialization() throws ClassNotFoundException{
 		newTool = new JdbcTools();
 
 		newTool.setDriver(JdbcTools.POSTGRESQL_DRIVER);
@@ -38,22 +38,22 @@ public class JdbcToolsPGTest {
 		newTool.setUser("florian");
 		newTool.setPassword("Marm0tt3");
 		newTool.init();
-	}
+	}//initialization()
 
 	@AfterClass
 	public static void closing(){
 		newTool.close();
-	}
+	}//closing()
 
 	@Test(timeout = 2000)
 	public void testConnection() throws SQLException{
 		newTool.newConnection();
-	}
+	}//testConnection()
 
 	@Test(timeout = 2000)
 	public void init() throws ClassNotFoundException{
 		newTool.init();
-	}
+	}//init()
 
 
 	//	@Test
@@ -65,35 +65,35 @@ public class JdbcToolsPGTest {
 	@Test(timeout = 2000)
 	public void getURLTest(){
 		assertEquals("jdbc:postgresql://vulgamatique.freeboxos.fr/JEE_Annuaire", newTool.getUrl());
-	}
+	}//getURLTest()
 
 	@Test(timeout = 2000)
 	public void getDriverTest(){
 		assertEquals("org.postgresql.Driver", newTool.getDriver()); //TODO meilleur fa�on de recup les driver FAIRE UN FICHIER DE CONFIG
-	}
+	}//getDriverTest()
 
 	@Test(timeout = 2000)
 	public void getUserTest(){
 		assertEquals("florian", newTool.getUser());
-	}
+	}//getUserTest()
 
 	@Test(timeout = 2000)
 	public void getPasswordTest(){
 		assertEquals("Marm0tt3", newTool.getPassword());
-	}
+	}//getPasswordTest()
 
 	@Test(timeout = 2000)
 	public void setDriverTest(){
 		newTool.setDriver("test.driver.new");
 		assertEquals("test.driver.new", newTool.getDriver());
-	}
+	}//setDriverTest()
 
 	@Test(timeout = 2000)
 	public void selectSimple() throws SQLException {
 		String query = "SELECT id_person, firstname_person, lastname_person, "
 				+ "email_person, web_person, birthday_person, id_group FROM \"PERSONNE\"";
 		newTool.executeUpdate(query);
-	}
+	}//selectSimple()
 	
 	@Test(timeout = 2000)
 	public void insertPrepared() throws SQLException {
@@ -129,11 +129,10 @@ public class JdbcToolsPGTest {
 
 	@Test(timeout = 2000)
 	public void deletePrepared() throws SQLException {
-		String query = 	"DELETE FROM \"PERSONNE\" WHERE lastname_person = ? AND firstname_person = ?";
-		String nom = "Benjamin";
+		String query = 	"DELETE FROM \"PERSONNE\" WHERE lastname_person = ?";
 		String prenom = "Magron";
-		newTool.executeUpdate(query, nom, prenom);
-	}
+		newTool.executeUpdate(query, prenom);
+	}//deletePrepared()
 
 
 	//	@Test (timeout = 2000)
