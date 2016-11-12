@@ -21,13 +21,13 @@ import fr.univ.annuaire.svg.IResultSetToBean;
 
 public class JdbcToolsTest extends JdbcTools {
 
-	static JdbcTools newTool;
-
+	private static JdbcTools newTool;
 	
 	@BeforeClass
 	public static void initialisation() throws ClassNotFoundException{
 		newTool = new JdbcTools();
 		
+		newTool.setDriver(JdbcTools.MYSQL_DRIVER);
 		newTool.setUrl("jdbc:mysql://localhost/annuaire");
 		newTool.setUser("admin");
 		newTool.setPassword("admin");
@@ -63,7 +63,7 @@ public class JdbcToolsTest extends JdbcTools {
 	
 	@Test(timeout = 2000)
 	public void getDriverTest(){
-		assertEquals("com.mysql.jdbc.Driver", newTool.getDriver()); //TODO meilleur façon de recup les driver FAIRE UN FICHIER DE CONFIG
+		assertEquals("com.mysql.jdbc.Driver", newTool.getDriver()); //TODO meilleur faï¿½on de recup les driver FAIRE UN FICHIER DE CONFIG
 	}
 	
 	@Test(timeout = 2000)
