@@ -34,9 +34,7 @@ public class JdbcToolsPGTest {
 		newTool = new JdbcTools();
 
 		newTool.setDriver(JdbcTools.POSTGRESQL_DRIVER);
-		newTool.setUrl("jdbc:postgresql://vulgamatique.freeboxos.fr/JEE_Annuaire");
-		newTool.setUser("florian");
-		newTool.setPassword("Marm0tt3");
+		
 		newTool.init();
 	}//initialization()
 

@@ -7,9 +7,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import fr.univ.annuaire.beans.GroupPersonnes;
 import fr.univ.annuaire.beans.Personne;
 
-public class Dao extends JdbcTools {
+
+public class Dao extends JdbcTools implements GroupDao {
+	
+	
+	
 	
 	public Collection<Personne> findPersons() throws DaoException {
 		Collection <Personne> personnes = new ArrayList<Personne>();
@@ -31,6 +36,8 @@ public class Dao extends JdbcTools {
 		
 		return personnes;
 	}//findPerson()
+	
+	
 	
 	
 	public void bidon(){
@@ -58,6 +65,31 @@ public class Dao extends JdbcTools {
 			return p;
 		};
 	
+	}
+	
+	
+	
+	
+
+
+	@Override
+	public Collection<GroupPersonnes> findAllGroups() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public void saveGroup(GroupPersonnes group) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void deleteGroup(GroupPersonnes group) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	
