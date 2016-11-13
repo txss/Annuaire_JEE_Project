@@ -11,7 +11,7 @@ import fr.univ.annuaire.beans.GroupPersonnes;
 import fr.univ.annuaire.beans.Personne;
 
 
-public class Dao extends JdbcTools implements GroupDao {
+public class Dao extends JdbcTools implements GroupDao, PersonneDao {
 	
 	
 	
@@ -88,6 +88,41 @@ public class Dao extends JdbcTools implements GroupDao {
 
 	@Override
 	public void deleteGroup(GroupPersonnes group) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public Collection<Personne> findAllPersonsInGroup(long groupId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public Collection<Personne> findAllPersons() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public Personne findPerson(long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public void savePerson(Personne personne) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void deletePerson(Personne personne) {
 		// TODO Auto-generated method stub
 		
 	}

@@ -13,7 +13,7 @@ import java.util.Date;
 
 public class JdbcTools {
 	public static final String POSTGRESQL_DRIVER = "org.postgresql.Driver";
-	public static final String MYSQL_DRIVER = "com.mysql.jdbc.Driver";
+	public static final String MYSQL_DRIVER = "com.mysql.jdbc.Driver"; // TODO fichier de config
 
 	private String driver;
 	private String url;

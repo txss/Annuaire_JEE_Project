@@ -16,12 +16,18 @@ public interface PersonneDao {
 
 	
 	/**
+	 * Methode to get all person in the person book
+	 * @return all person in the person book
+	 */
+	Collection<Personne> findAllPersons();
+	
+	
+	/**
 	 *  Methode to get one person in the person book
 	 * @param id person to find
 	 * @return A Personne bean with the id you give in param 
 	 */
 	Personne findPerson(long id);
-
 
 
 	/**
