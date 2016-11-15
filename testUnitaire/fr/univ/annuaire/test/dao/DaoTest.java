@@ -19,7 +19,7 @@ public class DaoTest {
 	public void before (){
 		dao = new Dao();
 		
-		dao.setUrl("jdbc:mysql://localhost/annuaire");
+		dao.setUrl("jdbc:mysql://localhost/annuaire?useSSL=false");
 		dao.setUser("admin");
 		dao.setPassword("admin");
 	}
@@ -28,23 +28,76 @@ public class DaoTest {
 	@Test (timeout = 2000)
 	public void findAllPersons() throws DaoException {
 		Collection<Personne> personnes = dao.findAllPersons();
-		assertNotEquals(null, personnes);
+		assertNotNull(personnes);
 //		System.out.println(personnes);
 	}
 
+	
 	@Test (timeout = 2000)
-	public void findPerson(){
-		Personne pers = dao.findPerson(19);
-		System.out.println(pers);
+	public void findPerson() throws DaoException{
+		Personne pers = dao.findPerson(21);
+		assertNotNull(pers);
+//		System.out.println(pers);
+	}
+	
+	
+	@Test (timeout = 2000, expected = DaoException.class)
+	public void findPersonNotPresent() throws DaoException{
+		dao.findPerson(100);
 	}
 	
 	
 	@Test (timeout = 2000)
 	public void findAllGroups() {
 		Collection<GroupPersonnes> groupPersonnes = dao.findAllGroups();
-		assertNotEquals(null, groupPersonnes);
+		assertNotNull(groupPersonnes);
 //		System.out.println(groupPersonnes);
 	}
 	
 	
+	@Test (timeout = 2000, expected = DaoException.class)
+	public void deletePerson() throws DaoException{
+		Personne p = new Personne();
+		p.setId(20);
+		dao.deletePersonByID(p);
+		
+		dao.findPerson(19);
+	}
+	
+	
+	@Test (timeout = 2000)
+	public void savePerson() throws DaoException{
+		Personne p = new Personne();
+		p.setFirstName("jean");
+		p.setLastName("charles louis emile");
+		p.setEmail("jean.riolait@live.de");
+		p.setIdGroup(4);
+		p.setBirthDate("18/01/1998");
+		p.setWebSite("monbeausiteweb.com");
+		p.setPassWord("password");
+		
+		dao.saveNewPerson(p);
+		dao.findPerson(25);
+	}
+	
+
+	@Test (timeout = 2000)
+	public void updatePerson() throws DaoException{
+		Personne p = new Personne();
+		p.setId(21);
+		p.setFirstName("jean-modifier");
+		p.setLastName("charles louis emile");
+		p.setEmail("jean.riolait@live.de");
+		p.setIdGroup(4);
+		p.setBirthDate("18/01/1998");
+		p.setWebSite("monbeausiteweb.com");
+		p.setPassWord("password");
+		
+		dao.updatePerson(p);
+		assertTrue(p.isEquals(dao.findPerson(21)));
+	}
+
+
+
+
 }

@@ -25,22 +25,32 @@ public interface PersonneDao {
 	 *  Methode to get one person in the person book
 	 * @param id person to find
 	 * @return A Personne bean with the id you give in param 
+	 * @throws DaoException 
 	 */
-	Personne findPerson(long id);
+	Personne findPerson(long id) throws DaoException;
 
 
 	/**
-	 * Methode to save or update a personne in the person book
+	 * Methode to save a new personne in the person book
+	 * the id of the person will be autoincrements by database
 	 * @param p
 	 */
-	void savePerson(Personne personne);
+	void saveNewPerson(Personne personne);
 
 
+	/**
+	 * Methode to update a personne in the person book
+	 * the person will be identify by it's id
+	 * @param personne
+	 */
+	void updatePerson(Personne personne);
+	
+	
 	/**
 	 *  Methode for delete a person in the person book
 	 *  (the person will be delete to in the all group)
 	 * @param personne
 	 */
-	void deletePerson(Personne personne);
+	void deletePersonByID(Personne personne);
 
 }
