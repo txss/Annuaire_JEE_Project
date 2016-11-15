@@ -47,7 +47,7 @@ public class PersonneTest {
 	@Test
 	public void birthDateTest(){
 		Date date = new Date(2016, 10, 28);
-		p.setBirthDate(date);
+		p.setBirthDate(date.toString());
 		assertEquals(date, p.getBirthDate());
 	}
 	
@@ -74,7 +74,7 @@ public class PersonneTest {
 		p.setFirstName("jean");
 		p.setLastName("christophe");
 		p.setId(0);
-		p.setBirthDate(new java.util.Date(1782, 12, 5));
+		p.setBirthDate(new java.util.Date(1782, 12, 5).toString());
 		p.setEmail("test.test@test.com");
 		p.setWebSite("monbeausite.com");
 		p.setIdGroup(5);

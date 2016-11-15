@@ -13,7 +13,7 @@ import java.util.Date;
 
 public class JdbcTools {
 	public static final String POSTGRESQL_DRIVER = "org.postgresql.Driver";
-	public static final String MYSQL_DRIVER = "com.mysql.jdbc.Driver";
+	public static final String MYSQL_DRIVER = "com.mysql.jdbc.Driver"; // TODO fichier de config
 
 	private String driver;
 	private String url;
@@ -88,9 +88,9 @@ public class JdbcTools {
 	}
 	
 	
-	public int executeUpdate(String query, Object... parameters) throws SQLException {
-		int nb = 0;
-		
+	public ResultSet executeUpdate(String query, Object... parameters) throws SQLException {
+		boolean ok = false;
+		ResultSet rs = null;
 		try(Connection connect = newConnection();) {
 //			Statement st = connect.createStatement();
 //			ResultSet rs = st.executeQuery();
@@ -100,7 +100,7 @@ public class JdbcTools {
 //	        }
 		
 			PreparedStatement st = connect.prepareStatement(query);
-
+			
 			for(int i = 0; i < parameters.length; i++) {
 				
 				if (parameters[i] instanceof Integer)
@@ -112,17 +112,18 @@ public class JdbcTools {
 				if (parameters[i] instanceof String)
 					st.setString(i+1, (String) parameters[i]);
 				
-//				if (parameters[i] instanceof Boolean)
-//					st.setBoolean(i+1, (Boolean) parameters[i]);
+				if (parameters[i] instanceof Boolean)
+					st.setBoolean(i+1, (Boolean) parameters[i]);
 			}
-			st.execute();			
+			ok = st.execute();
+			if (ok)
+				rs = st.getResultSet();
 			st.close();
 		}
-		
-		return nb;
+		return rs;
 	}
 	
-	
+	// TODO check this
 	public <T> Collection<T> findBeans(String sql, IResultSetToBean<T> mapper) throws DaoException {
 		Collection <T> beans = new ArrayList<T>();
 		

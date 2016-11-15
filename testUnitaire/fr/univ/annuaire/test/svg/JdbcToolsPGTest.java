@@ -34,9 +34,7 @@ public class JdbcToolsPGTest {
 		newTool = new JdbcTools();
 
 		newTool.setDriver(JdbcTools.POSTGRESQL_DRIVER);
-		newTool.setUrl("jdbc:postgresql://vulgamatique.freeboxos.fr/JEE_Annuaire");
-		newTool.setUser("florian");
-		newTool.setPassword("Marm0tt3");
+
 		newTool.init();
 	}//initialization()
 
@@ -62,25 +60,7 @@ public class JdbcToolsPGTest {
 	//	}
 
 
-	@Test(timeout = 2000)
-	public void getURLTest(){
-		assertEquals("jdbc:postgresql://vulgamatique.freeboxos.fr/JEE_Annuaire", newTool.getUrl());
-	}//getURLTest()
 
-	@Test(timeout = 2000)
-	public void getDriverTest(){
-		assertEquals("org.postgresql.Driver", newTool.getDriver()); //TODO meilleur fa�on de recup les driver FAIRE UN FICHIER DE CONFIG
-	}//getDriverTest()
-
-	@Test(timeout = 2000)
-	public void getUserTest(){
-		assertEquals("florian", newTool.getUser());
-	}//getUserTest()
-
-	@Test(timeout = 2000)
-	public void getPasswordTest(){
-		assertEquals("Marm0tt3", newTool.getPassword());
-	}//getPasswordTest()
 
 	@Test(timeout = 2000)
 	public void setDriverTest(){

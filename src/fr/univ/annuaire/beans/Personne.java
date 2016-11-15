@@ -7,7 +7,7 @@ public class Personne {
 	private int id;
 	private String firstName;
 	private String lastName;
-	private Date birthDate;
+	private String birthDate;
 	private String email;
 	private String webSite;
 	private int idGroup;
@@ -56,7 +56,7 @@ public class Personne {
 		this.lastName = lastName;
 	}
 	
-	public Date getBirthDate() {
+	public String getBirthDate() {
 		return birthDate;
 	}
 	
@@ -64,8 +64,8 @@ public class Personne {
 		return idGroup;
 	}
 	
-	public void setBirthDate(Date birthDate) {
-		this.birthDate = birthDate;
+	public void setBirthDate(String string) {
+		this.birthDate = string;
 	}
 	
 	public String getEmail() {
@@ -94,21 +94,4 @@ public class Personne {
 		return "\n"+"id: " + this.id + "\nprenom: " + this.firstName + "\nnom: " + this.lastName + "\nemail: " + this.email + "\nwebSite: " + this.webSite + "\nGroupe: " + this.idGroup;
 	}
 
-	// TODO suppre this
-//	@Override
-//	public Personne toBean(ResultSet rs) throws SQLException {
-//
-//		while (rs.next()) {
-//			this.setId(rs.getInt(1) );
-//			this.setLastName(rs.getString(2) );
-//			this.setFirstName(rs.getString(3) );
-//			this.setEmail(rs.getString(4));
-//			this.setWebSite(rs.getString(5));
-//			this.setBirthDate(rs.getDate(6));
-//			this.setIdGroup(rs.getInt(7));
-//			this.setPassWord(rs.getString(8));
-//        }
-//		
-//		return this;
-//	}
 }

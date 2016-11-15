@@ -5,7 +5,6 @@ import static org.junit.Assert.*;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Collection;
 import java.util.Date;
 import java.util.Locale;
 
@@ -13,18 +12,14 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import fr.univ.annuaire.beans.Personne;
-import fr.univ.annuaire.svg.DaoException;
 import fr.univ.annuaire.svg.JdbcTools;
-import fr.univ.annuaire.svg.IResultSetToBean;
-
 
 public class JdbcToolsTest extends JdbcTools {
 
 	private static JdbcTools newTool;
 	
 	@BeforeClass
-	public static void initialisation() throws ClassNotFoundException{
+	public static void initialisation() throws ClassNotFoundException, SQLException{
 		newTool = new JdbcTools();
 		
 		newTool.setDriver(JdbcTools.MYSQL_DRIVER);
@@ -32,6 +27,7 @@ public class JdbcToolsTest extends JdbcTools {
 		newTool.setUser("admin");
 		newTool.setPassword("admin");
 		newTool.init();
+		
 	}
 	
 	@AfterClass
@@ -85,7 +81,8 @@ public class JdbcToolsTest extends JdbcTools {
 	@Test(timeout = 2000)
 	public void selectSimple() throws SQLException {
 		String query = "SELECT id, lastname, firstname, email, website, birthdate, idgroup FROM Personnes";
-		newTool.executeUpdate(query);
+
+		assertNotNull(newTool.executeUpdate(query));
 	}
 	
 	
@@ -101,8 +98,8 @@ public class JdbcToolsTest extends JdbcTools {
 		int idgroup = 5;
 		String firstname = "marron";
 		int id = 0;
-		
-		newTool.executeUpdate(query, email, website, birthdate.toString(), idgroup, id, firstname);
+
+		assertNull(newTool.executeUpdate(query, email, website, birthdate.toString(), idgroup, id, firstname));
 	}
 	
 	
@@ -111,8 +108,8 @@ public class JdbcToolsTest extends JdbcTools {
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.FRENCH);
 		Date date = simpleDateFormat.parse("31-01-2010");
 		
-		String query = 	"INSERT INTO personnes(lastname, firstname, email, website, birthdate, idgroup, id, passWord)"+
-						"VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+		String query = 	"INSERT INTO personnes(lastname, firstname, email, website, birthdate, idgroup, passWord)"+
+						"VALUES (?, ?, ?, ?, ?, ?, ?)";
 		String lastname = "magron";
 		String password = "";
 		String firstname = "claude";
@@ -120,9 +117,8 @@ public class JdbcToolsTest extends JdbcTools {
 		String website = "testdusiteinternet.com";
 		Date birthdate = date;
 		int idgroup = 5;
-		int id = 18;
 
-		newTool.executeUpdate(query, lastname, firstname, email, website, birthdate.toString(), idgroup, id, password);
+		assertNull(newTool.executeUpdate(query, lastname, firstname, email, website, birthdate.toString(), idgroup, password) );
 	}
 	
 	
@@ -131,17 +127,25 @@ public class JdbcToolsTest extends JdbcTools {
 		String query = 	"DELETE FROM Personnes WHERE lastname = ? AND firstname = ?";
 		String prenom = "magron";
 		String nom = "claude";
-		newTool.executeUpdate(query, nom, prenom);
+		assertNull(newTool.executeUpdate(query, nom, prenom));
 	}
 	
+	
+	@Test(timeout = 2000)
+	public void selectSimpleOnTableGroupes() throws SQLException {
+		String query = "SELECT id, name FROM groupes_personnes";
+		assertNotNull(newTool.executeUpdate(query));
+	}
+	
+	
+	@Test(timeout = 2000)
+	public void insertPreparedOnTableGroupes() throws SQLException, ParseException {
+		String query = 	"INSERT INTO groupes_personnes(name)"+
+						"VALUES (?)";
+		String name = "ISL";
 
-//	@Test (timeout = 2000)
-//	public void findBeans() throws DaoException{
-//		String query = "SELECT id, lastname, firstname, email, website, birthdate, idgroup, passWord FROM Personnes";
-//		IResultSetToBean<Personne> mapper = new Personne();
-//		Collection<Personne> person = newTool.findBeans(query, mapper);
-//		System.out.println(person);
-//	}
+		assertNull(newTool.executeUpdate(query, name));
+	}
 	
 	
 }
