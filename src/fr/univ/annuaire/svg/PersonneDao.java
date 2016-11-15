@@ -6,6 +6,12 @@ import fr.univ.annuaire.beans.Personne;
 
 public interface PersonneDao {
 
+	/**
+	 * Methode to get all person in the person book
+	 * @return all person in the person book
+	 */
+	Collection<Personne> findAllPersons();
+	
 	
 	/**
 	 * Methode to get all person in one group
@@ -13,13 +19,6 @@ public interface PersonneDao {
 	 * @return A collection of beans "personne" in the group you asked
 	 */
 	Collection<Personne> findAllPersonsInGroup(long groupId);
-
-	
-	/**
-	 * Methode to get all person in the person book
-	 * @return all person in the person book
-	 */
-	Collection<Personne> findAllPersons();
 	
 	
 	/**

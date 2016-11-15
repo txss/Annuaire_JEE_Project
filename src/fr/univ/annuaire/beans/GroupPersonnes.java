@@ -1,12 +1,9 @@
 package fr.univ.annuaire.beans;
 
-import java.util.ArrayList;
-
 public class GroupPersonnes{
 
 	private int id;
 	private String name;
-	private ArrayList<Personne> personneInGroup;
 	
 	
 	/**
@@ -21,25 +18,18 @@ public class GroupPersonnes{
 		return id;
 	}
 	
-	public void setId(int id) {
-		this.id = id;
-	}
-	
 	public String getName() {
 		return name;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 	public void setName(String name) {
 		this.name = name;
 	}
 	
-	public ArrayList<Personne> getPersonneInGroup() {
-		return personneInGroup;
-	}
-	
-	public void setPersonneInGroup(ArrayList<Personne> personneInGroup) {
-		this.personneInGroup = personneInGroup;
-	}
 	
 	// END getter and setter
 	
@@ -47,7 +37,7 @@ public class GroupPersonnes{
 		return "id: " + this.id + "\nnom: " + this.name;
 	}
 	
-	
+	// TODO suppr this
 //	@Override
 //	public GroupPersonnes toBean(ResultSet rs) throws SQLException {
 //		

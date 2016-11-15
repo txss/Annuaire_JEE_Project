@@ -3,14 +3,12 @@ package fr.univ.annuaire.test.all.launcher;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
+import fr.univ.annuaire.test.dao.DaoTest;
 
 @RunWith(Suite.class)
-
 @Suite.SuiteClasses({
-	beansLauncherTest.class,
-	svgLauncherTest.class,
-	daoLauncherTest.class,
+	DaoTest.class
 })
 
-public class AllLauncher {
+public class daoLauncherTest {
 }
