@@ -34,7 +34,9 @@ public class JdbcToolsPGTest {
 		newTool = new JdbcTools();
 
 		newTool.setDriver(JdbcTools.POSTGRESQL_DRIVER);
-
+		newTool.setUrl("jdbc:postgresql://");
+		newTool.setUser("");
+		newTool.setPassword("");
 		newTool.init();
 	}//initialization()
 
@@ -72,7 +74,7 @@ public class JdbcToolsPGTest {
 	public void selectSimple() throws SQLException {
 		String query = "SELECT id_person, firstname_person, lastname_person, "
 				+ "email_person, web_person, birthday_person, id_group FROM \"PERSONNE\"";
-		newTool.executeUpdate(query);
+		assertNotNull(newTool.executeUpdate(query));
 	}//selectSimple()
 	
 	@Test(timeout = 2000)
@@ -89,7 +91,7 @@ public class JdbcToolsPGTest {
 		Date birthday = new Date(initAndGetCalendar(22, 2, 1993).getTimeInMillis());
 		String idgroup = "M2FSIL2016";
 
-		newTool.executeUpdate(query, lastname, firstname, email, website, birthday, password, idgroup);
+		assertNull(newTool.executeUpdate(query, lastname, firstname, email, website, birthday, password, idgroup));
 	}//insertPrepared()
 
 	
@@ -103,7 +105,7 @@ public class JdbcToolsPGTest {
 		Date birthday = new Date(initAndGetCalendar(27, 10, 1991).getTimeInMillis());
 		String lastname = "Cohen";
 
-		newTool.executeUpdate(query, email, website, birthday, lastname);
+		assertNull(newTool.executeUpdate(query, email, website, birthday, lastname));
 	}//updatePrepared()
 
 
@@ -111,8 +113,25 @@ public class JdbcToolsPGTest {
 	public void deletePrepared() throws SQLException {
 		String query = 	"DELETE FROM \"PERSONNE\" WHERE lastname_person = ?";
 		String prenom = "Magron";
-		newTool.executeUpdate(query, prenom);
+		assertNull(newTool.executeUpdate(query, prenom));
 	}//deletePrepared()
+	
+	@Test(timeout = 2000)
+	public void selectSimpleOnTableGroupes() throws SQLException {
+		String query = "SELECT id_group, name_group FROM \"GROUPE\"";
+		assertNotNull(newTool.executeUpdate(query));
+	}//selectSimpleOnTableGroupes()
+	
+	
+	@Test(timeout = 2000)
+	public void insertPreparedOnTableGroupes() throws SQLException, ParseException {
+		String query = 	"INSERT INTO \"GROUPE\"(id_group, name_group)"+
+						"VALUES (?, ?)";
+		String id = "M2ID2016";
+		String name = "M2 ID 2015/2016";
+
+		assertNull(newTool.executeUpdate(query, id, name));
+	}//insertPreparedOnTableGroupes()
 
 
 	//	@Test (timeout = 2000)
