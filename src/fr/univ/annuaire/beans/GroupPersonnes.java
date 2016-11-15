@@ -34,20 +34,7 @@ public class GroupPersonnes{
 	// END getter and setter
 	
 	public String toString (){
-		return "id: " + this.id + "\nnom: " + this.name;
+		return "\nid: " + this.id + " --> nom: " + this.name;
 	}
-	
-	// TODO suppr this
-//	@Override
-//	public GroupPersonnes toBean(ResultSet rs) throws SQLException {
-//		
-//		while (rs.next()) {
-//			this.setId(rs.getInt(1) );
-//			this.setName(rs.getString(2) );
-////			this.setFirstName(rs.getString(3) );
-//        }
-//		
-//		return this;
-//	}
 	
 }

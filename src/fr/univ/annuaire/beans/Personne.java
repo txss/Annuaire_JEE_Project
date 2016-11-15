@@ -93,5 +93,25 @@ public class Personne {
 	public String toString(){
 		return "\n"+"id: " + this.id + "\nprenom: " + this.firstName + "\nnom: " + this.lastName + "\nemail: " + this.email + "\nwebSite: " + this.webSite + "\nGroupe: " + this.idGroup;
 	}
-
+	
+	public boolean isEquals(Personne personne){
+		if(this.id != personne.getId())
+			return false;
+		if(!this.firstName.equals(personne.getFirstName()))
+			return false;
+		if(!this.lastName.equals(personne.getLastName()))
+			return false;
+		if(!this.birthDate.equals(personne.getBirthDate()))
+			return false;
+		if(!this.email.equals(personne.getEmail()))
+			return false;
+		if(!this.webSite.equals(personne.getWebSite()))
+			return false;
+		if(this.idGroup != personne.getIdGroup())
+			return false;
+		if(!this.passWord.equals(personne.getPassWord()))
+			return false;
+		return true;
+	}
+	
 }

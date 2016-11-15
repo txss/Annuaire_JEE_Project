@@ -91,13 +91,8 @@ public class JdbcTools {
 	public ResultSet executeUpdate(String query, Object... parameters) throws SQLException {
 		boolean ok = false;
 		ResultSet rs = null;
+		
 		try(Connection connect = newConnection();) {
-//			Statement st = connect.createStatement();
-//			ResultSet rs = st.executeQuery();
-//			while (rs.next()) {
-//	            System.out.printf("%-20s | %-20s | %3d\n", //
-//	                    rs.getString(1), rs.getString(2), rs.getInt(3));
-//	        }
 		
 			PreparedStatement st = connect.prepareStatement(query);
 			
@@ -122,6 +117,7 @@ public class JdbcTools {
 		}
 		return rs;
 	}
+	
 	
 	// TODO check this
 	public <T> Collection<T> findBeans(String sql, IResultSetToBean<T> mapper) throws DaoException {

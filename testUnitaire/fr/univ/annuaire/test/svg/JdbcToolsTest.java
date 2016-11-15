@@ -23,11 +23,10 @@ public class JdbcToolsTest extends JdbcTools {
 		newTool = new JdbcTools();
 		
 		newTool.setDriver(JdbcTools.MYSQL_DRIVER);
-		newTool.setUrl("jdbc:mysql://localhost/annuaire");
+		newTool.setUrl("jdbc:mysql://localhost/annuaire?useSSL=false");
 		newTool.setUser("admin");
 		newTool.setPassword("admin");
 		newTool.init();
-		
 	}
 	
 	@AfterClass
@@ -95,9 +94,9 @@ public class JdbcToolsTest extends JdbcTools {
 		String email = "test.test@gmail.com";
 		String website = "testdusoteinternet.com";
 		Date birthdate = date;
-		int idgroup = 5;
+		int idgroup = 6;
 		String firstname = "marron";
-		int id = 0;
+		int id = 1;
 
 		assertNull(newTool.executeUpdate(query, email, website, birthdate.toString(), idgroup, id, firstname));
 	}
