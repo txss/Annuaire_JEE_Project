@@ -11,7 +11,7 @@ import fr.univ.annuaire.svg.Dao;
 import fr.univ.annuaire.svg.DaoException;
 
 
-public class DaoTest {
+public class DaoPersonnesTest {
 
 	Dao dao;
 	
@@ -47,21 +47,13 @@ public class DaoTest {
 	}
 	
 	
-	@Test (timeout = 2000)
-	public void findAllGroups() {
-		Collection<GroupPersonnes> groupPersonnes = dao.findAllGroups();
-		assertNotNull(groupPersonnes);
-//		System.out.println(groupPersonnes);
-	}
-	
-	
 	@Test (timeout = 2000, expected = DaoException.class)
 	public void deletePerson() throws DaoException{
 		Personne p = new Personne();
-		p.setId(20);
+		p.setId(24);
 		dao.deletePersonByID(p);
 		
-		dao.findPerson(19);
+		dao.findPerson(24);
 	}
 	
 	
@@ -77,7 +69,6 @@ public class DaoTest {
 		p.setPassWord("password");
 		
 		dao.saveNewPerson(p);
-		dao.findPerson(25);
 	}
 	
 
@@ -97,7 +88,13 @@ public class DaoTest {
 		assertTrue(p.isEquals(dao.findPerson(21)));
 	}
 
-
+	
+	@Test (timeout = 2000)
+	public void findAllGroups() {
+		Collection<GroupPersonnes> groupPersonnes = dao.findAllGroups();
+		assertNotNull(groupPersonnes);
+//		System.out.println(groupPersonnes);
+	}
 
 
 }

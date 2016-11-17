@@ -24,7 +24,7 @@ public interface GroupDao {
 	 * Delete a person group
 	 * @param group
 	 */
-	void deleteGroup(GroupPersonnes group);
+	void deleteGroupByID(GroupPersonnes group);
 	
 	
 }

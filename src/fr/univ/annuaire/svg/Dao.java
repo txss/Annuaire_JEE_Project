@@ -83,9 +83,15 @@ public class Dao extends JdbcTools implements GroupDao, PersonneDao {
 
 
 	@Override
-	public void deleteGroup(GroupPersonnes group) {
-		// TODO Auto-generated method stub
+	public void deleteGroupByID(GroupPersonnes group) {
+		try(Connection connect = newConnection();) {
 
+			String query = 	"DELETE FROM Groupes_personnes WHERE id = ?";
+			this.executeUpdate(query, group.getId());
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 
@@ -169,7 +175,7 @@ public class Dao extends JdbcTools implements GroupDao, PersonneDao {
 
 
 	@Override
-	public void saveNewPerson(Personne personne) {
+	public void saveNewPerson(Personne personne) throws DaoException {
 		try(Connection connect = newConnection();) {
 
 			String query = 	"INSERT INTO personnes(lastname, firstname, email, website, birthdate, idgroup, passWord)"+
@@ -186,6 +192,7 @@ public class Dao extends JdbcTools implements GroupDao, PersonneDao {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
+			throw new DaoException("Error during saving! Person id -> " + personne.getId() + "has not be saved");
 		}
 	}//savePerson(Personne personne)
 

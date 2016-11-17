@@ -35,7 +35,7 @@ public interface PersonneDao {
 	 * the id of the person will be autoincrements by database
 	 * @param p
 	 */
-	void saveNewPerson(Personne personne);
+	void saveNewPerson(Personne personne) throws DaoException;
 
 
 	/**

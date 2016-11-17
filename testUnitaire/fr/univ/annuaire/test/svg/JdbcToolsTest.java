@@ -53,7 +53,7 @@ public class JdbcToolsTest extends JdbcTools {
 	
 	@Test(timeout = 2000)
 	public void getURLTest(){
-		assertEquals("jdbc:mysql://localhost/annuaire", newTool.getUrl());
+		assertEquals("jdbc:mysql://localhost/annuaire?useSSL=false", newTool.getUrl());
 	}
 	
 	@Test(timeout = 2000)
