@@ -14,39 +14,12 @@ import fr.univ.annuaire.beans.Personne;
 public class Dao extends JdbcTools implements GroupDao, PersonneDao {
 
 
+	
 	public Dao() {
 		super();
 	}
 
-
-
-	//	public void bidon(){
-	//		//		IResultSetToBean<Personne> per = new IResultSetToBean<Personne>() {
-	//		//			
-	//		//			@Override
-	//		//			public Personne toBean(ResultSet rs) throws SQLException {
-	//		//				
-	//		//				return null;
-	//		//			}
-	//		//		}; 
-	//
-	//		IResultSetToBean<Personne> personne = (ResultSet rs)->{
-	//			Personne p = new Personne();
-	//
-	//			p.setId(rs.getInt(1) );
-	//			p.setLastName(rs.getString(2) );
-	//			p.setFirstName(rs.getString(3) );
-	//			p.setEmail(rs.getString(4));
-	//			p.setWebSite(rs.getString(5));
-	//			p.setBirthDate(rs.getDate(6));
-	//			p.setIdGroup(rs.getInt(7));
-	//			p.setPassWord(rs.getString(8));
-	//
-	//			return p;
-	//		};
-	//
-	//	}
-
+	
 
 	@Override
 	public Collection<GroupPersonnes> findAllGroups() {
@@ -76,9 +49,19 @@ public class Dao extends JdbcTools implements GroupDao, PersonneDao {
 
 
 	@Override
-	public void saveGroup(GroupPersonnes group) {
-		// TODO Auto-generated method stub
+	public void saveGroup(GroupPersonnes group) throws DaoException {
+		try(Connection connect = newConnection();) {
 
+			String query = 	"INSERT INTO Groupes_Personnes(id, name) VALUES (?, ?)";
+			
+			this.executeUpdate(query,
+					group.getId(),
+					group.getName());
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new DaoException("This group (id:"+group.getId()+") is alerady present in the database. Use the methode UpdateGroupByID for change the values of group.");
+		}
 	}
 
 
@@ -94,11 +77,114 @@ public class Dao extends JdbcTools implements GroupDao, PersonneDao {
 		}
 	}
 
+	
+	@Override
+	public GroupPersonnes findGroupByID(GroupPersonnes group) throws DaoException {
+		GroupPersonnes groupPersonnes = new GroupPersonnes();
+
+		try(Connection connect = newConnection();) {
+
+			PreparedStatement st = connect.prepareStatement("SELECT id, name FROM Groupes_Personnes WHERE id = " + group.getId());
+
+			ResultSet rs = st.executeQuery();
+
+			if(!rs.next())
+				throw new DaoException("This group with id="+ group.getId() +" does't exist in this database.");
+
+			IResultSetToBean<GroupPersonnes> gr = (ResultSet r)->{
+				GroupPersonnes g = new GroupPersonnes();
+
+				g.setId(r.getInt(1));
+				g.setName(r.getString(2));
+				return g;
+			};
+			groupPersonnes = gr.toBean(rs);
+
+			st.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return groupPersonnes;
+	}
+	
+
+	@Override
+	public GroupPersonnes findGroupByName(GroupPersonnes group){
+		GroupPersonnes groupPersonnes = new GroupPersonnes();
+
+
+		try(Connection connect = newConnection();) {
+
+			PreparedStatement st = connect.prepareStatement("SELECT id, name FROM Groupes_Personnes WHERE name = \"" + group.getName()+"\"");
+
+			ResultSet rs = st.executeQuery();
+
+			while (rs.next()) {
+
+				IResultSetToBean<GroupPersonnes> gr = (ResultSet r)->{
+					GroupPersonnes g = new GroupPersonnes();
+					g.setId(r.getInt(1) );
+					g.setName(r.getString(2));
+					return g;
+				};
+
+				groupPersonnes = gr.toBean(rs);
+			}
+			st.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return groupPersonnes;
+	}
+	
 
 	@Override
 	public Collection<Personne> findAllPersonsInGroup(long groupId) {
-		// TODO Auto-generated method stub
-		return null;
+		Collection <Personne> personnes = new ArrayList<Personne>();
+
+		try(Connection connect = newConnection();) {
+			PreparedStatement st = connect.prepareStatement("SELECT id, lastname, firstname, website, idgroup FROM Personnes WHERE idgroup = " + groupId);
+			ResultSet rs = st.executeQuery();
+
+			while (rs.next()) {
+
+				IResultSetToBean<Personne> personne = (ResultSet r)->{
+					Personne p = new Personne();
+
+					p.setId(r.getInt(1) );
+					p.setLastName(r.getString(2) );
+					p.setFirstName(r.getString(3) );
+					p.setWebSite(r.getString(4));
+					p.setIdGroup(r.getInt(5));
+
+					return p;
+				};
+				personnes.add(personne.toBean(rs));
+			}
+			st.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return personnes;
+	}
+	
+
+	@Override
+	public void UpdateGroupByID(GroupPersonnes group) {
+		try(Connection connect = newConnection();) {
+
+			String query = 	"UPDATE Groupes_Personnes SET name = ? WHERE id = ?";
+			
+			this.executeUpdate(query,
+					group.getName(),
+					group.getId());
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 
@@ -138,7 +224,7 @@ public class Dao extends JdbcTools implements GroupDao, PersonneDao {
 
 
 	@Override
-	public Personne findPerson(long id) throws DaoException {
+	public Personne findPersonByID(long id) throws DaoException {
 		Personne personne = new Personne();
 
 		try(Connection connect = newConnection();) {
@@ -168,6 +254,7 @@ public class Dao extends JdbcTools implements GroupDao, PersonneDao {
 			st.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
+			throw new DaoException("This person is not present in the database, person id: "+ id);
 		}
 
 		return personne;
@@ -175,7 +262,7 @@ public class Dao extends JdbcTools implements GroupDao, PersonneDao {
 
 
 	@Override
-	public void saveNewPerson(Personne personne) throws DaoException {
+	public void saveNewPerson(Personne personne){
 		try(Connection connect = newConnection();) {
 
 			String query = 	"INSERT INTO personnes(lastname, firstname, email, website, birthdate, idgroup, passWord)"+
@@ -192,7 +279,6 @@ public class Dao extends JdbcTools implements GroupDao, PersonneDao {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-			throw new DaoException("Error during saving! Person id -> " + personne.getId() + "has not be saved");
 		}
 	}//savePerson(Personne personne)
 
@@ -231,6 +317,7 @@ public class Dao extends JdbcTools implements GroupDao, PersonneDao {
 			e.printStackTrace();
 		}
 	}//updatePerson(Personne personne)
+
 
 
 }

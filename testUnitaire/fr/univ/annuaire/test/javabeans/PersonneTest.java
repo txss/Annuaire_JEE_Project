@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import fr.univ.annuaire.beans.Personne;
+import fr.univ.annuaire.test.all.launcher.daoLauncherTest;
 
 public class PersonneTest {
 

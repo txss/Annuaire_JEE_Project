@@ -27,7 +27,7 @@ public interface PersonneDao {
 	 * @return A Personne bean with the id you give in param 
 	 * @throws DaoException 
 	 */
-	Personne findPerson(long id) throws DaoException;
+	Personne findPersonByID(long id) throws DaoException;
 
 
 	/**

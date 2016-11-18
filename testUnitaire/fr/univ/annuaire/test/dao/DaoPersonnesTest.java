@@ -35,7 +35,7 @@ public class DaoPersonnesTest {
 	
 	@Test (timeout = 2000)
 	public void findPerson() throws DaoException{
-		Personne pers = dao.findPerson(21);
+		Personne pers = dao.findPersonByID(21);
 		assertNotNull(pers);
 //		System.out.println(pers);
 	}
@@ -43,7 +43,7 @@ public class DaoPersonnesTest {
 	
 	@Test (timeout = 2000, expected = DaoException.class)
 	public void findPersonNotPresent() throws DaoException{
-		dao.findPerson(100);
+		dao.findPersonByID(100);
 	}
 	
 	
@@ -53,7 +53,7 @@ public class DaoPersonnesTest {
 		p.setId(24);
 		dao.deletePersonByID(p);
 		
-		dao.findPerson(24);
+		dao.findPersonByID(24);
 	}
 	
 	
@@ -85,7 +85,7 @@ public class DaoPersonnesTest {
 		p.setPassWord("password");
 		
 		dao.updatePerson(p);
-		assertTrue(p.isEquals(dao.findPerson(21)));
+		assertTrue(p.isEquals(dao.findPersonByID(21)) );
 	}
 
 	
@@ -96,5 +96,13 @@ public class DaoPersonnesTest {
 //		System.out.println(groupPersonnes);
 	}
 
-
+	
+	
+	@Test (timeout = 2000)
+	public void findAllPersonsInGroup(){
+		Collection<Personne> personnes = dao.findAllPersonsInGroup(55);
+		assertNotNull(personnes);
+		System.out.println(personnes);
+	}
+	
 }

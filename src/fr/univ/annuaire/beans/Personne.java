@@ -1,6 +1,5 @@
 package fr.univ.annuaire.beans;
 
-import java.util.Date;
 
 public class Personne {
 	
@@ -94,6 +93,12 @@ public class Personne {
 		return "\n"+"id: " + this.id + "\nprenom: " + this.firstName + "\nnom: " + this.lastName + "\nemail: " + this.email + "\nwebSite: " + this.webSite + "\nGroupe: " + this.idGroup;
 	}
 	
+	
+	/**
+	 * This methode test if the properties value of two Personne are identical
+	 * @param personne the personne to test
+	 * @return true if the two personnes are identical, false if they are not.
+	 */
 	public boolean isEquals(Personne personne){
 		if(this.id != personne.getId())
 			return false;
