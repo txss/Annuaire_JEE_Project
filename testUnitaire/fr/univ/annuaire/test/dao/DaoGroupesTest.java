@@ -8,20 +8,19 @@ import org.junit.Before;
 import org.junit.Test;
 
 import fr.univ.annuaire.beans.GroupPersonnes;
-import fr.univ.annuaire.svg.Dao;
-import fr.univ.annuaire.svg.DaoException;
+import fr.univ.annuaire.dao.Dao;
+import fr.univ.annuaire.dao.DaoException;
+import fr.univ.annuaire.svg.JdbcTools;
 
 public class DaoGroupesTest {
 
 Dao dao;
 	
 	@Before
-	public void before (){
+	public void before () throws ClassNotFoundException{
 		dao = new Dao();
 		
-		dao.setUrl("jdbc:mysql://localhost/annuaire?useSSL=false");
-		dao.setUser("admin");
-		dao.setPassword("admin");
+
 	}
 	
 	
@@ -34,11 +33,11 @@ Dao dao;
 
 	
 	@Test (timeout = 2000)
-	public void findGroupByID() throws DaoException{
+	public void findGroup() throws DaoException{
 		GroupPersonnes g = new GroupPersonnes();
-		g.setId(2);
+		g.setId("M2FSIL2016");
 		
-		GroupPersonnes res = dao.findGroupByID(g);
+		GroupPersonnes res = dao.findGroup(g);
 		assertEquals(g.getId(), res.getId());
 	}
 	
@@ -46,46 +45,44 @@ Dao dao;
 	@Test (timeout = 2000, expected = DaoException.class)
 	public void findGroupByIDAbsent() throws DaoException{
 		GroupPersonnes g = new GroupPersonnes();
-		g.setId(000);
+		g.setId("00000");
 		
-		dao.findGroupByID(g);
+		dao.findGroup(g);
 	}
 	
 	
 	@Test (timeout = 2000)
-	public void findGroupByName(){
-		GroupPersonnes g = new GroupPersonnes();
-		g.setName("ISL");
+	public void findGroupByName() throws DaoException{
+		GroupPersonnes g = dao.findGroupByName("M2 FSIL 2015/2016");
 		
-		dao.findGroupByName(g);
-		assertEquals("ISL", g.getName());
+		assertEquals("M2 FSIL 2015/2016", g.getName());
 	}
 	
-	
+	//TODO foreignkey
 	@Test (timeout = 2000, expected = DaoException.class)
 	public void deleteGroupByID() throws DaoException{
 		GroupPersonnes g = new GroupPersonnes();
-		g.setId(777);
+		g.setId("M2FSIL2018");
 		
-		dao.deleteGroupByID(g);
-		dao.findGroupByID(g);
+		dao.deleteGroup(g);
+		dao.findGroup(g);
 	}
 	
 	
 	@Test (timeout = 2000)
 	public void saveGroup() throws DaoException{
 		GroupPersonnes g = new GroupPersonnes();
-		g.setId(777);
+		g.setId("M2FSIL2018");
 		g.setName("ID");
 		
 		dao.saveGroup(g);
-		dao.findGroupByID(g);
+		dao.findGroup(g);
 	}
 	
 	@Test (timeout = 2000, expected = DaoException.class)
 	public void saveGroupDuplicate() throws DaoException{
 		GroupPersonnes g = new GroupPersonnes();
-		g.setId(777);
+		g.setId("M2FSIL2018");
 		g.setName("ID");
 		
 		dao.saveGroup(g);
@@ -94,16 +91,13 @@ Dao dao;
 	@Test (timeout = 2000)
 	public void UpdateGroupByID() throws DaoException{
 		GroupPersonnes g = new GroupPersonnes();
-		g.setId(55);
+		g.setId("777");
 		g.setName("ISSL");
 		
-		dao.saveGroup(g);
+		dao.UpdateGroup(g);
 		
-		g.setName("ISL");
-		dao.UpdateGroupByID(g);
-		
-		GroupPersonnes group = dao.findGroupByID(g);
-		assertEquals("ISL",	group.getName());
+		GroupPersonnes group = dao.findGroup(g);
+		assertEquals("ISSL",	group.getName());
 	}
 	
 }

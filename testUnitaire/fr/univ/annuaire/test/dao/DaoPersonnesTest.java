@@ -7,8 +7,8 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import fr.univ.annuaire.beans.GroupPersonnes;
 import fr.univ.annuaire.beans.Personne;
-import fr.univ.annuaire.svg.Dao;
-import fr.univ.annuaire.svg.DaoException;
+import fr.univ.annuaire.dao.Dao;
+import fr.univ.annuaire.dao.DaoException;
 
 
 public class DaoPersonnesTest {
@@ -51,7 +51,7 @@ public class DaoPersonnesTest {
 	public void deletePerson() throws DaoException{
 		Personne p = new Personne();
 		p.setId(24);
-		dao.deletePersonByID(p);
+		dao.deletePerson(p);
 		
 		dao.findPersonByID(24);
 	}
@@ -68,7 +68,7 @@ public class DaoPersonnesTest {
 		p.setWebSite("monbeausiteweb.com");
 		p.setPassWord("password");
 		
-		dao.saveNewPerson(p);
+		dao.insertPerson(p);
 	}
 	
 
@@ -97,10 +97,17 @@ public class DaoPersonnesTest {
 	}
 
 	
-	
 	@Test (timeout = 2000)
 	public void findAllPersonsInGroup(){
 		Collection<Personne> personnes = dao.findAllPersonsInGroup(55);
+		assertNotNull(personnes);
+		System.out.println(personnes);
+	}
+	
+	
+	@Test (timeout = 2000)
+	public void searchKeywordInPersons(){
+		Collection<Personne> personnes = dao.searchKeywordInPersons("ri");
 		assertNotNull(personnes);
 		System.out.println(personnes);
 	}

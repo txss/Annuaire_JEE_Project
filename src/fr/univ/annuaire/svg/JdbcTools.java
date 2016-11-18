@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
+import fr.univ.annuaire.dao.DaoException;
+
 
 
 public class JdbcTools {

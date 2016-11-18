@@ -18,7 +18,7 @@ public class GroupPersonnesTest {
 
 	@Test
 	public void testId() {
-		g.setId(18);
+		g.setId("M2FSIL2016");
 		assertEquals(18, g.getId());
 	}
 
@@ -30,7 +30,7 @@ public class GroupPersonnesTest {
 	
 	@Test
 	public void toStringTest(){
-		g.setId(2);
+		g.setId("M2FSIL2016");
 		g.setName("ISL");
 
 		assertEquals("id: 2\nnom: ISL", g.toString());

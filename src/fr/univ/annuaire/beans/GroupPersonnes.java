@@ -2,7 +2,7 @@ package fr.univ.annuaire.beans;
 
 public class GroupPersonnes{
 
-	private int id;
+	private String id;
 	private String name;
 	
 	
@@ -14,7 +14,7 @@ public class GroupPersonnes{
 	
 	// BEGIN getter and setter
 	
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 	
@@ -22,7 +22,7 @@ public class GroupPersonnes{
 		return name;
 	}
 	
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	

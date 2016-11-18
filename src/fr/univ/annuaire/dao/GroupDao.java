@@ -1,4 +1,4 @@
-package fr.univ.annuaire.svg;
+package fr.univ.annuaire.dao;
 
 import java.util.Collection;
 
@@ -25,14 +25,14 @@ public interface GroupDao {
 	 * This methode update values of a group and save it in the database
 	 * @param group to update
 	 */
-	void UpdateGroupByID(GroupPersonnes group);
+	void UpdateGroup(GroupPersonnes group);
 	
 	
 	/**
 	 * Delete a group in database
 	 * @param group to delete
 	 */
-	void deleteGroupByID(GroupPersonnes group);
+	void deleteGroup(GroupPersonnes group);
 	
 	
 	/**
@@ -40,8 +40,9 @@ public interface GroupDao {
 	 * database 
 	 * @param groups to find in database 
 	 * @return
+	 * @throws DaoException 
 	 */
-	GroupPersonnes findGroupByName(GroupPersonnes group);
+	GroupPersonnes findGroupByName(String groupName) throws DaoException;
 
 
 	/**
@@ -50,6 +51,6 @@ public interface GroupDao {
 	 * @return the group if it exist
 	 * @throws DaoException if the Group doesn't exist in datbase
 	 */
-	GroupPersonnes findGroupByID(GroupPersonnes group) throws DaoException;
+	GroupPersonnes findGroup(GroupPersonnes group) throws DaoException;
 	
 }

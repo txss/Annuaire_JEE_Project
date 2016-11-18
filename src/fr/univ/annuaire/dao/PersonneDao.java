@@ -1,4 +1,4 @@
-package fr.univ.annuaire.svg;
+package fr.univ.annuaire.dao;
 
 import java.util.Collection;
 
@@ -35,7 +35,7 @@ public interface PersonneDao {
 	 * the id of the person will be autoincrements by database
 	 * @param p
 	 */
-	void saveNewPerson(Personne personne) throws DaoException;
+	void insertPerson(Personne personne) throws DaoException;
 
 
 	/**
@@ -51,6 +51,13 @@ public interface PersonneDao {
 	 *  (the person will be delete to in the all group)
 	 * @param personne
 	 */
-	void deletePersonByID(Personne personne);
+	void deletePerson(Personne personne);
 
+	
+	/**
+	 * This methode is util to excute the search
+	 * @param search the value in datbase
+	 * @return a collection of person who match with the search
+	 */
+	Collection<Personne> searchKeywordInPersons(String search);
 }

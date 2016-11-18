@@ -1,4 +1,4 @@
-package fr.univ.annuaire.svg;
+package fr.univ.annuaire.dao;
 
 public class DaoException extends Exception {
 
