@@ -3,12 +3,12 @@ package fr.univ.annuaire.test.javabeans;
 import static org.junit.Assert.*;
 
 import java.sql.Date;
+import java.util.Calendar;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import fr.univ.annuaire.beans.Personne;
-import fr.univ.annuaire.test.all.launcher.daoLauncherTest;
 
 public class PersonneTest {
 
@@ -19,6 +19,16 @@ public class PersonneTest {
 	public void init(){
 		p = new Personne();
 	}
+	
+	private Calendar initAndGetCalendar(int day, int month, int year) {
+		Calendar cal = Calendar.getInstance();
+		cal.set(Calendar.YEAR, year);
+		cal.set(Calendar.MONTH, month - 1); // <-- months start
+		                                    // at 0.
+		cal.set(Calendar.DAY_OF_MONTH, day);
+		
+		return cal;
+	}//initAndGetCalendar()
 	
 	
 	@Test
@@ -47,9 +57,9 @@ public class PersonneTest {
 	
 	@Test
 	public void birthDateTest(){
-		Date date = new Date(2016, 10, 28);
-		p.setBirthDate(date.toString());
-		assertEquals(date, p.getBirthDate());
+		Date birthday = new Date(initAndGetCalendar(27, 10, 1991).getTimeInMillis());
+		p.setBirthDate(birthday);
+		assertEquals(birthday, p.getBirthDate());
 	}
 	
 	@Test
@@ -66,7 +76,7 @@ public class PersonneTest {
 	
 	@Test
 	public void idGroupTest(){
-		p.setIdGroup(5);
+		p.setIdGroup("5");
 		assertEquals(5, p.getIdGroup());
 	}
 
@@ -75,10 +85,11 @@ public class PersonneTest {
 		p.setFirstName("jean");
 		p.setLastName("christophe");
 		p.setId(0);
-		p.setBirthDate(new java.util.Date(1782, 12, 5).toString());
+		Date birthday = new Date(initAndGetCalendar(27, 10, 1991).getTimeInMillis());
+		p.setBirthDate(birthday);
 		p.setEmail("test.test@test.com");
 		p.setWebSite("monbeausite.com");
-		p.setIdGroup(5);
+		p.setIdGroup("5");
 
 		assertEquals("\nid: 0\nprenom: jean\nnom: christophe\nemail: test.test@test.com\nwebSite: monbeausite.com\nGroupe: 5", p.toString());
 	}

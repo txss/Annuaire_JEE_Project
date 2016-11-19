@@ -1,15 +1,16 @@
 package fr.univ.annuaire.beans;
 
+import java.sql.Date;
 
 public class Personne {
 	
 	private int id;
 	private String firstName;
 	private String lastName;
-	private String birthDate;
+	private Date birthDate;
 	private String email;
 	private String webSite;
-	private int idGroup;
+	private String idGroup;
 	private String passWord; // TODO crypt this password
 	
 	
@@ -55,16 +56,16 @@ public class Personne {
 		this.lastName = lastName;
 	}
 	
-	public String getBirthDate() {
+	public Date getBirthDate() {
 		return birthDate;
 	}
 	
-	public int getIdGroup() {
+	public String getIdGroup() {
 		return idGroup;
 	}
 	
-	public void setBirthDate(String string) {
-		this.birthDate = string;
+	public void setBirthDate(Date birthday) {
+		this.birthDate = birthday;
 	}
 	
 	public String getEmail() {
@@ -83,7 +84,7 @@ public class Personne {
 		this.webSite = webSite;
 	}
 	
-	public void setIdGroup(int idGroup){
+	public void setIdGroup(String idGroup){
 		this.idGroup = idGroup;
 	}
 	// END Getters and Setters
@@ -106,13 +107,13 @@ public class Personne {
 			return false;
 		if(!this.lastName.equals(personne.getLastName()))
 			return false;
-		if(!this.birthDate.equals(personne.getBirthDate()))
+		if(!this.birthDate.toString().equals(personne.birthDate.toString()))
 			return false;
 		if(!this.email.equals(personne.getEmail()))
 			return false;
 		if(!this.webSite.equals(personne.getWebSite()))
 			return false;
-		if(this.idGroup != personne.getIdGroup())
+		if(!this.idGroup.equals(personne.getIdGroup()))
 			return false;
 		if(!this.passWord.equals(personne.getPassWord()))
 			return false;

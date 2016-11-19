@@ -1,11 +1,12 @@
 package fr.univ.annuaire.test.dao;
 
+import java.sql.Date;
+import java.util.Calendar;
 import java.util.Collection;
 
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import fr.univ.annuaire.beans.GroupPersonnes;
 import fr.univ.annuaire.beans.Personne;
 import fr.univ.annuaire.dao.Dao;
 import fr.univ.annuaire.dao.DaoException;
@@ -19,10 +20,18 @@ public class DaoPersonnesTest {
 	public void before (){
 		dao = new Dao();
 		
-		dao.setUrl("jdbc:mysql://localhost/annuaire?useSSL=false");
-		dao.setUser("admin");
-		dao.setPassword("admin");
+
 	}
+	
+	private Calendar initAndGetCalendar(int day, int month, int year) {
+		Calendar cal = Calendar.getInstance();
+		cal.set(Calendar.YEAR, year);
+		cal.set(Calendar.MONTH, month - 1); // <-- months start
+		                                    // at 0.
+		cal.set(Calendar.DAY_OF_MONTH, day);
+		
+		return cal;
+	}//initAndGetCalendar()
 	
 	
 	@Test (timeout = 2000)
@@ -34,10 +43,21 @@ public class DaoPersonnesTest {
 
 	
 	@Test (timeout = 2000)
-	public void findPerson() throws DaoException{
-		Personne pers = dao.findPersonByID(21);
-		assertNotNull(pers);
-//		System.out.println(pers);
+	public void findPersonByID() throws DaoException{
+		Personne pers = dao.findPersonByID(2);
+		
+		Personne p = new Personne();
+		p.setId(2);
+		p.setFirstName("Josef               ");
+		p.setLastName("Cohen               ");
+		p.setEmail("test.test@gmail.com");
+		p.setWebSite("testdusiteinternet.com");
+		Date birthday = new Date(initAndGetCalendar(27, 10, 1991).getTimeInMillis());
+		p.setBirthDate(birthday);
+		p.setPassWord("D0nneMoiDes$ou$");
+		p.setIdGroup("M2FSIL2016");
+
+		assertTrue(p.isEquals(pers));
 	}
 	
 	
@@ -50,7 +70,7 @@ public class DaoPersonnesTest {
 	@Test (timeout = 2000, expected = DaoException.class)
 	public void deletePerson() throws DaoException{
 		Personne p = new Personne();
-		p.setId(24);
+		p.setId(16);
 		dao.deletePerson(p);
 		
 		dao.findPersonByID(24);
@@ -63,8 +83,9 @@ public class DaoPersonnesTest {
 		p.setFirstName("jean");
 		p.setLastName("charles louis emile");
 		p.setEmail("jean.riolait@live.de");
-		p.setIdGroup(4);
-		p.setBirthDate("18/01/1998");
+		p.setIdGroup("57");
+		Date birthday = new Date(initAndGetCalendar(27, 10, 1991).getTimeInMillis());
+		p.setBirthDate(birthday);
 		p.setWebSite("monbeausiteweb.com");
 		p.setPassWord("password");
 		
@@ -75,31 +96,24 @@ public class DaoPersonnesTest {
 	@Test (timeout = 2000)
 	public void updatePerson() throws DaoException{
 		Personne p = new Personne();
-		p.setId(21);
-		p.setFirstName("jean-modifier");
-		p.setLastName("charles louis emile");
+		p.setId(17);
+		p.setFirstName("jean-modifier       ");
+		p.setLastName("charles louis emile ");
 		p.setEmail("jean.riolait@live.de");
-		p.setIdGroup(4);
-		p.setBirthDate("18/01/1998");
+		p.setIdGroup("57");
+		Date birthday = new Date(initAndGetCalendar(27, 10, 1991).getTimeInMillis());
+		p.setBirthDate(birthday);
 		p.setWebSite("monbeausiteweb.com");
 		p.setPassWord("password");
 		
 		dao.updatePerson(p);
-		assertTrue(p.isEquals(dao.findPersonByID(21)) );
+		assertTrue(p.isEquals(dao.findPersonByID(17)) );
 	}
 
-	
-	@Test (timeout = 2000)
-	public void findAllGroups() {
-		Collection<GroupPersonnes> groupPersonnes = dao.findAllGroups();
-		assertNotNull(groupPersonnes);
-//		System.out.println(groupPersonnes);
-	}
 
-	
 	@Test (timeout = 2000)
 	public void findAllPersonsInGroup(){
-		Collection<Personne> personnes = dao.findAllPersonsInGroup(55);
+		Collection<Personne> personnes = dao.findAllPersonsInGroup(57);
 		assertNotNull(personnes);
 		System.out.println(personnes);
 	}
@@ -107,7 +121,7 @@ public class DaoPersonnesTest {
 	
 	@Test (timeout = 2000)
 	public void searchKeywordInPersons(){
-		Collection<Personne> personnes = dao.searchKeywordInPersons("ri");
+		Collection<Personne> personnes = dao.searchKeywordInPersons("oh");
 		assertNotNull(personnes);
 		System.out.println(personnes);
 	}

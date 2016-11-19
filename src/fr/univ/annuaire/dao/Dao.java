@@ -159,7 +159,7 @@ public class Dao extends JdbcTools implements GroupDao, PersonneDao {
 		Collection <Personne> personnes = new ArrayList<Personne>();
 
 		try(Connection connect = newConnection();) {
-			PreparedStatement st = connect.prepareStatement("SELECT id_person, lastname_person, firstname_person, web_person, id_group FROM \"PERSONNE\" WHERE id_group = " + groupId);
+			PreparedStatement st = connect.prepareStatement("SELECT id_person, lastname_person, firstname_person, web_person, id_group FROM \"PERSONNE\" WHERE id_group = '" + groupId + "'");
 			ResultSet rs = st.executeQuery();
 
 			while (rs.next()) {
@@ -171,7 +171,7 @@ public class Dao extends JdbcTools implements GroupDao, PersonneDao {
 					p.setLastName(r.getString(2) );
 					p.setFirstName(r.getString(3) );
 					p.setWebSite(r.getString(4));
-					p.setIdGroup(r.getInt(5));
+					p.setIdGroup(r.getString(5));
 
 					return p;
 				};
@@ -203,7 +203,7 @@ public class Dao extends JdbcTools implements GroupDao, PersonneDao {
 					p.setLastName(r.getString(2) );
 					p.setFirstName(r.getString(3) );
 					p.setWebSite(r.getString(4));
-					p.setIdGroup(r.getInt(5));
+					p.setIdGroup(r.getString(5));
 
 					return p;
 				};
@@ -239,8 +239,8 @@ public class Dao extends JdbcTools implements GroupDao, PersonneDao {
 				p.setFirstName(r.getString(3));
 				p.setEmail(r.getString(4));
 				p.setWebSite(r.getString(5));
-				p.setBirthDate(r.getString(6));
-				p.setIdGroup(r.getInt(7));
+				p.setBirthDate(r.getDate(6));
+				p.setIdGroup(r.getString(7));
 				p.setPassWord(r.getString(8));
 				return p;
 			};
@@ -319,7 +319,7 @@ public class Dao extends JdbcTools implements GroupDao, PersonneDao {
 
 		try(Connection connect = newConnection();) {
 			PreparedStatement st = connect.prepareStatement("SELECT id_person, lastname_person, firstname_person, web_person, id_group FROM \"PERSONNE\" "
-					+ "WHERE lastname_person LIKE \"%" + search + "%\" OR firstname_person LIKE  \"%" + search + "%\" OR web_person LIKE  \"%" + search + "%\"");
+					+ "WHERE lastname_person LIKE '%" + search + "%' OR firstname_person LIKE  '%" + search + "%' OR web_person LIKE  '%" + search + "%'");
 			ResultSet rs = st.executeQuery();
 
 			while (rs.next()) {
@@ -330,7 +330,7 @@ public class Dao extends JdbcTools implements GroupDao, PersonneDao {
 					p.setLastName(r.getString(2) );
 					p.setFirstName(r.getString(3) );
 					p.setWebSite(r.getString(4));
-					p.setIdGroup(r.getInt(5));
+					p.setIdGroup(r.getString(5));
 					return p;
 				};
 				
