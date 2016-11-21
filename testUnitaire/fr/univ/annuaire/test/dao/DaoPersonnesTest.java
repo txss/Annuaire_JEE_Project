@@ -1,15 +1,19 @@
 package fr.univ.annuaire.test.dao;
 
 import java.sql.Date;
+import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.Collection;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.postgresql.util.PSQLException;
+
 import static org.junit.Assert.*;
 import fr.univ.annuaire.beans.Personne;
 import fr.univ.annuaire.dao.Dao;
 import fr.univ.annuaire.dao.DaoException;
+import fr.univ.annuaire.svg.JdbcTools;
 
 
 public class DaoPersonnesTest {
@@ -20,7 +24,10 @@ public class DaoPersonnesTest {
 	public void before (){
 		dao = new Dao();
 		
-
+		dao.setDriver(JdbcTools.POSTGRESQL_DRIVER);
+		dao.setUrl("jdbc:postgresql://vulgamatique.freeboxos.fr/JEE_Annuaire");
+		dao.setUser("florian");
+		dao.setPassword("Marm0tt3!");
 	}
 	
 	private Calendar initAndGetCalendar(int day, int month, int year) {
@@ -73,12 +80,13 @@ public class DaoPersonnesTest {
 		p.setId(16);
 		dao.deletePerson(p);
 		
-		dao.findPersonByID(24);
+		Personne pers = dao.findPersonByID(16);
+		assertNull(pers);
 	}
 	
 	
 	@Test (timeout = 2000)
-	public void savePerson() throws DaoException{
+	public void insertPerson() throws DaoException{
 		Personne p = new Personne();
 		p.setFirstName("jean");
 		p.setLastName("charles louis emile");
@@ -115,7 +123,6 @@ public class DaoPersonnesTest {
 	public void findAllPersonsInGroup(){
 		Collection<Personne> personnes = dao.findAllPersonsInGroup(57);
 		assertNotNull(personnes);
-		System.out.println(personnes);
 	}
 	
 	
@@ -123,7 +130,13 @@ public class DaoPersonnesTest {
 	public void searchKeywordInPersons(){
 		Collection<Personne> personnes = dao.searchKeywordInPersons("oh");
 		assertNotNull(personnes);
-		System.out.println(personnes);
 	}
 	
+	@Test (timeout = 2000)
+	public void searchKeywordInPersonsError(){
+		dao.setUrl("jdbc:postgresql://vulgamatique");
+		dao.setUser("");
+		dao.setPassword("");
+		dao.searchKeywordInPersons("");
+	}
 }

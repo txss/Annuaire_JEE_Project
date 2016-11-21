@@ -20,7 +20,10 @@ Dao dao;
 	public void before () throws ClassNotFoundException{
 		dao = new Dao();
 		
-
+		dao.setDriver(JdbcTools.POSTGRESQL_DRIVER);
+		dao.setUrl("jdbc:postgresql://vulgamatique.freeboxos.fr/JEE_Annuaire");
+		dao.setUser("florian");
+		dao.setPassword("Marm0tt3!");
 	}
 	
 	
@@ -46,7 +49,6 @@ Dao dao;
 	public void findGroupByIDAbsent() throws DaoException{
 		GroupPersonnes g = new GroupPersonnes();
 		g.setId("00000");
-		
 		dao.findGroup(g);
 	}
 	
@@ -54,9 +56,15 @@ Dao dao;
 	@Test (timeout = 2000)
 	public void findGroupByName() throws DaoException{
 		GroupPersonnes g = dao.findGroupByName("M2 FSIL 2015/2016");
-		
 		assertEquals("M2 FSIL 2015/2016", g.getName());
 	}
+	
+	
+	@Test (timeout = 2000, expected = DaoException.class)
+	public void findGroupByNameAbsent() throws DaoException{
+		dao.findGroupByName("Absent");
+	}
+	
 	
 	//TODO foreignkey
 	@Test (timeout = 2000, expected = DaoException.class)

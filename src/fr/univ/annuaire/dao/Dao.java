@@ -249,7 +249,6 @@ public class Dao extends JdbcTools implements GroupDao, PersonneDao {
 			st.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
-			throw new DaoException("This person is not present in the database, person id_person: "+ id);
 		}
 
 		return personne;

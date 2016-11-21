@@ -1,22 +1,31 @@
 package fr.univ.annuaire.test.svg;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
+import java.sql.Date;
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.sql.Date;
 import java.util.Calendar;
-import java.util.Locale;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import fr.univ.annuaire.svg.JdbcTools;
 
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = "/fichier-de-configuration-spring.xml")
 public class JdbcToolsPGTest {
 
+	@Autowired
+    ApplicationContext context;
+	
 	private static JdbcTools newTool;
 	
 	private Calendar initAndGetCalendar(int day, int month, int year) {
@@ -34,9 +43,9 @@ public class JdbcToolsPGTest {
 		newTool = new JdbcTools();
 
 		newTool.setDriver(JdbcTools.POSTGRESQL_DRIVER);
-		newTool.setUrl("jdbc:postgresql://");
-		newTool.setUser("");
-		newTool.setPassword("");
+		newTool.setUrl("jdbc:postgresql://vulgamatique.freeboxos.fr/JEE_Annuaire");
+		newTool.setUser("florian");
+		newTool.setPassword("Marm0tt3!");
 		newTool.init();
 	}//initialization()
 
@@ -55,15 +64,6 @@ public class JdbcToolsPGTest {
 		newTool.init();
 	}//init()
 
-
-	//	@Test
-	//	public void closeOK() {
-	//		newTool.close();
-	//	}
-
-
-
-
 	@Test(timeout = 2000)
 	public void setDriverTest(){
 		newTool.setDriver("test.driver.new");
@@ -79,8 +79,6 @@ public class JdbcToolsPGTest {
 	
 	@Test(timeout = 2000)
 	public void insertPrepared() throws SQLException {
-		//SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy", Locale.FRENCH);
-		
 		String query = 	"INSERT INTO \"PERSONNE\" (id_person, lastname_person, firstname_person, email_person, web_person, birthday_person, passwd_person, id_group)"+
 				"VALUES (nextval('\"Personne_id_person_seq\"'), ?, ?, ?, ?, ?, ?, ?)";
 		String firstname = "Benjamin";
@@ -97,8 +95,6 @@ public class JdbcToolsPGTest {
 	
 	@Test(timeout = 2000)
 	public void updatePrepared() throws SQLException {
-		//SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy", Locale.FRENCH);
-
 		String query = 	"UPDATE \"PERSONNE\" SET email_person = ?, web_person = ?, birthday_person = ? WHERE lastname_person = ?";
 		String email = "test.test@gmail.com";
 		String website = "testdusiteinternet.com";
@@ -132,13 +128,5 @@ public class JdbcToolsPGTest {
 
 		assertNull(newTool.executeUpdate(query, id, name));
 	}//insertPreparedOnTableGroupes()
-
-
-	//	@Test (timeout = 2000)
-	//	public void findBeans() throws DaoException{
-	//		String query = "SELECT id, lastname, firstname, email, website, birthdate, idgroup, passWord FROM Personnes";
-	//		IResultSetToBean<Personne> mapper = new Personne();
-	//		Collection<Personne> person = newTool.findBeans(query, mapper);
-	//		System.out.println(person);
-	//	}
+	
 }

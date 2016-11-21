@@ -77,7 +77,7 @@ public class PersonneTest {
 	@Test
 	public void idGroupTest(){
 		p.setIdGroup("5");
-		assertEquals(5, p.getIdGroup());
+		assertEquals("5", p.getIdGroup());
 	}
 
 	@Test

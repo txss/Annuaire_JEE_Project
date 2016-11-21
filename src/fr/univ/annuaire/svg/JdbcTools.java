@@ -5,12 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
-
-import fr.univ.annuaire.dao.DaoException;
-
 
 
 public class JdbcTools {
@@ -84,11 +79,6 @@ public class JdbcTools {
 	    return conn;
 	}
 
-	// TODO CODE MORT????
-	public void quietClose(Connection c) throws SQLException {
-		if (c != null) c.close();
-	}
-	
 	
 	public ResultSet executeUpdate(String query, Object... parameters) throws SQLException {
 		boolean ok = false;
@@ -108,9 +98,6 @@ public class JdbcTools {
 				
 				if (parameters[i] instanceof String)
 					st.setString(i+1, (String) parameters[i]);
-				
-				if (parameters[i] instanceof Boolean)
-					st.setBoolean(i+1, (Boolean) parameters[i]);
 			}
 			ok = st.execute();
 			if (ok)
@@ -121,22 +108,22 @@ public class JdbcTools {
 	}
 	
 	
-	// TODO check this
-	public <T> Collection<T> findBeans(String sql, IResultSetToBean<T> mapper) throws DaoException {
-		Collection <T> beans = new ArrayList<T>();
-		
-		try(Connection connect = newConnection();) {
-			PreparedStatement st = connect.prepareStatement(sql);
-			ResultSet rs = st.executeQuery();
-			
-			beans.add(mapper.toBean(rs));
-			
-			st.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		return beans;
-	}//findBeans
+//	// TODO check this
+//	public <T> Collection<T> findBeans(String sql, IResultSetToBean<T> mapper) throws DaoException {
+//		Collection <T> beans = new ArrayList<T>();
+//		
+//		try(Connection connect = newConnection();) {
+//			PreparedStatement st = connect.prepareStatement(sql);
+//			ResultSet rs = st.executeQuery();
+//			
+//			beans.add(mapper.toBean(rs));
+//			
+//			st.close();
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+//		
+//		return beans;
+//	}//findBeans
 	
 }
