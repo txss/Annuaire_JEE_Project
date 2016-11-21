@@ -69,17 +69,33 @@ public class JdbcTools {
 		System.out.println("Closing JDBCTOOLS..."); // TODO
 	}
 	
+	/**
+	 * Use this methode to load the database driver
+	 * @throws ClassNotFoundException
+	 */
 	private void loadDriver() throws ClassNotFoundException {
 	    Class.forName(driver);
 	}
 	
 	
+	/**
+	 * This methode create and return a new connection with the class attributes values
+	 * @return a available connection to the database
+	 * @throws SQLException
+	 */
 	public Connection newConnection() throws SQLException {
 	    Connection conn = DriverManager.getConnection(url, user, password);
 	    return conn;
 	}
 
 	
+	/**
+	 * This methode is used to exectute a database a prepared statement request
+	 * @param query you SQL request
+	 * @param parameters the value of prameter in your prepared statment
+	 * @return a resultSet, null if the rs is empty
+	 * @throws SQLException
+	 */
 	public ResultSet executeUpdate(String query, Object... parameters) throws SQLException {
 		boolean ok = false;
 		ResultSet rs = null;
