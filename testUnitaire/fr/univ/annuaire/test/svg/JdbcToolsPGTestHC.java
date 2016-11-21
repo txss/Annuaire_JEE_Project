@@ -16,12 +16,6 @@ public class JdbcToolsPGTestHC {
 	@BeforeClass
 	public static void initialization() throws ClassNotFoundException{
 		newTool = new JdbcTools();
-
-		newTool.setDriver(JdbcTools.POSTGRESQL_DRIVER);
-		newTool.setUrl("jdbc:postgresql://vulgamatiqu");
-		newTool.setUser("");
-		newTool.setPassword("");
-		newTool.init();
 	}//initialization()
 	
 	
@@ -46,9 +40,9 @@ public class JdbcToolsPGTestHC {
 		assertEquals("password", pwd);
 	}//getPwdTest()
 	
-	@Test(timeout = 2000)
+	@Test(timeout = 2000, expected = SQLException.class)
 	public void selectSimpleOnTableGroupesErr() throws SQLException {
 		String query = "SELECT id_group, name_group FROM \"GROUPE\"";
-		assertNotNull(newTool.executeUpdate(query));
+		newTool.executeUpdate(query);
 	}//selectSimpleOnTableGroupes()
 }

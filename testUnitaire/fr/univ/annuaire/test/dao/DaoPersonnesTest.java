@@ -1,34 +1,28 @@
 package fr.univ.annuaire.test.dao;
 
 import java.sql.Date;
-import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.Collection;
 
-import org.junit.Before;
 import org.junit.Test;
-import org.postgresql.util.PSQLException;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import static org.junit.Assert.*;
 import fr.univ.annuaire.beans.Personne;
 import fr.univ.annuaire.dao.Dao;
 import fr.univ.annuaire.dao.DaoException;
-import fr.univ.annuaire.svg.JdbcTools;
 
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = "classpath:fr/univ/annuaire/test/svg/fichier-de-configuration-spring.xml")
 public class DaoPersonnesTest {
 
+	@Autowired
 	Dao dao;
 	
-	@Before
-	public void before (){
-		dao = new Dao();
-		
-		dao.setDriver(JdbcTools.POSTGRESQL_DRIVER);
-		dao.setUrl("jdbc:postgresql://vulgamatique.freeboxos.fr/JEE_Annuaire");
-		dao.setUser("florian");
-		dao.setPassword("Marm0tt3!");
-	}
 	
 	private Calendar initAndGetCalendar(int day, int month, int year) {
 		Calendar cal = Calendar.getInstance();

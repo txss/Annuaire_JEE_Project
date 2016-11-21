@@ -9,10 +9,9 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.Calendar;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -20,13 +19,11 @@ import fr.univ.annuaire.svg.JdbcTools;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "/fichier-de-configuration-spring.xml")
+@ContextConfiguration(locations = "classpath:fr/univ/annuaire/test/svg/fichier-de-configuration-spring.xml")
 public class JdbcToolsPGTest {
 
 	@Autowired
-    ApplicationContext context;
-	
-	private static JdbcTools newTool;
+	private JdbcTools newTool;
 	
 	private Calendar initAndGetCalendar(int day, int month, int year) {
 		Calendar cal = Calendar.getInstance();
@@ -37,22 +34,6 @@ public class JdbcToolsPGTest {
 		
 		return cal;
 	}//initAndGetCalendar()
-
-	@BeforeClass
-	public static void initialization() throws ClassNotFoundException{
-		newTool = new JdbcTools();
-
-		newTool.setDriver(JdbcTools.POSTGRESQL_DRIVER);
-		newTool.setUrl("jdbc:postgresql://vulgamatique.freeboxos.fr/JEE_Annuaire");
-		newTool.setUser("florian");
-		newTool.setPassword("Marm0tt3!");
-		newTool.init();
-	}//initialization()
-
-	@AfterClass
-	public static void closing(){
-		newTool.close();
-	}//closing()
 
 	@Test(timeout = 2000)
 	public void testConnection() throws SQLException{

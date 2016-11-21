@@ -16,12 +16,10 @@ import fr.univ.annuaire.svg.JdbcTools;
 public class Dao extends JdbcTools implements GroupDao, PersonneDao {
 
 
-	
 	public Dao() {
 		super();
 	}
 
-	
 
 	@Override
 	public Collection<GroupPersonnes> findAllGroups() {
