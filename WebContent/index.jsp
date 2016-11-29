@@ -5,9 +5,9 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Title</title>
+  <title>Annuaire amu</title>
 </head>
 <body>
-  <p>Hello.</p>
+  <p>Hello. Benjamin</p>
 </body>
 </html>
