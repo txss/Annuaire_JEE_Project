@@ -2,7 +2,6 @@
     contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" %>
 <%@ include file="include.jsp" %>
-
 <!DOCTYPE html>
 <html lang="fr">
     <head>
@@ -40,4 +39,6 @@
         <![endif]-->
     </head>
     <body>
+    
+<%@ include file="tmpcss.jsp" %> <!--  TODO del this line -->
     <div class="container">
