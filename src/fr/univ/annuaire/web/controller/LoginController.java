@@ -1,4 +1,4 @@
-package fr.univ.annuaire.controller;
+package fr.univ.annuaire.web.controller;
 
 import java.io.IOException;
 
@@ -12,16 +12,16 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.Controller;
 
 
-public class AcceuilController implements Controller {
+public class LoginController implements Controller {
 
     protected final Log logger = LogFactory.getLog(getClass());
 
+    
     public ModelAndView handleRequest(HttpServletRequest request,
             HttpServletResponse response) throws ServletException, IOException {
 
-        logger.info("Returning index view");
-        return new ModelAndView("index.jsp");
-
+        logger.info("Returning login view");
+        return new ModelAndView("login");
     }
 
 }
