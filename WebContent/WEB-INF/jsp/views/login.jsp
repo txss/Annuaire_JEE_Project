@@ -1,17 +1,45 @@
 <%@ include file="/WEB-INF/jsp/templates/header.jsp" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <h3>Connectez vous pour utiliser l'application</h3>
 
 <div class="container" id="login_panel">
     <div class="row">
         <div class="col-sm-6 col-md-4 col-md-offset-4">
-            <h4 class="text-center login-title">Annuaire AMU</h1>
+            <h4 class="text-center login-title">Annuaire AMU</h4>
             <div class="account-wall">
-                <form class="form-signin" url="">
-	                <input type="text" class="form-control" placeholder="Email" required autofocus>
-	                <input type="password" class="form-control" placeholder="Password" required>
-	                <button class="btn btn-lg btn-primary btn-block" type="submit">Se connecter</button>
-                </form>
+                <form:form method="POST" commandName="login">
+				    <table>
+				    <tr>
+				        <td><label for="email">Email:</label></td>
+				        <td>
+				        	<div class="form-group">
+				        		<form:input path="email" class="form-control" placeholder="Email"/>
+				        	</div>
+				        </td>
+				        <td>
+				        	<small class="errors help-block"><form:errors path="email" cssClass="error" /></small>
+				        </td>
+				    </tr>
+				    <tr>
+				        <td><label for="password">Password:</label></td>
+				        <td>
+				        	<div class="form-group">
+				        		<form:password path="passWord" class="form-control" placeholder="Password"/>
+				        	</div>
+				        </td>
+				        <td>
+				        	<small class="errors help-block"><form:errors path="passWord" cssClass="error" /></small>
+				        </td>
+				    </tr>
+				    <tr>
+						<td colspan="3">
+							<button class="btn btn-primary btn-block" type="submit">Se connecter</button>
+						</td>
+					</tr>
+				    </table>
+				    
+				</form:form>
             </div>
         </div>
     </div>

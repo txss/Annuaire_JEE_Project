@@ -2,15 +2,35 @@ package fr.univ.annuaire.beans;
 
 import java.sql.Date;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class Personne {
 	
 	private int id;
+	
+	@NotNull
+    @Size(min = 1, message = "Le nom est obligatoire")
 	private String firstName;
+	
+	@NotNull
+    @Size(min = 1, message = "Le prènom est obligatoire")
 	private String lastName;
+	
 	private Date birthDate;
+	
+	@NotNull
+    @Size(min = 6, message = "Votre email est obligatoire")
 	private String email;
+	
 	private String webSite;
+	
+	@NotNull
+    @Size(min = 3, message = "Le groupe est obligatoire")
 	private String idGroup;
+	
+	@NotNull
+    @Size(min = 4, message = "Le mot de passe est obligatoire")
 	private String passWord; // TODO crypt this password
 	
 	

@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
@@ -28,6 +27,6 @@
 		cache-period="100000" />
 
 
-	<bean name="/login.htm" class="fr.univ.annuaire.web.controller.ConnectController" />
+	<bean name="/actions/login/sign_in" class="fr.univ.annuaire.web.controller.ConnectController" />
 
 </beans>
