@@ -252,6 +252,43 @@ public class Dao extends JdbcTools implements GroupDao, PersonneDao {
 		return personne;
 	}
 
+	
+	@Override
+	public Personne findPersonByEmail(String email) throws DaoException {
+		Personne personne = new Personne();
+
+		try(Connection connect = newConnection();) {
+
+			PreparedStatement st = connect.prepareStatement("SELECT id_person, lastname_person, firstname_person, email_person, web_person, birthday_person, id_group, passwd_person FROM \"PERSONNE\" WHERE email_person = '" + email+"'");
+
+			ResultSet rs = st.executeQuery();
+
+			if(!rs.next())
+				throw new DaoException("This person with email="+email +" does't exist in this database.");
+
+			IResultSetToBean<Personne> pers = (ResultSet r)->{
+				Personne p = new Personne();
+
+				p.setId(r.getInt(1));
+				p.setLastName(r.getString(2));
+				p.setFirstName(r.getString(3));
+				p.setEmail(r.getString(4));
+				p.setWebSite(r.getString(5));
+				p.setBirthDate(r.getDate(6));
+				p.setIdGroup(r.getString(7));
+				p.setPassWord(r.getString(8));
+				return p;
+			};
+			personne = pers.toBean(rs);
+
+			st.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return personne;
+	}
+	
 
 	@Override
 	public void insertPerson(Personne personne){

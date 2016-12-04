@@ -22,7 +22,7 @@ public interface PersonneDao {
 	
 	
 	/**
-	 *  Methode to get one person in the person book
+	 *  Methode to find one person by id in the person book
 	 * @param id person to find
 	 * @return A Personne bean with the id you give in param 
 	 * @throws DaoException 
@@ -30,6 +30,14 @@ public interface PersonneDao {
 	Personne findPersonByID(long id) throws DaoException;
 
 
+	/**
+	 * Methode to find one person by the email addresse in the person book
+	 * @param Email
+	 * @return A Personne bean with the email you give in param 
+	 * @throws DaoException
+	 */
+	Personne findPersonByEmail(String Email) throws DaoException;
+	
 	/**
 	 * Methode to save a new personne in the person book
 	 * the id of the person will be autoincrements by database

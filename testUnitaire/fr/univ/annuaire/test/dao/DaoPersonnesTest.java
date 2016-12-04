@@ -62,6 +62,32 @@ public class DaoPersonnesTest {
 	}
 	
 	
+	@Test (timeout = 2000)
+	public void findPersonByEmail() throws DaoException{
+		String email = "test.test@gmail.com";
+		Personne pers = dao.findPersonByEmail(email);
+		
+		Personne p = new Personne();
+		p.setId(2);
+		p.setFirstName("Josef               ");
+		p.setLastName("Cohen               ");
+		p.setEmail("test.test@gmail.com");
+		p.setWebSite("testdusiteinternet.com");
+		Date birthday = new Date(initAndGetCalendar(27, 10, 1991).getTimeInMillis());
+		p.setBirthDate(birthday);
+		p.setPassWord("D0nneMoiDes$ou$");
+		p.setIdGroup("M2FSIL2016");
+
+		assertTrue(p.isEquals(pers));
+	}
+	
+	@Test (timeout = 2000, expected = DaoException.class)
+	public void findPersonByEmailError() throws DaoException{
+		String email = "jexistePas@gmail.com";
+		dao.findPersonByEmail(email);
+	}
+	
+	
 	@Test (timeout = 2000, expected = DaoException.class)
 	public void findPersonNotPresent() throws DaoException{
 		dao.findPersonByID(100);
