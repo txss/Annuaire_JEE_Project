@@ -28,7 +28,7 @@ public class Dao extends JdbcTools implements GroupDao, PersonneDao {
 		try(Connection connect = newConnection();) {
 			PreparedStatement st = connect.prepareStatement("SELECT id_group, name_group FROM \"GROUPE\"");
 			ResultSet rs = st.executeQuery();
-
+			
 			while (rs.next()) {
 
 				IResultSetToBean<GroupPersonnes> group = (ResultSet r)->{

@@ -39,7 +39,7 @@ public class DaoPersonnesTest {
 	public void findAllPersons() throws DaoException {
 		Collection<Personne> personnes = dao.findAllPersons();
 		assertNotNull(personnes);
-//		System.out.println(personnes);
+		System.out.println(personnes);
 	}
 
 	

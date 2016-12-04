@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import fr.univ.annuaire.beans.Login;
+import fr.univ.annuaire.dao.DaoException;
+import fr.univ.annuaire.manager.LoginManager;
 
 @Controller()
 @RequestMapping("/login")
@@ -25,15 +27,21 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/sign_in", method = RequestMethod.POST)
-    public String loginRedirect(@ModelAttribute @Valid Login l, BindingResult result) {
+    public String loginRedirect(@ModelAttribute @Valid Login l, BindingResult result) throws DaoException {
+    	LoginManager manager = new LoginManager(l);
     	
     	if (result.hasErrors()) {
-    		logger.info("Returning log view, auth failled");
+    		logger.info("Returning log view, auth failled: incorrect syntax");
             return "login";
         }
-//        manager.save(p);
-    	logger.info("Returning accueil view, auth success");
-        return "redirect:/actions/accueil";
+    	
+    	if (!manager.checkLogin()){ //TODO suppr le -> !
+    		logger.info("Returning accueil view, auth success");
+            return "redirect:/actions/accueil";
+    	}
+    	
+    	logger.info("Returning log view, auth failled: wrong identifiants");
+        return "login";
     }
     
 }
