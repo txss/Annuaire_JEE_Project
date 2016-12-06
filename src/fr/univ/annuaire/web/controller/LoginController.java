@@ -10,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import fr.univ.annuaire.beans.Login;
 import fr.univ.annuaire.dao.DaoException;
@@ -20,29 +21,43 @@ import fr.univ.annuaire.manager.LoginManager;
 public class LoginController {
 
 	protected final Log logger = LogFactory.getLog(getClass());
+	
 	@Autowired
 	LoginManager manager;
     
+	
+	
     @RequestMapping(value = "/sign_in", method = RequestMethod.GET)
     public String login(@ModelAttribute Login l, BindingResult result) {
     	logger.info("Returning login view");
         return "login";
     }
 
+    
+    
     @RequestMapping(value = "/sign_in", method = RequestMethod.POST)
-    public String loginRedirect(@ModelAttribute @Valid Login l, BindingResult result) throws DaoException {
+    public String loginRedirect(@ModelAttribute @Valid Login l, BindingResult result, final RedirectAttributes redirectAttributes) throws DaoException {
     	if (result.hasErrors()) {
     		logger.info("Returning log view, auth failled: incorrect syntax");
             return "login";
         }
-    	System.out.println(manager.checkLogin(l));
-    	if (!manager.checkLogin(l)){ //TODO suppr le -> !
+    	
+    	if (manager.checkLogin(l)){
     		logger.info("Returning accueil view, auth success");
-            return "redirect:/actions/accueil";
+            return "redirect:/actions/accueil"; // TODO set bean in session
     	}
     	
+    	redirectAttributes.addFlashAttribute("error", "Identifiant ou mot de passe incorect.");
     	logger.info("Returning log view, auth failled: wrong identifiants");
-        return "login";
+        return "redirect:sign_in";
+    }
+    
+    
+    
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public String logout(@ModelAttribute Login l, BindingResult result) {
+    	logger.info("Returning login view");
+        return "redirect:sign_in";
     }
     
 }

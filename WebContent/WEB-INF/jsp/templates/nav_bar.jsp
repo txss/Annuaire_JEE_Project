@@ -8,8 +8,8 @@
 			id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
 				<li><a href="profil">Mon profil</a></li>
-				<li><a href="#">Liste des personnes</a></li>
-				<li><a href="#">Liste des groupes</a></li>
+				<li><a href="person_List">Liste des personnes</a></li>
+				<li><a href="groups_List">Liste des groupes</a></li>
 			</ul>
 			<form class="navbar-form navbar-left">
 				<div class="form-group">

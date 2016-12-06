@@ -7,12 +7,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller()
-@RequestMapping("/accueil")
-public class AccueilController {
+@RequestMapping("")
+public class ViewsDispatcherController {
 
 protected final Log logger = LogFactory.getLog(getClass());
 
-	@RequestMapping(value = "", method = RequestMethod.GET)
+	@RequestMapping(value = "/accueil", method = RequestMethod.GET)
     public String showAccueil() {
     	logger.info("Returning accueil view");
         return "accueil";
@@ -23,5 +23,18 @@ protected final Log logger = LogFactory.getLog(getClass());
     	logger.info("Returning accueil profil");
         return "profil";
     }
+	
+	@RequestMapping(value = "/person_List", method = RequestMethod.GET)
+    public String showPersonsList() {
+    	logger.info("Returning accueil profil");
+        return "lister";
+    }
+	
+	@RequestMapping(value = "/groups_List", method = RequestMethod.GET)
+    public String showGroupsList() {
+    	logger.info("Returning accueil profil");
+        return "lister"; // TODO add param 
+    }
+	
 	
 }

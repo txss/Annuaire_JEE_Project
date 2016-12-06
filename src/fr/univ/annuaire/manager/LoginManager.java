@@ -25,7 +25,14 @@ public class LoginManager {
 //	}
 	
 	public boolean checkLogin(Login login) throws DaoException{
-		Personne p = dao.findPersonByEmail(login.getEmail());
+		
+		Personne p;
+		try {
+			p = dao.findPersonByEmail(login.getEmail());
+		} catch (Exception e) {
+			//e.printStackTrace();
+			return false;
+		}
 		
 		if(p.getEmail().equals(login.getEmail()))
 			if(p.getPassWord().equals(login.getPassWord()))
