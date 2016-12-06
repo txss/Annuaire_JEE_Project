@@ -152,11 +152,4 @@ public class DaoPersonnesTest {
 		assertNotNull(personnes);
 	}
 	
-	@Test (timeout = 2000)
-	public void searchKeywordInPersonsError(){
-		dao.setUrl("jdbc:postgresql://vulgamatique");
-		dao.setUser("");
-		dao.setPassword("");
-		dao.searchKeywordInPersons("");
-	}
 }

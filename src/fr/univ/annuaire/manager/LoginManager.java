@@ -1,39 +1,35 @@
 package fr.univ.annuaire.manager;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
+import org.springframework.stereotype.Service;
 
 import fr.univ.annuaire.beans.Login;
 import fr.univ.annuaire.beans.Personne;
 import fr.univ.annuaire.dao.Dao;
 import fr.univ.annuaire.dao.DaoException;
 
-@ContextConfiguration(locations = "classpath:fr/univ/annuaire/manager/fichier-de-configuration-spring.xml")
+@Service
 public class LoginManager {
 
 	@Autowired
 	Dao dao;
 	
-	private Login l;
 	/**
 	 * default constructor
 	 */
-	public LoginManager(Login login) {
-		this.l = login;
-	}
+	public LoginManager() {}
 	
-	public boolean checkLogin() throws DaoException{
-		System.out.println("lllll" +l.getEmail());
-//		System.out.println(dao.getPassword());
-//		System.out.println(dao.findAllGroups());
+//	@PostConstruct
+//	public void init (){
+//		dao.findAllGroups();
+//	}
+	
+	public boolean checkLogin(Login login) throws DaoException{
+		Personne p = dao.findPersonByEmail(login.getEmail());
 		
-//		Personne p = dao.findPersonByEmail(l.getEmail());
-//		System.out.println(p);
-//		System.out.println("pppppppppppp" + p.getEmail());
-		
-//		if(p.getEmail().equals(l.getEmail()))
-//			if(p.getPassWord().equals(l.getPassWord()))
-//				return true;
+		if(p.getEmail().equals(login.getEmail()))
+			if(p.getPassWord().equals(login.getPassWord()))
+				return true;
 		
 		return false;
 	}

@@ -7,11 +7,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
 
+import javax.annotation.PostConstruct;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 
 public class JdbcTools {
-	public static final String POSTGRESQL_DRIVER = "org.postgresql.Driver";
-	public final String MYSQL_DRIVER = "com.mysql.jdbc.Driver"; // TODO fichier de config
-
+	protected final Log logger = LogFactory.getLog(getClass());
 	private String driver;
 	private String url;
 	private String user;
@@ -59,14 +62,14 @@ public class JdbcTools {
 
 	// END getters and setters
 
-
+	@PostConstruct
 	public void init() throws ClassNotFoundException {
-		System.out.println("Initializing JDBCTOOLS..."); // TODO
+		logger.info( (new Date()).toString() + " Initializing JdbcTools...");
 		loadDriver();
 	}
 	
 	public void close(){
-		System.out.println("Closing JDBCTOOLS..."); // TODO
+		logger.info("Close JdbcTools...");
 	}
 	
 	/**
@@ -74,7 +77,8 @@ public class JdbcTools {
 	 * @throws ClassNotFoundException
 	 */
 	private void loadDriver() throws ClassNotFoundException {
-	    Class.forName(driver);
+	    if(driver != null)
+	    	Class.forName(driver);
 	}
 	
 	
@@ -84,6 +88,7 @@ public class JdbcTools {
 	 * @throws SQLException
 	 */
 	public Connection newConnection() throws SQLException {
+		logger.info((new Date()).toString() + " Create new connection on database.");
 	    Connection conn = DriverManager.getConnection(url, user, password);
 	    return conn;
 	}

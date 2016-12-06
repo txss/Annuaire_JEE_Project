@@ -18,4 +18,10 @@ protected final Log logger = LogFactory.getLog(getClass());
         return "accueil";
     }
 	
+	@RequestMapping(value = "/profil", method = RequestMethod.GET)
+    public String showProfil() {
+    	logger.info("Returning accueil profil");
+        return "profil";
+    }
+	
 }
