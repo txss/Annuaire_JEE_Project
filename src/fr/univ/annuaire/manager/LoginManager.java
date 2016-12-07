@@ -33,10 +33,11 @@ public class LoginManager {
 			//e.printStackTrace();
 			return false;
 		}
-		
+
 		if(p.getEmail().equals(login.getEmail()))
-			if(p.getPassWord().equals(login.getPassWord()))
-				return true;
+			if(p.getPassWord() != null)
+				if(p.getPassWord().equals(login.getPassWord()))
+					return true;
 		
 		return false;
 	}

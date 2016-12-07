@@ -1,5 +1,7 @@
 package fr.univ.annuaire.web.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.apache.commons.logging.Log;
@@ -28,7 +30,9 @@ public class LoginController {
 	
 	
     @RequestMapping(value = "/sign_in", method = RequestMethod.GET)
-    public String login(@ModelAttribute Login l, BindingResult result) {
+    public String login(@ModelAttribute Login l, BindingResult result, HttpServletRequest request) {
+    	HttpSession session = request.getSession();
+	    session.setAttribute("user", null);
     	logger.info("Returning login view");
         return "login";
     }
@@ -36,15 +40,21 @@ public class LoginController {
     
     
     @RequestMapping(value = "/sign_in", method = RequestMethod.POST)
-    public String loginRedirect(@ModelAttribute @Valid Login l, BindingResult result, final RedirectAttributes redirectAttributes) throws DaoException {
+    public String loginRedirect(@ModelAttribute @Valid Login l, 
+    							BindingResult result, 
+    							final RedirectAttributes redirectAttributes, 
+    							HttpServletRequest request) throws DaoException {
+    	
     	if (result.hasErrors()) {
     		logger.info("Returning log view, auth failled: incorrect syntax");
             return "login";
         }
     	
     	if (manager.checkLogin(l)){
+    		HttpSession session = request.getSession();
+    	    session.setAttribute("user", true);
     		logger.info("Returning accueil view, auth success");
-            return "redirect:/actions/accueil"; // TODO set bean in session
+            return "redirect:/actions/accueil";
     	}
     	
     	redirectAttributes.addFlashAttribute("error", "Identifiant ou mot de passe incorect.");
@@ -55,7 +65,9 @@ public class LoginController {
     
     
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
-    public String logout(@ModelAttribute Login l, BindingResult result) {
+    public String logout(@ModelAttribute Login l, BindingResult result, HttpServletRequest request) {
+    	HttpSession session = request.getSession();
+	    session.setAttribute("user", null);
     	logger.info("Returning login view");
         return "redirect:sign_in";
     }
