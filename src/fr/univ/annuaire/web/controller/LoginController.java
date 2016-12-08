@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import fr.univ.annuaire.beans.Login;
+import fr.univ.annuaire.beans.Personne;
 import fr.univ.annuaire.dao.DaoException;
 import fr.univ.annuaire.manager.LoginManager;
 
@@ -50,9 +51,11 @@ public class LoginController {
             return "login";
         }
     	
-    	if (manager.checkLogin(l)){
+    	Personne pers = manager.checkLogin(l);
+    	if (pers != null){
     		HttpSession session = request.getSession();
     	    session.setAttribute("user", true);
+    	    session.setAttribute("pers", pers); // envoie les infos de la personne connecté en session
     		logger.info("Returning accueil view, auth success");
             return "redirect:/actions/accueil";
     	}

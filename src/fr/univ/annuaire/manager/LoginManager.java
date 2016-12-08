@@ -24,22 +24,22 @@ public class LoginManager {
 //		dao.findAllGroups();
 //	}
 	
-	public boolean checkLogin(Login login) throws DaoException{
+	public Personne checkLogin(Login login) throws DaoException{
 		
 		Personne p;
 		try {
 			p = dao.findPersonByEmail(login.getEmail());
 		} catch (Exception e) {
 			//e.printStackTrace();
-			return false;
+			return null;
 		}
 
 		if(p.getEmail().equals(login.getEmail()))
 			if(p.getPassWord() != null)
 				if(p.getPassWord().equals(login.getPassWord()))
-					return true;
+					return p;
 		
-		return false;
+		return null;
 	}
 	
 }
