@@ -141,7 +141,7 @@ public class DaoPersonnesTest {
 
 	@Test (timeout = 2000)
 	public void findAllPersonsInGroup(){
-		Collection<Personne> personnes = dao.findAllPersonsInGroup(57);
+		Collection<Personne> personnes = dao.findAllPersonsInGroup("57");
 		assertNotNull(personnes);
 	}
 	

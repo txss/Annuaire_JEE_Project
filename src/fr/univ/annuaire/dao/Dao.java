@@ -153,7 +153,7 @@ public class Dao extends JdbcTools implements GroupDao, PersonneDao {
 	
 
 	@Override
-	public Collection<Personne> findAllPersonsInGroup(long groupId) {
+	public Collection<Personne> findAllPersonsInGroup(String groupId) {
 		Collection <Personne> personnes = new ArrayList<Personne>();
 
 		try(Connection connect = newConnection();) {

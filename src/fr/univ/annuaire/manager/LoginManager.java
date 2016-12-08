@@ -19,11 +19,7 @@ public class LoginManager {
 	 */
 	public LoginManager() {}
 	
-//	@PostConstruct
-//	public void init (){
-//		dao.findAllGroups();
-//	}
-	
+
 	public Personne checkLogin(Login login) throws DaoException{
 		
 		Personne p;

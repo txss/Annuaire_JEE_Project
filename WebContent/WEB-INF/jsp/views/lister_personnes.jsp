@@ -6,7 +6,7 @@
 	<h3>Personnes presente dans l'annuaire</h3>
     <ul style="list-style-type: square">
 	    <c:forEach items="${personnes}" var="person">
-	        <li><a href="">${person.firstName} ${person.lastName}</a></li>
+	        <li><a href="person?id=${person.id}">${person.firstName} ${person.lastName}</a></li>
 	    </c:forEach>
 	</ul>
 </div>	  

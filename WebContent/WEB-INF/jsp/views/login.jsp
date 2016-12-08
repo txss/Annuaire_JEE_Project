@@ -1,4 +1,5 @@
 <%@ include file="/WEB-INF/jsp/templates/header.jsp" %>
+<%@ include file="/WEB-INF/jsp/templates/nav_bar.jsp" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <h3>Connectez vous pour utiliser l'application</h3>

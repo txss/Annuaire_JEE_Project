@@ -2,14 +2,12 @@
 <%@ include file="/WEB-INF/jsp/templates/nav_bar.jsp" %>
 
 
-<c:url var="editer" value="" /> 
-
 <div class="container">
 
 	<h3>Bonjour ${pers.firstName}!</h3>
 	
-	<h5>Vos informations personnel: <a href=""><span class="glyphicon glyphicon-pencil"></span></a></h5>
-	
+	<h5>Vos informations personnel: <a href="edit"><span class="glyphicon glyphicon-pencil"></span></a></h5>
+
 	 <table id="infos_perso">
 	 	<tr>
 		 	<td>Nom:</td>

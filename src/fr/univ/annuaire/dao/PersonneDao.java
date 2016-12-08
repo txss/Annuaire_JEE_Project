@@ -18,7 +18,7 @@ public interface PersonneDao {
 	 * @param groupId the group we want the person
 	 * @return A collection of beans "personne" in the group you asked
 	 */
-	Collection<Personne> findAllPersonsInGroup(long groupId);
+	Collection<Personne> findAllPersonsInGroup(String groupId);
 	
 	
 	/**
