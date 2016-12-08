@@ -12,16 +12,16 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.Controller;
 
 
-public class ConnectController implements Controller {
+public class AccueilController implements Controller {
 
     protected final Log logger = LogFactory.getLog(getClass());
 
-    
+
     public ModelAndView handleRequest(HttpServletRequest request,
             HttpServletResponse response) throws ServletException, IOException {
 
-        logger.info("Returning login view");
-        return new ModelAndView("login");
+        logger.info("Returning accueil view");
+        return new ModelAndView("accueil");
     }
 
 }

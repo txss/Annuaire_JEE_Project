@@ -7,7 +7,10 @@
 		<div class="collapse navbar-collapse"
 			id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
-				<li><a href="profil">Mon profil</a></li>
+				<c:if test="${user != null}">
+					<li><a href="profil">Mon profil</a></li>
+				</c:if>
+				
 				<li><a href="person_List">Liste des personnes</a></li>
 				<li><a href="groups_List">Liste des groupes</a></li>
 			</ul>
@@ -18,7 +21,12 @@
 				<button type="submit" class="btn btn-default">Rechercher</button>
 			</form>
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="login/logout">Logout</a></li>
+				<c:if test="${user == null}">
+					<li><a href="login/sign_in">Se connecter</a></li>
+				</c:if>
+				<c:if test="${user != null}">
+					<li><a href="login/logout">Deconnecter</a></li>
+				</c:if>
 			</ul>
 		</div>
 		<!-- /.navbar-collapse -->
