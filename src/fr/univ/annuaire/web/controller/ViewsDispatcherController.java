@@ -32,72 +32,23 @@ public class ViewsDispatcherController {
     	logger.info("Returning accueil view");
         return "accueil";
     }
-	
-	@RequestMapping(value = "/person_List", method = RequestMethod.GET)
-    public String showPersonsList(HttpServletRequest request) {
-		HttpSession session = request.getSession();
-//		if (session.getAttribute("user") == null)
-//			return "redirect:login/sign_in";
-		
-	    session.setAttribute("personnes", personManager.getPersonList());
 
-	    logger.info("Returning person_List view");
-        return "lister_personnes";
-    }
 	
-	
-	
-	
-	
-	@RequestMapping(value = "/person", method = RequestMethod.GET)
-    public String showPersoninAnnuaire(
-    		HttpServletRequest request,
+	@RequestMapping(value = "/search", method = RequestMethod.GET)
+    public String searchinAnnuaire(
     		final RedirectAttributes redirectAttributes,
-    		@RequestParam(value = "id", required = false) Long personID) {
-		
-//		if (personID == null) {
-//			redirectAttributes.addFlashAttribute("errorPers", "Oops cette personne n'as pas été trouvé dans l'annuaire.");
-//	        logger.info("Person with id:" + personID + " not found.");
-//	        return "show_person";
-//	    }
-		
-		HttpSession session = request.getSession();
-	    session.setAttribute("showPers", personManager.getPerson(personID));
-		
-	    logger.info("Returning show_person ("+personID+")  view.");
-        return "show_person";
-    }
-	
-	
-	
-	
-	
-	@RequestMapping(value = "/groups_List", method = RequestMethod.GET)
-    public String showGroupsList(HttpServletRequest request) {
-		HttpSession session = request.getSession();
-//		if (session.getAttribute("user") == null)
-//			return "redirect:login/sign_in";
-		
-		session.setAttribute("groupes", groupManager.getGroupList());
-    	logger.info("Returning groups_List view");
-        return "lister_groupes";
-    }
-	
-	
-	
-	
-	@RequestMapping(value = "/group", method = RequestMethod.GET)
-    public String showGroupinAnnuaire(
     		HttpServletRequest request,
-    		final RedirectAttributes redirectAttributes,
-    		@RequestParam(value = "id", required = false) String groupID) {
+    		@RequestParam(value = "searcher", required = false) String search) {
 		
 		HttpSession session = request.getSession();
-		session.setAttribute("group", groupManager.findGroup(groupID));
-		session.setAttribute("showPersonInGroup", personManager.findAllPersonInGroup(groupID));
-	    
-	    logger.info("Returning show_group ("+groupID+")  view.");
-        return "show_group";
+		long debut = System.currentTimeMillis();
+		if(search != "")
+			session.setAttribute("personnes", personManager.searchPerson(search));
+		long time = System.currentTimeMillis()-debut;
+		
+		session.setAttribute("time",  time+" ms");
+	    logger.info("Returning show_search_view ("+search+")  view.");
+        return "searcher";
     }
 	
 }

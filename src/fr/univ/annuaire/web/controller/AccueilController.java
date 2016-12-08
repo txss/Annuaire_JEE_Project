@@ -1,3 +1,7 @@
+/**
+ * Accueil controller is the controller to redirect the user on the accueil view
+ * @author Campanella & Magron
+ */
 package fr.univ.annuaire.web.controller;
 
 import java.io.IOException;
@@ -17,6 +21,9 @@ public class AccueilController implements Controller {
     protected final Log logger = LogFactory.getLog(getClass());
 
 
+    /**
+     * This methode redirect the user (login or not) to the accueil view 
+     */
     public ModelAndView handleRequest(HttpServletRequest request,
             HttpServletResponse response) throws ServletException, IOException {
 

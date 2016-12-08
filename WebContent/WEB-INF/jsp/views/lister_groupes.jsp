@@ -6,7 +6,7 @@
 	<h3>Groupes de l'annuaire</h3>
     <ul style="list-style-type: square">
 	    <c:forEach items="${groupes}" var="grp">
-	        <li><a href="group?id=${grp.id}">${grp.name}</a></li>
+	        <li><a href="show_group?id=${grp.id}">${grp.name}</a></li>
 	    </c:forEach>
 	</ul>
 </div>

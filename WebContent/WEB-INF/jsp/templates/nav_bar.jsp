@@ -11,12 +11,12 @@
 					<li><a href="/Annuaire/actions/profil/show">Mon profil</a></li>
 				</c:if>
 				
-				<li><a href="/Annuaire/actions/person_List">Liste des personnes</a></li>
-				<li><a href="/Annuaire/actions/groups_List">Liste des groupes</a></li>
+				<li><a href="/Annuaire/actions/person/person_List">Liste des personnes</a></li>
+				<li><a href="/Annuaire/actions/group/groups_List">Liste des groupes</a></li>
 			</ul>
-			<form class="navbar-form navbar-left">
+			<form class="navbar-form navbar-left" action="/Annuaire/actions/search" method="get">
 				<div class="form-group">
-					<input type="text" class="form-control" placeholder="Search">
+					<input name="searcher" type="text" class="form-control" placeholder="Search">
 				</div>
 				<button type="submit" class="btn btn-default">Rechercher</button>
 			</form>

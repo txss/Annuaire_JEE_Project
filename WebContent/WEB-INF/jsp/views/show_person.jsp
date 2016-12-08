@@ -32,10 +32,12 @@
 			 	<td>${showPers.email}</td>
 		 	</tr>
 		</c:if>
-	 	<tr>
-		 	<td>Site internet:</td>
-		 	<td><a href="${showPers.webSite}">${showPers.webSite}</a></td>
-	 	</tr>
+		<c:if test="${showPers.webSite != ''}">
+			<tr>
+			 	<td>Site internet:</td>
+			 	<td><a href="${showPers.webSite}" target="_blank">${showPers.webSite}</a></td>
+	 		</tr>
+		</c:if>
 	 </table>
 
 </div>	  

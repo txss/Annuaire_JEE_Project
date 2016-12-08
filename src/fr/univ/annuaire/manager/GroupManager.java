@@ -1,3 +1,8 @@
+/**
+ * Regroup all methodes to link the dao part and the controller part
+ * Every methode to access data in data base for a user request about groups need to be implement in this Class
+ * @author Campanella & Magron
+ */
 package fr.univ.annuaire.manager;
 
 import java.util.Collection;
@@ -22,12 +27,22 @@ public class GroupManager {
 	public GroupManager(){}
 	
 	
-	public Collection<GroupPersonnes> getGroupList(){
+	/**
+	 * Explicite name..
+	 * return all groups contain in the database
+	 * @return a Collection<GroupPersonnes> with all person in the database
+	 */
+	public Collection<GroupPersonnes> getAllGroups(){
 		Collection<GroupPersonnes> persons = dao.findAllGroups();
 		return persons;
 	}
 	
 	
+	/**
+	 * Find one group in the database with the groupe ID
+	 * @param groupID id group to find
+	 * @return if the id group match with a group in database return the group else return null
+	 */
 	public GroupPersonnes findGroup(String groupID){
 		GroupPersonnes group = new GroupPersonnes();
 		group.setId(groupID);

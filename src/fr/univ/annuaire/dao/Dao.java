@@ -26,7 +26,7 @@ public class Dao extends JdbcTools implements GroupDao, PersonneDao {
 		Collection <GroupPersonnes> groupes = new ArrayList<GroupPersonnes>();
 
 		try(Connection connect = newConnection();) {
-			PreparedStatement st = connect.prepareStatement("SELECT id_group, name_group FROM \"GROUPE\"");
+			PreparedStatement st = connect.prepareStatement("SELECT id_group, name_group FROM \"GROUPE\" ORDER BY name_group");
 			ResultSet rs = st.executeQuery();
 			
 			while (rs.next()) {
@@ -157,7 +157,7 @@ public class Dao extends JdbcTools implements GroupDao, PersonneDao {
 		Collection <Personne> personnes = new ArrayList<Personne>();
 
 		try(Connection connect = newConnection();) {
-			PreparedStatement st = connect.prepareStatement("SELECT id_person, lastname_person, firstname_person, web_person, id_group FROM \"PERSONNE\" WHERE id_group = '" + groupId + "'");
+			PreparedStatement st = connect.prepareStatement("SELECT id_person, lastname_person, firstname_person, web_person, id_group FROM \"PERSONNE\" WHERE id_group = '" + groupId + "' ORDER BY lastname_person");
 			ResultSet rs = st.executeQuery();
 
 			while (rs.next()) {
@@ -189,7 +189,7 @@ public class Dao extends JdbcTools implements GroupDao, PersonneDao {
 		Collection <Personne> personnes = new ArrayList<Personne>();
 
 		try(Connection connect = newConnection();) {
-			PreparedStatement st = connect.prepareStatement("SELECT id_person, lastname_person, firstname_person, web_person, id_group FROM \"PERSONNE\"");
+			PreparedStatement st = connect.prepareStatement("SELECT id_person, lastname_person, firstname_person, web_person, id_group FROM \"PERSONNE\" ORDER BY lastname_person");
 			ResultSet rs = st.executeQuery();
 
 			while (rs.next()) {
@@ -352,8 +352,8 @@ public class Dao extends JdbcTools implements GroupDao, PersonneDao {
 		Collection <Personne> personnes = new ArrayList<Personne>();
 
 		try(Connection connect = newConnection();) {
-			PreparedStatement st = connect.prepareStatement("SELECT id_person, lastname_person, firstname_person, web_person, id_group FROM \"PERSONNE\" "
-					+ "WHERE lastname_person LIKE '%" + search + "%' OR firstname_person LIKE  '%" + search + "%' OR web_person LIKE  '%" + search + "%'");
+			PreparedStatement st = connect.prepareStatement("SELECT DISTINCT id_person, lastname_person, firstname_person, web_person, p.id_group FROM \"PERSONNE\" p, \"GROUPE\" g "
+					+ "WHERE lastname_person LIKE '%" + search + "%' OR firstname_person LIKE  '%" + search + "%' OR web_person LIKE  '%" + search + "%' OR (p.id_group = g.id_group AND g.name_group LIKE '%" + search + "%' )");
 			ResultSet rs = st.executeQuery();
 
 			while (rs.next()) {

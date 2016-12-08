@@ -12,11 +12,7 @@
 	<p>Id du groupe: ${group.id}</p>
 
 	<h3>Personnes présente dans le groupe:</h3>
-    <ul style="list-style-type: square">
-	    <c:forEach items="${showPersonInGroup}" var="person">
-	        <li><a href="person?id=${person.id}">${person.firstName} ${person.lastName}</a></li>
-	    </c:forEach>
-	</ul>
+    <%@ include file="/WEB-INF/jsp/templates/person_list.jsp" %>
 
 </div>	  
 	  
