@@ -11,10 +11,12 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import fr.univ.annuaire.beans.GroupPersonnes;
 import fr.univ.annuaire.manager.GroupManager;
 import fr.univ.annuaire.manager.PersonManager;
 
@@ -68,4 +70,29 @@ public class GroupController {
         return "show_group";
     }
 	
+	
+	
+	@RequestMapping(value = "/add_group", method = RequestMethod.GET)
+    public String showAddGroupinAnnuaire(@ModelAttribute GroupPersonnes g, HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		if (session.getAttribute("user") == null)
+			return "redirect:/actions/login/sign_in";
+		
+	    logger.info("Returning add_group view.");
+        return "add_group";
+    }
+	
+	
+	@RequestMapping(value = "/add_group", method = RequestMethod.POST)
+    public String addGroupinAnnuaire(@ModelAttribute GroupPersonnes g, HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		if (session.getAttribute("user") == null)
+			return "redirect:/actions/login/sign_in";
+		
+		groupManager.saveGroup(g);
+	    logger.info("Returning add group "+ g.getName() +" view.");
+        return "show_group";
+    }
 }

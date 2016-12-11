@@ -4,8 +4,11 @@
 
 <div class="container">
 
+	<a href="" onclick="javascript:window.history.go(-1)" class="noStyle gras"><span class="glyphicon glyphicon-chevron-left"></span>Retour</a>
 	<h5>Modifier vos informations personnel</h5>
 	
+	 <small class="errors help-block">${error}</small>
+	 
 	 <form:form method="POST" commandName="personne">
 				    <table>
 				    <form:hidden path="id" value="${pers.id}"/>
@@ -68,12 +71,25 @@
 				        <td><label for="idGroup">Groupe:</label></td>
 				        <td>
 				        	<div class="form-group">
-				        		<form:input path="idGroup" class="form-control" value="${pers.idGroup}"/>
+           						<form:select path="idGroup" multiple="false" class="form-control">
+	           						<c:if test="${pers.idGroup != ''}">
+	           							<form:option value="${pers.idGroup}" label="${pers.idGroup}" />
+									</c:if>
+									<c:if test="${pers.idGroup == ''}">
+	           							<form:option value="" label="--- Select ---" />
+									</c:if>
+						            <form:options items="${groupList}" />
+						        </form:select>
 				        	</div>
 				        </td>
 				        <td>
 				        	<small class="errors help-block"><form:errors path="idGroup" cssClass="error" /></small>
 				        </td>
+				    </tr>
+				    <tr>
+				        <td colspan="3">
+							Entrez votre mot de passe pour valider les modifications.
+						</td>
 				    </tr>
 				    <tr>
 				        <td><label for="password">Password:*</label></td>

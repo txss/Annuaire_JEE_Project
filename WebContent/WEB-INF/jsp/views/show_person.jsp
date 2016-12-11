@@ -24,7 +24,7 @@
 		</c:if>
 	 	<tr>
 		 	<td>Groupe:</td>
-		 	<td>${showPers.idGroup}</td>
+		 	<td><a href="/Annuaire/actions/group/show_group?id=${group.id}">${group.name}</a></td>
 	 	</tr>
 	 	<c:if test="${user != null}">
 			<tr>

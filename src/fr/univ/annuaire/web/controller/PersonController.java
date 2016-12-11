@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import fr.univ.annuaire.beans.Personne;
+import fr.univ.annuaire.manager.GroupManager;
 import fr.univ.annuaire.manager.PersonManager;
 
 @Controller()
@@ -27,7 +29,8 @@ public class PersonController {
 	
 	@Autowired
 	PersonManager personManager;
-	
+	@Autowired
+	GroupManager groupManager;
 	
 	/**
 	 * This methode redirect to the view to see all person in the annuaire database
@@ -58,7 +61,9 @@ public class PersonController {
     		@RequestParam(value = "id", required = false) Long personID) {
 		
 		HttpSession session = request.getSession();
-	    session.setAttribute("showPers", personManager.getPerson(personID));
+		Personne pers = personManager.getPerson(personID);
+	    session.setAttribute("showPers", pers);
+	    session.setAttribute("group", groupManager.findGroup(pers.getIdGroup()));
 		
 	    logger.info("Returning show_person ("+personID+")  view.");
         return "show_person";

@@ -36,7 +36,6 @@ public class ViewsDispatcherController {
 	
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
     public String searchinAnnuaire(
-    		final RedirectAttributes redirectAttributes,
     		HttpServletRequest request,
     		@RequestParam(value = "searcher", required = false) String search) {
 		
@@ -44,6 +43,8 @@ public class ViewsDispatcherController {
 		long debut = System.currentTimeMillis();
 		if(search != "")
 			session.setAttribute("personnes", personManager.searchPerson(search));
+		else
+			session.setAttribute("personnes", null);
 		long time = System.currentTimeMillis()-debut;
 		
 		session.setAttribute("time",  time+" ms");

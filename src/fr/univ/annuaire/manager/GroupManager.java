@@ -54,4 +54,26 @@ public class GroupManager {
 		}
 		return null;
 	}
+	
+	
+	/**
+	 * This methode save a group of personne in database
+	 * If the group already exist in the database the group is not added
+	 * @param gr groupPersonnes to save
+	 */
+	public void saveGroup(GroupPersonnes gr){
+		try {
+			dao.findGroupByName(gr.getName());
+		} catch (DaoException e) {
+			String id = gr.getName().toLowerCase().replace(" ", "-");
+			gr.setId(id);
+			try {
+				dao.saveGroup(gr);
+			} catch (DaoException e1) {
+				e1.printStackTrace();
+			}
+		}
+	}
+	
+	
 }

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import fr.univ.annuaire.beans.Personne;
 import fr.univ.annuaire.dao.Dao;
+import fr.univ.annuaire.dao.DaoException;
 
 @Service
 public class ProfilManager {
@@ -28,8 +29,25 @@ public class ProfilManager {
 	 * This methode save the update done by the current user on it's own data except the password.
 	 * @param pers the person to save
 	 */
-	public void save(Personne pers){ //TODO exiger le mdp pour update les données
-		dao.updatePerson(pers);
+	public boolean save(Personne pers){
+		Personne p;
+		try {
+			p = dao.findPersonByID(pers.getId());
+		} catch (DaoException e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+		if (p.getPassWord().equals(pers.getPassWord())){
+			dao.updatePerson(pers);
+			return true;
+		}
+		return false;
+	}
+	
+	
+	public boolean validatePerson(Personne pers){
+		return false;
 	}
 	
 }

@@ -80,7 +80,7 @@ public class LoginController {
             return "redirect:/actions/accueil";
     	}
     	
-    	redirectAttributes.addFlashAttribute("error", "Identifiant ou mot de passe incorect.");
+    	redirectAttributes.addFlashAttribute("error", "Identifiant ou mot de passe incorect. Retente ta chance!");
     	logger.info("Returning login view, auth failled: wrong identifiants");
         return "redirect:sign_in";
     }
