@@ -43,7 +43,7 @@
 					</tr>
 				    </table>
 				</form:form>
-				
+				<a href="sign_up">Sign up</a>
             </div>
         </div>
     </div>

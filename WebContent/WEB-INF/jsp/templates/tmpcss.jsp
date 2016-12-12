@@ -6,4 +6,5 @@ footer{background: white;}
 .errors{color: FireBrick ; margin-left: 5px;}
 #infos_perso tr td{padding-left: 5px;  padding-top: 5px;}
 #infos_per tr td {padding-left: 5px; padding-top: 5px;}
+.centre {text-align: center;}
 </style>

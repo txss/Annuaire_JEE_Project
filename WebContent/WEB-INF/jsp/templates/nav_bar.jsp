@@ -8,7 +8,7 @@
 			id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
 				<c:if test="${user != null}">
-					<li><a href="/Annuaire/actions/profil/show">Mon profil</a></li>
+					<li><a href="/Annuaire/actions/profil/show"><span class="glyphicon glyphicon-user"></span> Mon profil</a></li>
 				</c:if>
 				
 				<li><a href="/Annuaire/actions/person/person_List">Liste des personnes</a></li>

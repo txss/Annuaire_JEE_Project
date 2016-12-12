@@ -61,7 +61,7 @@ public class LoginController {
      * @return views
      */
     @RequestMapping(value = "/sign_in", method = RequestMethod.POST)
-    public String loginRedirect(@ModelAttribute @Valid Login l, 
+    public String loginForm(@ModelAttribute @Valid Login l, 
     							BindingResult result, 
     							final RedirectAttributes redirectAttributes, 
     							HttpServletRequest request){
@@ -83,6 +83,27 @@ public class LoginController {
     	redirectAttributes.addFlashAttribute("error", "Identifiant ou mot de passe incorect. Retente ta chance!");
     	logger.info("Returning login view, auth failled: wrong identifiants");
         return "redirect:sign_in";
+    }
+    
+    
+	/**
+	 * This methode allow someone to register on the annuaire.
+	 * @param request
+	 * @return the view to add a account on the annuaire
+	 */
+    @RequestMapping(value = "/sign_up", method = RequestMethod.GET)
+    public String sign_up(@ModelAttribute Personne p, HttpServletRequest request) {
+    	logger.info("Returning sign_up view");
+        return "sign_up";
+    }
+    
+
+    @RequestMapping(value = "/sign_up", method = RequestMethod.POST)
+    public String sign_upForm(@ModelAttribute Personne p, BindingResult result, HttpServletRequest request) {
+    	System.out.println(p);
+    	System.out.println(p.getPassWord());
+    	logger.info("Returning accueil view, new Person in Annuaire: " + p);
+        return "sign_up";
     }
     
     
