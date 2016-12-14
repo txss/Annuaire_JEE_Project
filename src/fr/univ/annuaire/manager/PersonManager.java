@@ -74,4 +74,19 @@ public class PersonManager {
 	public Collection<Personne> searchPerson(String search){
 		return dao.searchKeywordInPersons(search);
 	}
+	
+	
+	/**
+	 * This methode check in database if the person pers is in already in base by the email
+	 * Then if the email doesn't exist, save the person in the database.
+	 * @param pers the bean to save in database
+	 * @return boolean true if the person was save successfully, otherwise false
+	 */
+	public boolean saveNewPerson(Personne pers){
+		// TODO 
+		// check in base by email
+		// if not present save and return true 
+		return false;
+	}
+	
 }

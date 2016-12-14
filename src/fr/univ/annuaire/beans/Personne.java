@@ -3,6 +3,8 @@ package fr.univ.annuaire.beans;
 import java.sql.Date;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 public class Personne {
@@ -10,13 +12,14 @@ public class Personne {
 	private int id;
 	
 	@NotNull
-    @Size(min = 1, message = "Le nom est obligatoire")
+    @Size(min = 2, message = "Le nom est obligatoire")
 	private String firstName;
 	
 	@NotNull
-    @Size(min = 1, message = "Le prènom est obligatoire")
+    @Size(min = 2, message = "Le prènom est obligatoire")
 	private String lastName;
 	
+	@Null
 	private Date birthDate;
 	
 	@NotNull

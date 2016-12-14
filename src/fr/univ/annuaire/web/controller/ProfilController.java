@@ -78,7 +78,7 @@ public class ProfilController {
             return "edit_profil";
         }
 		
-		if(profilManager.save(p)){
+		if(profilManager.update(p)){
 			session.setAttribute("pers", p); // update les infos de la personne connecté en session
 			logger.info("Saving modifications on person(id:"+p.getId()+")");
 	    	logger.info("Returning edit_profil_POST view");

@@ -29,7 +29,7 @@ public class ProfilManager {
 	 * This methode save the update done by the current user on it's own data except the password.
 	 * @param pers the person to save
 	 */
-	public boolean save(Personne pers){
+	public boolean update(Personne pers){
 		Personne p;
 		try {
 			p = dao.findPersonByID(pers.getId());
@@ -46,7 +46,9 @@ public class ProfilManager {
 	}
 	
 	
+	
 	public boolean validatePerson(Personne pers){
+		// TODO
 		return false;
 	}
 	

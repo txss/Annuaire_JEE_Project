@@ -7,11 +7,11 @@
 
 	<div class="col-md-offset-3 col-md-8">
 	
-		<small class="errors help-block">${error}</small>
+		<small class="errors help-block">${erreur}</small>
 		 
 		<form:form method="POST" commandName="personne">
 			<table>
-			    <form:hidden path="id" value="null"/>
+			    <form:hidden path="id" value="0"/>
 			    <tr>
 			        <td><label for="firstName">Prénom:</label></td>
 			        <td>
@@ -33,8 +33,7 @@
 			        <td>
 			        	<small class="errors help-block"><form:errors path="lastName" cssClass="error" /></small>
 			        </td>
-			    </tr>
-			    <form:hidden path="birthDate" value="null"/>
+			    </tr>	
 			    <tr>
 			        <td><label for="email">Email:*</label></td>
 			        <td>
@@ -57,7 +56,7 @@
 			        	<small class="errors help-block"><form:errors path="webSite" cssClass="error" /></small>
 			        </td>
 			    </tr>
-			    <form:hidden path="idGroup" value="null"/>
+			    <form:hidden path="idGroup" value="000"/>
 			    <tr>
 			        <td><label for="password">Mot de passe:*</label></td>
 			        <td>

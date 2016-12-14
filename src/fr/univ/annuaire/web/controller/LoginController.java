@@ -24,6 +24,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import fr.univ.annuaire.beans.Login;
 import fr.univ.annuaire.beans.Personne;
 import fr.univ.annuaire.manager.LoginManager;
+import fr.univ.annuaire.manager.PersonManager;
 
 @Controller()
 @RequestMapping("/login")
@@ -32,7 +33,9 @@ public class LoginController {
 	protected final Log logger = LogFactory.getLog(getClass());
 	
 	@Autowired
-	LoginManager manager;
+	LoginManager loginManager;
+	@Autowired
+	PersonManager personManger;
     
 	
 	/**
@@ -71,7 +74,7 @@ public class LoginController {
             return "login";
         }
     	
-    	Personne pers = manager.checkLogin(l);
+    	Personne pers = loginManager.checkLogin(l);
     	if (pers != null){
     		HttpSession session = request.getSession();
     	    session.setAttribute("user", true);
@@ -81,7 +84,7 @@ public class LoginController {
     	}
     	
     	redirectAttributes.addFlashAttribute("error", "Identifiant ou mot de passe incorect. Retente ta chance!");
-    	logger.info("Returning login view, auth failled: wrong identifiants");
+    	logger.info("Returning login view, auth failed: wrong identifiants");
         return "redirect:sign_in";
     }
     
@@ -92,18 +95,40 @@ public class LoginController {
 	 * @return the view to add a account on the annuaire
 	 */
     @RequestMapping(value = "/sign_up", method = RequestMethod.GET)
-    public String sign_up(@ModelAttribute Personne p, HttpServletRequest request) {
+    public String sign_up(@ModelAttribute Personne p, BindingResult result) {
     	logger.info("Returning sign_up view");
         return "sign_up";
     }
     
 
+    /**
+     * This methode check sent the values submit by the user in the sign_up form
+     * redirect to the sign_in view if the person saving is a success
+     * redirect to sign_up view if errors or if the email is already in database
+     * @param p the person to save
+     * @param redirectAttributes set the flash message 
+     * @param result bind the result with bean
+     * @return String view name
+     */
     @RequestMapping(value = "/sign_up", method = RequestMethod.POST)
-    public String sign_upForm(@ModelAttribute Personne p, BindingResult result, HttpServletRequest request) {
+    public String sign_upForm(@ModelAttribute @Valid Personne p, 
+							final RedirectAttributes redirectAttributes,
+							BindingResult result) {
+    	
+    	if (result.hasErrors()) {
+    		logger.info("Returning sign_up view, sign_up failed: incorrect syntax");
+            return "sign_up";
+        }
     	System.out.println(p);
-    	System.out.println(p.getPassWord());
-    	logger.info("Returning accueil view, new Person in Annuaire: " + p);
-        return "sign_up";
+    	if( ! personManger.saveNewPerson(p)){
+    		redirectAttributes.addFlashAttribute("erreur", "/!\\ Cette email est déjà enregistré dans l'annuaire.");
+    		logger.info("Returning sign_up view, email already exist");
+    		return "redirect:sign_up";
+    	}else{
+    		logger.info("Returning accueil view, new Person in Annuaire: " + p);
+    	}
+    	
+        return "redirect:sign_in";
     }
     
     
