@@ -4,6 +4,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
 import fr.univ.annuaire.test.javabeans.GroupPersonnesTest;
+import fr.univ.annuaire.test.javabeans.LoginTest;
 import fr.univ.annuaire.test.javabeans.PersonneTest;
 
 
@@ -12,6 +13,7 @@ import fr.univ.annuaire.test.javabeans.PersonneTest;
 @Suite.SuiteClasses({
 	PersonneTest.class,
 	GroupPersonnesTest.class,
+	LoginTest.class,
 })
 public class beansLauncherTest {
 }

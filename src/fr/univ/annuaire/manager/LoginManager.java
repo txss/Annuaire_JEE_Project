@@ -5,9 +5,6 @@
  */
 package fr.univ.annuaire.manager;
 
-import java.sql.Date;
-import java.util.Calendar;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -60,7 +57,6 @@ public class LoginManager {
 	 * @return boolean true if the person was save successfully, otherwise false
 	 */
 	public boolean saveNewPerson(Personne pers){
-		
 		try {
 			dao.findPersonByEmail(pers.getEmail());
 		} catch (Exception e) {

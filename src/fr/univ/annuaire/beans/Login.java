@@ -37,7 +37,7 @@ public class Login {
 	}
 	
 	public String toString(){
-		return "\nemail: " + this.email + " --> pwd: " + this.passWord;
+		return "Email: " + this.email + " --> pwd: " + this.passWord;
 	}
 	
 }
