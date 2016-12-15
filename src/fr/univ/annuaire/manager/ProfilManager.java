@@ -46,10 +46,12 @@ public class ProfilManager {
 	}
 	
 	
-	
-	public boolean validatePerson(Personne pers){
-		// TODO
-		return false;
+	/**
+	 * This methode delete the person passed in param
+	 * Explicit name
+	 * @param pers the person to delete
+	 */
+	public void deletePerson(Personne pers){
+		dao.deletePerson(pers);
 	}
-	
 }

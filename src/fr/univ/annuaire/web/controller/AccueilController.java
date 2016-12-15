@@ -4,9 +4,6 @@
  */
 package fr.univ.annuaire.web.controller;
 
-import java.io.IOException;
-
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -25,7 +22,7 @@ public class AccueilController implements Controller {
      * This methode redirect the user (login or not) to the accueil view 
      */
     public ModelAndView handleRequest(HttpServletRequest request,
-            HttpServletResponse response) throws ServletException, IOException {
+            HttpServletResponse response){
 
         logger.info("Returning accueil view");
         return new ModelAndView("accueil");

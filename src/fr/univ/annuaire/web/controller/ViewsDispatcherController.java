@@ -1,5 +1,7 @@
 package fr.univ.annuaire.web.controller;
 
+import java.util.Collection;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import fr.univ.annuaire.beans.Personne;
 import fr.univ.annuaire.manager.GroupManager;
 import fr.univ.annuaire.manager.PersonManager;
 
@@ -37,19 +40,29 @@ public class ViewsDispatcherController {
     }
 
 	
-	
+	/**
+	 * This methode solve the url with the search.
+	 * If they find a possible match in database, return 
+	 * @param request
+	 * @param search
+	 * @return
+	 */
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
     public String searchinAnnuaire(
     		HttpServletRequest request,
     		@RequestParam(value = "searcher", required = false) String search) {
 		
 		HttpSession session = request.getSession();
+		
 		long debut = System.currentTimeMillis();
-		if(search != "")
-			session.setAttribute("personnes", personManager.searchPerson(search));
+		Collection<Personne> personnes = personManager.searchPerson(search);
+		long time = System.currentTimeMillis()-debut;
+		
+		if(search != "" && personnes.size() != 0)
+			session.setAttribute("personnes", personnes);
 		else
 			session.setAttribute("personnes", null);
-		long time = System.currentTimeMillis()-debut;
+		
 		
 		session.setAttribute("time",  time+" ms");
 	    logger.info("Returning show_search_view ("+search+")  view.");

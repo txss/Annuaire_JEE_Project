@@ -1,3 +1,9 @@
+/**
+ * ProfilController is the controller to routes all profils request in the url
+ * Every action in the application, or in Url, about the person profil need to be done in this controller
+ * Show person, show all person in database..
+ * @author Campanella & Magron
+ */
 package fr.univ.annuaire.web.controller;
 
 import java.util.Collection;
@@ -36,6 +42,12 @@ public class ProfilController {
 	GroupManager groupManager;
 	
 	
+	/**
+	 * This methode check if the user is authenticate and redirect to the profile view
+	 * if the user is not connect, he will be redirect to the login view
+	 * @param request useful to check if the user is connect
+	 * @return the profil view name
+	 */
 	@RequestMapping(value = "/show", method = RequestMethod.GET)
     public String showProfil(HttpServletRequest request) {
 		HttpSession session = request.getSession();
@@ -49,6 +61,14 @@ public class ProfilController {
     }
 	
 	
+	/**
+	 * This methode check if the user is authenticate and redirect to view edit_profil
+	 * if the user is not connect, he will be redirect to the login view
+	 * @param p the bean correspondance
+	 * @param result to binding the result that will be submit by the user
+	 * @param request check if the user is authenticate
+	 * @return the edit profil view name
+	 */
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
     public String editProfilGet(@ModelAttribute Personne p, 
 					    		BindingResult result, 
@@ -57,12 +77,22 @@ public class ProfilController {
 		HttpSession session = request.getSession();
 		if (session.getAttribute("user") == null)
 			return "redirect:/actions/login/sign_in";
+		
     	logger.info("Returning edit_profil_GET view");
         return "edit_profil";
     }
 	
 	
-	
+	/**
+	 * This methode check if the user is authenticate and redirect to the profile view
+	 * if the user is not connect, he will be redirect to the login view
+	 * then update the value of each parameters to the person in database.
+	 * @param p
+	 * @param result
+	 * @param redirectAttributes
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value = "/edit", method = RequestMethod.POST)
     public String editProfilPost(	@ModelAttribute @Valid Personne p, 
 						    		BindingResult result,
@@ -83,9 +113,8 @@ public class ProfilController {
 			logger.info("Saving modifications on person(id:"+p.getId()+")");
 	    	logger.info("Returning edit_profil_POST view");
 		}else{
-			redirectAttributes.addFlashAttribute("error", "Le mot de passe ne corespond pas.");
-			System.out.println("ERROR le mot de passe coresp pas"); // TODO
-			return "edit_profil";
+			redirectAttributes.addFlashAttribute("erreur", true);
+			return "redirect:edit";
 		}
 		
 	    return "profil";
@@ -95,7 +124,7 @@ public class ProfilController {
 	
 	// Type complexe
 	@ModelAttribute("groupList")
-	public Map<String, String> productTypes() {
+	public Map<String, String> groupesTypes() {
 	    Map<String, String> groupes = new LinkedHashMap<>();
 	    Collection<GroupPersonnes> gr = groupManager.getAllGroups();
 	    
@@ -109,5 +138,28 @@ public class ProfilController {
 	}
 	
 	
+	/**
+	 * This methode check if the user is authenticate, 
+	 * if the user is not connect, he will be redirect to the login view.
+	 * If the user is authenticate this action will erase all data about it in te database.
+	 * @param request to check if the user is authenticate
+	 * @param redirectAttributes add flash message
+	 * @return redirect to sign_in view
+	 */
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+    public String deleteProfil(	HttpServletRequest request,
+    							final RedirectAttributes redirectAttributes) {
+		
+		HttpSession session = request.getSession();
+		if (session.getAttribute("user") == null)
+			return "redirect:/actions/login/sign_in";
+		
+		Personne pers = (Personne) session.getAttribute("pers");
+		profilManager.deletePerson(pers);
+		
+		redirectAttributes.addFlashAttribute("erase", true);
+    	logger.info("Returning profil view, erase person in database");
+        return "redirect:/actions/login/sign_in";
+    }
 	
 }

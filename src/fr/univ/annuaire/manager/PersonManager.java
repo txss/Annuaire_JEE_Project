@@ -53,8 +53,8 @@ public class PersonManager {
 	
 	
 	/**
-	 * Explixit name.
-	 * This methode retrun all person with they are in the group that research
+	 * Explicit name.
+	 * This methode return all person with they are in the group that research
 	 * @param groupID the id group research
 	 * @return a Collection<Personne> of all person in the group
 	 */

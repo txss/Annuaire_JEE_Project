@@ -38,6 +38,19 @@
 			        <td>
 			        	<small class="errors help-block"><form:errors path="lastName" cssClass="error" /></small>
 			        </td>
+			    </tr>
+			    <tr>
+			        <td>
+			        	<label for="birthDate">Date de naissance:*<br/><small class="help-block" style="color:grey;">Format: YYYY-MM-DD</small></label>
+			        </td>
+			        <td>
+			        	<div class="form-group has-feedback" id="naiss">
+			        		<form:input path="birthDate" class="form-control" onchange="checkDateFormat()" id="naissance"/>
+			        	</div>
+			        </td>
+			        <td>
+			        	<small class="errors help-block"><form:errors path="birthDate" cssClass="error" /></small>
+			        </td>
 			    </tr>	
 			    <tr>
 			        <td><label for="email">Email:*</label></td>
@@ -116,8 +129,29 @@
 			$( "#confirm" ).after('<span class="glyphicon glyphicon-remove form-control-feedback resultConf"></span>' );
 			$( "#confirm" ).after('<small id="confMessage" class="errors help-block">Le mot de passe est différent</small>');
 			$( ".pwdGroup" ).removeClass( "has-success" ).addClass( "has-error" );
-			$( "#btnSubmit" ).attr( 'disabled', "disabled" );
+			
 		}
+	}
+	
+	
+	function checkDateFormat() {
+		var birthdate =  $( "#naissance").val();
+		var regEx = /^\d{4}-\d{2}-\d{2}$/;
+		
+		var result =  birthdate.match(regEx) != null;
+		
+		if(result){
+			$( ".validDateFormat" ).remove();
+			$( "#naiss" ).removeClass( "has-error" ).addClass( "has-success" );
+			$( "#naissance" ).after('<span class="glyphicon glyphicon-ok form-control-feedback validDateFormat"></span>' );
+			$( "#btnSubmit" ).removeAttr( "disabled" );
+		}else{
+			$( ".validDateFormat" ).remove();
+			$( "#naissance" ).after('<span class="glyphicon glyphicon-remove form-control-feedback validDateFormat"></span>' );
+			$( "#btnSubmit" ).attr( 'disabled', "disabled" );
+			$( "#naiss" ).removeClass( "has-success" ).addClass( "has-error" );
+		}
+		
 	}
 
 </script>

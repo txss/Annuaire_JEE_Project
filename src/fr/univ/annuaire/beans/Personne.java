@@ -8,18 +8,19 @@ public class Personne {
 	private int id;
 	
 	@NotNull
-    @Size(min = 2, message = "Le nom est obligatoire")
+    @Size(min = 2, max = 60, message = "Le nom est obligatoire (min 2, max 60)")
 	private String firstName;
 	
 	@NotNull
-    @Size(min = 2, message = "Le prènom est obligatoire")
+    @Size(min = 2, max = 60, message = "Le prènom est obligatoire (min 2, max 60)")
 	private String lastName;
 	
 	@NotNull
+	@Size(min = 10, max = 10, message = "La date de naissance est obligatoire, format YYYY-MM-DD")
 	private String birthDate;
 	
 	@NotNull
-    @Size(min = 6, message = "Votre email est obligatoire")
+    @Size(min = 6, max = 50, message = "Votre email est obligatoire")
 	private String email;
 	
 	private String webSite;
