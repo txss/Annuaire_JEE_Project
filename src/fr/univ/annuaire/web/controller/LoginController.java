@@ -24,7 +24,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import fr.univ.annuaire.beans.Login;
 import fr.univ.annuaire.beans.Personne;
 import fr.univ.annuaire.manager.LoginManager;
-import fr.univ.annuaire.manager.PersonManager;
 
 @Controller()
 @RequestMapping("/login")
@@ -34,8 +33,6 @@ public class LoginController {
 	
 	@Autowired
 	LoginManager loginManager;
-	@Autowired
-	PersonManager personManger;
     
 	
 	/**
@@ -83,7 +80,7 @@ public class LoginController {
             return "redirect:/actions/accueil";
     	}
     	
-    	redirectAttributes.addFlashAttribute("error", "Identifiant ou mot de passe incorect. Retente ta chance!");
+    	redirectAttributes.addFlashAttribute("erreur", true);
     	logger.info("Returning login view, auth failed: wrong identifiants");
         return "redirect:sign_in";
     }
@@ -111,17 +108,17 @@ public class LoginController {
      * @return String view name
      */
     @RequestMapping(value = "/sign_up", method = RequestMethod.POST)
-    public String sign_upForm(@ModelAttribute @Valid Personne p, 
-							final RedirectAttributes redirectAttributes,
-							BindingResult result) {
-    	
+    public String sign_upForm(@ModelAttribute @Valid Personne p,
+    						BindingResult result,
+							final RedirectAttributes redirectAttributes) {
+    	System.out.println(result);
     	if (result.hasErrors()) {
     		logger.info("Returning sign_up view, sign_up failed: incorrect syntax");
             return "sign_up";
         }
-    	System.out.println(p);
-    	if( ! personManger.saveNewPerson(p)){
-    		redirectAttributes.addFlashAttribute("erreur", "/!\\ Cette email est déjà enregistré dans l'annuaire.");
+    	
+    	if( ! loginManager.saveNewPerson(p)){
+    		redirectAttributes.addFlashAttribute("erreur", true);
     		logger.info("Returning sign_up view, email already exist");
     		return "redirect:sign_up";
     	}else{

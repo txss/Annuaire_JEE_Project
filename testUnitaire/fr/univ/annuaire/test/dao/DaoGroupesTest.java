@@ -60,7 +60,6 @@ public class DaoGroupesTest {
 	}
 
 
-	//TODO foreignkey
 	@Test (timeout = 2000, expected = DaoException.class)
 	public void deleteGroupByID() throws DaoException{
 		GroupPersonnes g = new GroupPersonnes();

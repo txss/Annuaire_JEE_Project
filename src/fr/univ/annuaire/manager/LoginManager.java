@@ -5,6 +5,9 @@
  */
 package fr.univ.annuaire.manager;
 
+import java.sql.Date;
+import java.util.Calendar;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -47,6 +50,24 @@ public class LoginManager {
 					return p;
 		
 		return null;
+	}
+	
+	
+	/**
+	 * This methode check in database if the person pers is in already in base by the email
+	 * Then if the email doesn't exist, save the person in the database.
+	 * @param pers the bean to save in database
+	 * @return boolean true if the person was save successfully, otherwise false
+	 */
+	public boolean saveNewPerson(Personne pers){
+		
+		try {
+			dao.findPersonByEmail(pers.getEmail());
+		} catch (Exception e) {
+			dao.insertPerson(pers);
+			return true;
+		}
+		return false;
 	}
 	
 }

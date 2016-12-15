@@ -2,9 +2,6 @@ package fr.univ.annuaire.test.javabeans;
 
 import static org.junit.Assert.*;
 
-import java.sql.Date;
-import java.util.Calendar;
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -19,17 +16,6 @@ public class PersonneTest {
 	public void init(){
 		p = new Personne();
 	}
-	
-	private Calendar initAndGetCalendar(int day, int month, int year) {
-		Calendar cal = Calendar.getInstance();
-		cal.set(Calendar.YEAR, year);
-		cal.set(Calendar.MONTH, month - 1); // <-- months start
-		                                    // at 0.
-		cal.set(Calendar.DAY_OF_MONTH, day);
-		
-		return cal;
-	}//initAndGetCalendar()
-	
 	
 	@Test
 	public void iDTest() {
@@ -57,9 +43,8 @@ public class PersonneTest {
 	
 	@Test
 	public void birthDateTest(){
-		Date birthday = new Date(initAndGetCalendar(27, 10, 1991).getTimeInMillis());
-		p.setBirthDate(birthday);
-		assertEquals(birthday, p.getBirthDate());
+		p.setBirthDate("1992-02-10");
+		assertEquals("1992-02-10", p.getBirthDate());
 	}
 	
 	@Test
@@ -85,8 +70,7 @@ public class PersonneTest {
 		p.setFirstName("jean");
 		p.setLastName("christophe");
 		p.setId(0);
-		Date birthday = new Date(initAndGetCalendar(27, 10, 1991).getTimeInMillis());
-		p.setBirthDate(birthday);
+		p.setBirthDate("1989-10-20");
 		p.setEmail("test.test@test.com");
 		p.setWebSite("monbeausite.com");
 		p.setIdGroup("5");

@@ -1,10 +1,12 @@
 package fr.univ.annuaire.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 
 import fr.univ.annuaire.beans.GroupPersonnes;
@@ -237,7 +239,7 @@ public class Dao extends JdbcTools implements GroupDao, PersonneDao {
 				p.setFirstName(r.getString(3));
 				p.setEmail(r.getString(4));
 				p.setWebSite(r.getString(5));
-				p.setBirthDate(r.getDate(6));
+				p.setBirthDate(r.getDate(6).toString());
 				p.setIdGroup(r.getString(7));
 				p.setPassWord(r.getString(8));
 				return p;
@@ -274,7 +276,7 @@ public class Dao extends JdbcTools implements GroupDao, PersonneDao {
 				p.setFirstName(r.getString(3));
 				p.setEmail(r.getString(4));
 				p.setWebSite(r.getString(5));
-				p.setBirthDate(r.getDate(6));
+				p.setBirthDate(r.getDate(6).toString());
 				p.setIdGroup(r.getString(7));
 				p.setPassWord(r.getString(8));
 				return p;
@@ -302,7 +304,7 @@ public class Dao extends JdbcTools implements GroupDao, PersonneDao {
 					personne.getFirstName(),
 					personne.getEmail(),
 					personne.getWebSite(), 
-					personne.getBirthDate(),
+					initSQLDate(personne),
 					personne.getIdGroup(),
 					personne.getPassWord());
 
@@ -336,7 +338,7 @@ public class Dao extends JdbcTools implements GroupDao, PersonneDao {
 					personne.getFirstName(),
 					personne.getEmail(),
 					personne.getWebSite(), 
-					personne.getBirthDate(),
+					initSQLDate(personne),
 					personne.getIdGroup(),
 					personne.getPassWord(),
 					personne.getId());
@@ -352,9 +354,11 @@ public class Dao extends JdbcTools implements GroupDao, PersonneDao {
 		Collection <Personne> personnes = new ArrayList<Personne>();
 
 		try(Connection connect = newConnection();) {
+			
 			PreparedStatement st = connect.prepareStatement("SELECT DISTINCT id_person, lastname_person, firstname_person, web_person, p.id_group FROM \"PERSONNE\" p, \"GROUPE\" g "
 					+ "WHERE lastname_person LIKE '%" + search + "%' OR firstname_person LIKE  '%" + search + "%' OR web_person LIKE  '%" + search + "%' OR (p.id_group = g.id_group AND g.name_group LIKE '%" + search + "%' )");
 			ResultSet rs = st.executeQuery();
+
 
 			while (rs.next()) {
 
@@ -378,4 +382,21 @@ public class Dao extends JdbcTools implements GroupDao, PersonneDao {
 	}//searchKeywordInPersons
 
 
+	/**
+	 * This methode convert a person birthdate (string) to a correct sqlDate format
+	 * @param p the person to convert birthdate
+	 * @return the birthdate of the person to type sql date Format
+	 */
+	private Date initSQLDate(Personne p) {
+		String birthDate = p.getBirthDate();
+		String []date = birthDate.split("-");
+		
+		Calendar cal = Calendar.getInstance();
+		cal.set(Calendar.YEAR, Integer.parseInt(date[0]) );
+		cal.set(Calendar.MONTH, Integer.parseInt(date[1]) -1);
+		cal.set(Calendar.DAY_OF_MONTH, Integer.parseInt(date[2]) );
+		
+		return new Date(cal.getTimeInMillis());
+	}//initAndGetCalendar()
+	
 }

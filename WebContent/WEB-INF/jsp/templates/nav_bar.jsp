@@ -16,7 +16,7 @@
 			</ul>
 			<form class="navbar-form navbar-left" action="/Annuaire/actions/search" method="get">
 				<div class="form-group">
-					<input name="searcher" type="text" class="form-control" placeholder="Search">
+					<input name="searcher" type="text" class="form-control" placeholder="Rechercher une personne">
 				</div>
 				<button type="submit" class="btn btn-default">Rechercher</button>
 			</form>

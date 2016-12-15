@@ -26,12 +26,17 @@ public class ViewsDispatcherController {
 	GroupManager groupManager;
 	
 	
+	/**
+	 * retrun accueil view
+	 * @return String, the name to the view
+	 */
 	@RequestMapping(value = "/accueil", method = RequestMethod.GET)
-    public String showAccueil(HttpServletRequest request) {
+    public String showAccueil() {
     	logger.info("Returning accueil view");
         return "accueil";
     }
 
+	
 	
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
     public String searchinAnnuaire(

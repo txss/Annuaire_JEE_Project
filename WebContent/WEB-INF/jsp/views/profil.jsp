@@ -36,7 +36,7 @@
 		 	<c:if test="${pers.webSite != ''}">
 				<tr>
 				 	<td>Site internet:</td>
-				 	<td>${pers.webSite}</td>
+				 	<td><a href="${pers.webSite}">${pers.webSite}</a></td>
 		 		</tr>
 			</c:if>
 		 </table>

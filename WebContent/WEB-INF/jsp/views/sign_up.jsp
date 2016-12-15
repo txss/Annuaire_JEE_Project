@@ -7,11 +7,16 @@
 
 	<div class="col-md-offset-3 col-md-8">
 	
-		<small class="errors help-block">${erreur}</small>
+		<c:if test="${erreur == true}">
+			<div class="alert alert-warning centre" role="alert">
+				<small class="errors help-block"><span class="glyphicon glyphicon-warning-sign" style="color:orange;"></span> Cette email est déjà enregistré dans l'annuaire.</small>
+			</div>
+		</c:if>
 		 
 		<form:form method="POST" commandName="personne">
 			<table>
 			    <form:hidden path="id" value="0"/>
+			    <form:hidden path="idGroup" value="soutient"/>
 			    <tr>
 			        <td><label for="firstName">Prénom:</label></td>
 			        <td>
@@ -56,7 +61,6 @@
 			        	<small class="errors help-block"><form:errors path="webSite" cssClass="error" /></small>
 			        </td>
 			    </tr>
-			    <form:hidden path="idGroup" value="000"/>
 			    <tr>
 			        <td><label for="password">Mot de passe:*</label></td>
 			        <td>

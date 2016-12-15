@@ -9,7 +9,12 @@
         <div class="col-sm-6 col-md-4 col-md-offset-4">
             <h4 class="text-center login-title">Annuaire AMU</h4>
             
-            <small class="errors help-block">${error}</small>
+            <c:if test="${erreur == true}">
+           		<div class="alert alert-danger centre" role="alert">
+					<small class="errors"><span class="glyphicon glyphicon-warning-sign" style="color:orange;"></span> Identifiant ou mot de passe incorect.</small>
+				</div>
+			</c:if>
+            
             <div class="account-wall">
                 
                 <form:form method="POST" commandName="login">

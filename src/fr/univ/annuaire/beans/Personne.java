@@ -1,10 +1,6 @@
 package fr.univ.annuaire.beans;
 
-import java.sql.Date;
-
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Null;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 public class Personne {
@@ -19,8 +15,8 @@ public class Personne {
     @Size(min = 2, message = "Le prènom est obligatoire")
 	private String lastName;
 	
-	@Null
-	private Date birthDate;
+	@NotNull
+	private String birthDate;
 	
 	@NotNull
     @Size(min = 6, message = "Votre email est obligatoire")
@@ -29,7 +25,7 @@ public class Personne {
 	private String webSite;
 	
 	@NotNull
-    @Size(min = 3, message = "Le groupe est obligatoire")
+	@Size(min = 3, message = "Le groupe est obligatoire")
 	private String idGroup;
 	
 	@NotNull
@@ -42,7 +38,6 @@ public class Personne {
 	 * Default constructor
 	 */
 	public Personne(){
-		
 	}
 	
 	// BEGIN Getters and Setters
@@ -79,7 +74,7 @@ public class Personne {
 		this.lastName = lastName;
 	}
 	
-	public Date getBirthDate() {
+	public String getBirthDate() {
 		return birthDate;
 	}
 	
@@ -87,7 +82,7 @@ public class Personne {
 		return idGroup;
 	}
 	
-	public void setBirthDate(Date birthday) {
+	public void setBirthDate(String birthday) {
 		this.birthDate = birthday;
 	}
 	
@@ -130,7 +125,7 @@ public class Personne {
 			return false;
 		if(!this.lastName.equals(personne.getLastName()))
 			return false;
-		if(!this.birthDate.toString().equals(personne.birthDate.toString()))
+		if(!this.birthDate.equals(personne.getBirthDate()))
 			return false;
 		if(!this.email.equals(personne.getEmail()))
 			return false;

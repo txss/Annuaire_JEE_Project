@@ -32,9 +32,9 @@ public interface PersonneDao {
 
 	/**
 	 * Methode to find one person by the email addresse in the person book
-	 * @param Email
+	 * @param Email the email to find in database
 	 * @return A Personne bean with the email you give in param 
-	 * @throws DaoException
+	 * @throws DaoException if the person doesn't exist this methode return a DaoException
 	 */
 	Personne findPersonByEmail(String Email) throws DaoException;
 	
