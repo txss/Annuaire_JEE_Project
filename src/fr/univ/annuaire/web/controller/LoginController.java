@@ -7,6 +7,11 @@
  */
 package fr.univ.annuaire.web.controller;
 
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -21,8 +26,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import fr.univ.annuaire.beans.GroupPersonnes;
 import fr.univ.annuaire.beans.Login;
 import fr.univ.annuaire.beans.Personne;
+import fr.univ.annuaire.manager.GroupManager;
 import fr.univ.annuaire.manager.LoginManager;
 
 @Controller()
@@ -33,7 +40,9 @@ public class LoginController {
 	
 	@Autowired
 	LoginManager loginManager;
-    
+	@Autowired
+	GroupManager groupManager;
+	
 	
 	/**
 	 * This methode return the login view to the user.
@@ -122,6 +131,7 @@ public class LoginController {
     		logger.info("Returning sign_up view, email already exist");
     		return "redirect:sign_up";
     	}else{
+    		redirectAttributes.addFlashAttribute("success", true);
     		logger.info("Returning accueil view, new Person in Annuaire: " + p);
     	}
     	
@@ -141,5 +151,21 @@ public class LoginController {
     	logger.info("lOGOUT and returning login view");
         return "redirect:sign_in";
     }
+    
+    
+	// Type complexe
+	@ModelAttribute("groupList")
+	public Map<String, String> groupesTypes() {
+	    Map<String, String> groupes = new LinkedHashMap<>();
+	    Collection<GroupPersonnes> gr = groupManager.getAllGroups();
+	    
+	    Iterator<GroupPersonnes> itr = gr.iterator();
+	    while(itr.hasNext()){
+	    	GroupPersonnes groupPersonnes = itr.next();
+	    	groupes.put(groupPersonnes.getId(), groupPersonnes.getName());
+	    }
+	    
+	    return groupes;
+	}
     
 }

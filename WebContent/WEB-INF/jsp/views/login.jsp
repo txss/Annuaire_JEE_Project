@@ -9,6 +9,12 @@
         <div class="col-sm-6 col-md-4 col-md-offset-4">
             <h4 class="text-center login-title">Annuaire AMU</h4>
             
+             <c:if test="${success == true}">
+           		<div class="alert alert-success centre" role="alert">
+					<small class="errors"><span class="glyphicon glyphicon-ok" style="color:orange;"></span> Votre compte a bien été crée.</small>
+				</div>
+			</c:if>
+            
             <c:if test="${erase == true}">
            		<div class="alert alert-success centre" role="alert">
 					<small class="errors"><span class="glyphicon glyphicon-ok" style="color:orange;"></span> Votre compte a bien étais supprimé.</small>
