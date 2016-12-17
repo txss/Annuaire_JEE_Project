@@ -21,6 +21,14 @@ public class GroupManager {
 	Dao dao;
 	
 	
+	public Dao getDao() {
+		return dao;
+	}
+	public void setDao(Dao dao) {
+		this.dao = dao;
+	}
+
+
 	/**
 	 * Default construcor
 	 */
@@ -33,8 +41,8 @@ public class GroupManager {
 	 * @return a Collection<GroupPersonnes> with all person in the database
 	 */
 	public Collection<GroupPersonnes> getAllGroups(){
-		Collection<GroupPersonnes> persons = dao.findAllGroups();
-		return persons;
+		Collection<GroupPersonnes> grPersons = dao.findAllGroups();
+		return grPersons.size() != 0 ? grPersons : null;
 	}
 	
 	
@@ -75,5 +83,14 @@ public class GroupManager {
 		}
 	}
 	
+	
+	/**
+	 * Explicit methode name
+	 * This methode delete a groupe in database
+	 * @param gr the group to delete
+	 */
+	public void deleteGroup(GroupPersonnes gr){
+		dao.deleteGroup(gr);
+	}
 	
 }

@@ -10,6 +10,7 @@ import org.junit.runners.Suite;
 	beansLauncherTest.class,
 	svgLauncherTest.class,
 	daoLauncherTest.class,
+	managerLauncherTest.class,
 })
 
 public class AllLauncher {

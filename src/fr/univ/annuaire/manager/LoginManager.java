@@ -19,6 +19,17 @@ public class LoginManager {
 	@Autowired
 	Dao dao;
 	
+	
+	
+	public Dao getDao() {
+		return dao;
+	}
+	
+	public void setDao(Dao dao) {
+		this.dao = dao;
+	}
+
+
 	/**
 	 * default constructor
 	 */

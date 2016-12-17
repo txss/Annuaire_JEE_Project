@@ -25,7 +25,7 @@ public class DaoGroupesTest {
 	public void findAllGroups() {
 		Collection<GroupPersonnes> groupPersonnes = dao.findAllGroups();
 		assertNotNull(groupPersonnes);
-		//		System.out.println(groupPersonnes);
+		System.out.println(groupPersonnes);
 	}
 
 
