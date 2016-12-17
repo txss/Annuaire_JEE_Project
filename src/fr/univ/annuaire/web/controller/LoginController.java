@@ -81,6 +81,7 @@ public class LoginController {
         }
     	
     	Personne pers = loginManager.checkLogin(l);
+    	
     	if (pers != null){
     		HttpSession session = request.getSession();
     	    session.setAttribute("user", true);

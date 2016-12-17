@@ -70,9 +70,9 @@
 				<div class="alert alert-warning" role="alert">
 					<span class="glyphicon glyphicon-warning-sign"
 						style="color: orange;"></span>
-						Cette action sera définitive et ne pourra être annulé.
+						Cette action sera définitive et ne pourra être annulée.
 				</div>
-				<p>Vous etez sur le point de supprimer toute les informations
+				<p>Vous etes sur le point de supprimer toute les informations
 					vous concernant de l'annuaire.</p>
 				
 			</div>

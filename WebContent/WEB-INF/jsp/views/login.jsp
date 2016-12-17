@@ -17,7 +17,7 @@
             
             <c:if test="${erase == true}">
            		<div class="alert alert-success centre" role="alert">
-					<small class="errors"><span class="glyphicon glyphicon-ok" style="color:orange;"></span> Votre compte a bien étais supprimé.</small>
+					<small class="errors"><span class="glyphicon glyphicon-ok" style="color:orange;"></span> Votre compte a bien été supprimé.</small>
 				</div>
 			</c:if>
             

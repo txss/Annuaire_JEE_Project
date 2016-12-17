@@ -76,7 +76,7 @@
 					<td>
 						<div class="form-group">
 							<form:select path="idGroup" multiple="false" class="form-control">
-								<form:option value="" label="--- Select ---" />
+								<form:option value="default" label="--- Select ---" />
 								<form:options items="${groupList}" />
 							</form:select>
 						</div>
@@ -91,7 +91,7 @@
 						<div class="form-group has-feedback">
 							<label class="control-label" for="pwd"></label>
 							<form:password path="passWord" class="form-control"
-								placeholder="Mot de passe" onkeyup="verifPwd()" />
+								placeholder="Mot de passe" onkeyup="verifPwd()" id="pwd"/>
 						</div>
 					</td>
 					<td><small class="errors help-block"><form:errors
@@ -142,7 +142,7 @@
 			$( "#confirm" ).after('<span class="glyphicon glyphicon-remove form-control-feedback resultConf"></span>' );
 			$( "#confirm" ).after('<small id="confMessage" class="errors help-block">Le mot de passe est différent</small>');
 			$( ".pwdGroup" ).removeClass( "has-success" ).addClass( "has-error" );
-			
+			$( "#btnSubmit" ).attr( 'disabled', "disabled" );
 		}
 	}
 	
