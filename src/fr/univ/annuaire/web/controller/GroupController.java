@@ -32,6 +32,20 @@ public class GroupController {
 	PersonManager personManager;
 	
 	
+	public GroupManager getGroupManager() {
+		return groupManager;
+	}
+	public void setGroupManager(GroupManager groupManager) {
+		this.groupManager = groupManager;
+	}
+	public PersonManager getPersonManager() {
+		return personManager;
+	}
+	public void setPersonManager(PersonManager personManager) {
+		this.personManager = personManager;
+	}
+
+
 	/**
 	 * Route the request to the view lister_groupes with the attribute groupes in session
 	 * the attribute is a collection of GroupPersonnes
@@ -67,7 +81,7 @@ public class GroupController {
 		session.setAttribute("personnes", personManager.findAllPersonInGroup(groupID));
 	    
 	    logger.info("Returning show_group ("+groupID+")  view.");
-        return "show_group";
+        return "show_groupe";
     }
 	
 	
@@ -80,7 +94,7 @@ public class GroupController {
 			return "redirect:/actions/login/sign_in";
 		
 	    logger.info("Returning add_group view.");
-        return "add_group";
+        return "add_groupe";
     }
 	
 	

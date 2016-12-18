@@ -11,6 +11,7 @@ import org.junit.runners.Suite;
 	svgLauncherTest.class,
 	daoLauncherTest.class,
 	managerLauncherTest.class,
+	controllerLauncherTest.class,
 })
 
 public class AllLauncher {
