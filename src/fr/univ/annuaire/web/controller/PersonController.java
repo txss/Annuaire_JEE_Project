@@ -32,6 +32,21 @@ public class PersonController {
 	@Autowired
 	GroupManager groupManager;
 	
+	
+	public PersonManager getPersonManager() {
+		return personManager;
+	}
+	public void setPersonManager(PersonManager personManager) {
+		this.personManager = personManager;
+	}
+	public GroupManager getGroupManager() {
+		return groupManager;
+	}
+	public void setGroupManager(GroupManager groupManager) {
+		this.groupManager = groupManager;
+	}
+
+
 	/**
 	 * This methode redirect to the view to see all person in the annuaire database
 	 * The request id made by the personManager.
@@ -62,11 +77,12 @@ public class PersonController {
 		
 		HttpSession session = request.getSession();
 		Personne pers = personManager.getPerson(personID);
+		
 	    session.setAttribute("showPers", pers);
 	    session.setAttribute("group", groupManager.findGroup(pers.getIdGroup()));
 		
 	    logger.info("Returning show_person ("+personID+")  view.");
-        return "show_person";
+        return "show-person";
     }
 	
 }

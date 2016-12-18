@@ -68,9 +68,6 @@ public class JdbcTools {
 		loadDriver();
 	}
 	
-	public void close(){
-		logger.info("Close JdbcTools...");
-	}
 	
 	/**
 	 * Use this methode to load the database driver
@@ -127,24 +124,5 @@ public class JdbcTools {
 		}
 		return rs;
 	}
-	
-	
-//	// TODO check this
-//	public <T> Collection<T> findBeans(String sql, IResultSetToBean<T> mapper) throws DaoException {
-//		Collection <T> beans = new ArrayList<T>();
-//		
-//		try(Connection connect = newConnection();) {
-//			PreparedStatement st = connect.prepareStatement(sql);
-//			ResultSet rs = st.executeQuery();
-//			
-//			beans.add(mapper.toBean(rs));
-//			
-//			st.close();
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}
-//		
-//		return beans;
-//	}//findBeans
 	
 }

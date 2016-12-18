@@ -11,7 +11,7 @@
 	<h4>${group.name}</h4>
 	<p>Id du groupe: ${group.id}</p>
 
-	<h3>Personnes présente dans le groupe:</h3>
+	<h3>Personnes présentes dans le groupe:</h3>
     <%@ include file="/WEB-INF/jsp/templates/person_list.jsp" %>
 
 </div>	  

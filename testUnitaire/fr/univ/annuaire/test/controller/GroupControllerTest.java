@@ -1,5 +1,7 @@
 package fr.univ.annuaire.test.controller;
 
+import static org.junit.Assert.*;
+
 import java.util.Collection;
 
 import org.junit.Before;
@@ -58,7 +60,14 @@ public class GroupControllerTest {
                     .andExpect(viewName);
 	}
 	
-	@Test(timeout = 3000)
+	
+	@Test (timeout = 2000)
+	public void testGet(){
+		assertNotNull(groupController.getGroupManager());
+		assertNotNull(groupController.getPersonManager());
+	}
+	
+	@Test(timeout = 3500)
 	public void showGroupinAnnuaire() throws Exception{
 		GroupPersonnes group = null;
 		Collection<Personne> personnes = null; 

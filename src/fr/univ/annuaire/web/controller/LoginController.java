@@ -44,6 +44,20 @@ public class LoginController {
 	GroupManager groupManager;
 	
 	
+	public LoginManager getLoginManager() {
+		return loginManager;
+	}
+	public void setLoginManager(LoginManager loginManager) {
+		this.loginManager = loginManager;
+	}
+	public GroupManager getGroupManager() {
+		return groupManager;
+	}
+	public void setGroupManager(GroupManager groupManager) {
+		this.groupManager = groupManager;
+	}
+
+
 	/**
 	 * This methode return the login view to the user.
 	 * The user need to use this methode to get the login form on the login view
@@ -104,7 +118,7 @@ public class LoginController {
     @RequestMapping(value = "/sign_up", method = RequestMethod.GET)
     public String sign_up(@ModelAttribute Personne p, BindingResult result) {
     	logger.info("Returning sign_up view");
-        return "sign_up";
+        return "sign-up";
     }
     
 
@@ -121,10 +135,10 @@ public class LoginController {
     public String sign_upForm(@ModelAttribute @Valid Personne p,
     						BindingResult result,
 							final RedirectAttributes redirectAttributes) {
-    	System.out.println(result);
+
     	if (result.hasErrors()) {
     		logger.info("Returning sign_up view, sign_up failed: incorrect syntax");
-            return "sign_up";
+            return "sign-up";
         }
     	
     	if( ! loginManager.saveNewPerson(p)){
