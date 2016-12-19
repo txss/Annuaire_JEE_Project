@@ -124,6 +124,7 @@ public class ProfilController {
 		
 		if(profilManager.update(p)){
 			session.setAttribute("pers", p); // update les infos de la personne connecté en session
+			session.setAttribute("gr", groupManager.findGroup(p.getIdGroup()));
 			logger.info("Saving modifications on person(id:"+p.getId()+")");
 	    	logger.info("Returning edit_profil_POST view");
 		}else{
