@@ -6,8 +6,3 @@
 		</c:forEach>
 	</ul>
 </c:if>
-
-<c:if test="${personnes == null}">
-	<p>Il n'y a aucune personne dans l'annuaire pour moment..</p><br/>
-	<p>Soyez la permiére: <a herf="/Annuaire/actions/login/sign_up">sign_up</a></p>
-</c:if>

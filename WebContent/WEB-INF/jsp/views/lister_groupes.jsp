@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/jsp/templates/nav_bar.jsp" %>
 
 
-<div class="container">
+<div class="container lister">
 	<h3>Groupes de l'annuaire</h3>
     <ul style="list-style-type: square">
 	    <c:forEach items="${groupes}" var="grp">
