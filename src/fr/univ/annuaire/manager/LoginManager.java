@@ -60,6 +60,20 @@ public class LoginManager {
 		return null;
 	}
 	
+	/**
+	 * This methode search a person in the database by the email
+	 * @param email
+	 * @return
+	 */
+	public Personne getPerson(String email){
+		try {
+			return dao.findPersonByEmail(email);
+		} catch (DaoException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	
 	/**
 	 * This methode check in database if the person pers is in already in base by the email

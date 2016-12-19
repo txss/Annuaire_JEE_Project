@@ -31,6 +31,7 @@ import fr.univ.annuaire.beans.Login;
 import fr.univ.annuaire.beans.Personne;
 import fr.univ.annuaire.manager.GroupManager;
 import fr.univ.annuaire.manager.LoginManager;
+import fr.univ.annuaire.utility.EmailUtility;
 
 @Controller()
 @RequestMapping("/login")
@@ -164,6 +165,43 @@ public class LoginController {
     	HttpSession session = request.getSession();
 	    session.setAttribute("user", null);
     	logger.info("lOGOUT and returning login view");
+        return "redirect:sign_in";
+    }
+    
+
+    /**
+     * Route the user to the password recovery view
+     * @param l
+     * @return
+     */
+    @RequestMapping(value = "/forgot_pwd", method = RequestMethod.GET)
+    public String forgotPWD(@ModelAttribute Login l) {
+    	logger.info("Returning pwd_recovery view");
+        return "pwd_recovery";
+    }
+
+    /**
+     * Check in the database if this email exist
+     * If this email exist, send a email with the password, if the email doesn't exist in the database the email 
+     * add falsh attribute for the user
+     * @param l
+     * @param redirectAttributes
+     * @return
+     */
+    @RequestMapping(value = "/forgot_pwd", method = RequestMethod.POST)
+    public String forgotPWDSendEmail(@ModelAttribute Login l,
+    									final RedirectAttributes redirectAttributes) {
+    	
+    	Personne pers = loginManager.getPerson(l.getEmail());
+    	
+    	if(pers != null){
+    		EmailUtility.sendEmail(pers.getEmail(), pers.getPassWord());
+    		redirectAttributes.addFlashAttribute("forgot_pwd_success", true);
+    		logger.info("Sending Email pwd recovery to: "+ l.getEmail() +" Returning sign_in view");
+            return "redirect:sign_in";
+    	}
+    	
+    	redirectAttributes.addFlashAttribute("forgot_pwd_error", true);
         return "redirect:sign_in";
     }
     

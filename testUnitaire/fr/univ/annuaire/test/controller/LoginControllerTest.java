@@ -110,4 +110,16 @@ public class LoginControllerTest {
         			.andExpect(attr1)
                     .andExpect(redirect);
 	}
+	
+	
+	@Test(timeout = 2000)
+	public void forgotPWD() throws Exception {
+		ResultMatcher ok = MockMvcResultMatchers.status().isOk();
+		ResultMatcher viewName = MockMvcResultMatchers.view().name("pwd_recovery");
+		
+		MockHttpServletRequestBuilder builder = MockMvcRequestBuilders.get("/login/forgot_pwd");
+        this.mockMvc.perform(builder)
+                    .andExpect(ok)
+                    .andExpect(viewName);
+	}
 }

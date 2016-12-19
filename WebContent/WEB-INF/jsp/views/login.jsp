@@ -23,7 +23,19 @@
             
             <c:if test="${erreur == true}">
            		<div class="alert alert-danger centre" role="alert">
-					<small class="errors"><span class="glyphicon glyphicon-warning-sign" style="color:orange;"></span> Identifiant ou mot de passe incorect.</small>
+					<small class="errors"><span class="glyphicon glyphicon-ok" style="color:orange;"></span> Identifiant ou mot de passe incorect.</small>
+				</div>
+			</c:if>
+			
+			<c:if test="${forgot_pwd_success == true}">
+           		<div class="alert alert-success centre" role="alert">
+					<small class="errors"><span class="glyphicon glyphicon-warning-sign" style="color:orange;"></span> Un email de récupération de mot de passe vous a été envoyé.</small>
+				</div>
+			</c:if>
+            
+            <c:if test="${forgot_pwd_error == true}">
+           		<div class="alert alert-danger centre" role="alert">
+					<small class="errors"><span class="glyphicon glyphicon-warning-sign" style="color:orange;"></span> Aucun compte n'existe avec cette adresse email dans l'annuaire.</small>
 				</div>
 			</c:if>
             
@@ -60,8 +72,10 @@
 					</tr>
 				    </table>
 				</form:form>
-				<a href="sign_up">Sign up</a>
+				<a class="btn btn-success" href="sign_up">Sign up</a><br/>
+				<a href="forgot_pwd">Mot de passe oublié?</a>
             </div>
+            
         </div>
     </div>
 </div>
