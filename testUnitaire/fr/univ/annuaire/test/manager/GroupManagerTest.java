@@ -30,6 +30,11 @@ public class GroupManagerTest {
 		assertNotNull(groupManager.findGroup("test"));
 	}
 	
+	@Test(timeout = 2000)
+	public void testGet(){
+		assertNotNull(groupManager.getDao());
+	}
+	
 	@Test (timeout = 2000)
 	public void findGroup() {
 		assertNotNull(groupManager.findGroup("default"));

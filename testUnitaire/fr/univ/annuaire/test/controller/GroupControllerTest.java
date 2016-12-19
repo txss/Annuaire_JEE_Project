@@ -36,7 +36,6 @@ public class GroupControllerTest {
 	GroupController groupController;
 	
 	private MockMvc mockMvc;
-
 	
 	
 	@Before

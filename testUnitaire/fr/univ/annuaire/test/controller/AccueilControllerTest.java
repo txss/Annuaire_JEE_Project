@@ -21,7 +21,7 @@ public class AccueilControllerTest {
 	@Test
 	public void accueil() {
 		ModelAndView result = accueilController.handleRequest(null, null);
-		assertEquals("accueil", result.getViewName());
+		assertEquals("accueil_view", result.getViewName());
 	}
 
 }

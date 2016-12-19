@@ -25,7 +25,7 @@ public class AccueilController implements Controller {
             HttpServletResponse response){
 
         logger.info("Returning accueil view");
-        return new ModelAndView("accueil");
+        return new ModelAndView("accueil_view");
     }
 
 }

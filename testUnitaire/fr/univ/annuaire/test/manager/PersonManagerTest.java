@@ -25,6 +25,10 @@ public class PersonManagerTest {
 		assertTrue(personManager.getAllPerson().size()!=0);
 	}
 
+	@Test(timeout = 2000)
+	public void testGet(){
+		assertNotNull(personManager.getDao());
+	}
 	
 	@Test(timeout = 2000)
 	public void getPerson(){

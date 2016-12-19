@@ -29,6 +29,10 @@ public class LoginManagerTest {
 		assertNull(loginManager.checkLogin(login));
 	}
 
+	@Test(timeout = 2000)
+	public void testGet(){
+		assertNotNull(loginManager.getDao());
+	}
 	
 	@Test (timeout = 2000)
 	public void checkLoginFailWrongPassword() {

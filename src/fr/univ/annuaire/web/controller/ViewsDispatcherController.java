@@ -28,7 +28,20 @@ public class ViewsDispatcherController {
 	@Autowired
 	GroupManager groupManager;
 	
-	
+	public PersonManager getPersonManager() {
+		return personManager;
+	}
+	public void setPersonManager(PersonManager personManager) {
+		this.personManager = personManager;
+	}
+	public GroupManager getGroupManager() {
+		return groupManager;
+	}
+	public void setGroupManager(GroupManager groupManager) {
+		this.groupManager = groupManager;
+	}
+
+
 	/**
 	 * retrun accueil view
 	 * @return String, the name to the view
@@ -36,7 +49,7 @@ public class ViewsDispatcherController {
 	@RequestMapping(value = "/accueil", method = RequestMethod.GET)
     public String showAccueil() {
     	logger.info("Returning accueil view");
-        return "accueil";
+        return "accueil_view";
     }
 
 	

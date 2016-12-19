@@ -42,7 +42,7 @@ public class GroupManager {
 	 */
 	public Collection<GroupPersonnes> getAllGroups(){
 		Collection<GroupPersonnes> grPersons = dao.findAllGroups();
-		return grPersons.size() != 0 ? grPersons : null;
+		return grPersons;
 	}
 	
 	

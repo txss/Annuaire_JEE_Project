@@ -1,5 +1,7 @@
 package fr.univ.annuaire.test.controller;
 
+import static org.junit.Assert.*;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -37,6 +39,11 @@ public class LoginControllerTest {
         this.mockMvc = builder.build();
 	}
 	
+	@Test(timeout = 2000)
+	public void testGet(){
+		assertNotNull(loginController.getGroupManager());
+		assertNotNull(loginController.getLoginManager());
+	}
 	
 	
 	@Test(timeout = 2000)

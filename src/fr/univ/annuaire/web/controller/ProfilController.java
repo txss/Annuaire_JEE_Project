@@ -42,6 +42,20 @@ public class ProfilController {
 	GroupManager groupManager;
 	
 	
+	public ProfilManager getProfilManager() {
+		return profilManager;
+	}
+	public void setProfilManager(ProfilManager profilManager) {
+		this.profilManager = profilManager;
+	}
+	public GroupManager getGroupManager() {
+		return groupManager;
+	}
+	public void setGroupManager(GroupManager groupManager) {
+		this.groupManager = groupManager;
+	}
+
+
 	/**
 	 * This methode check if the user is authenticate and redirect to the profile view
 	 * if the user is not connect, he will be redirect to the login view

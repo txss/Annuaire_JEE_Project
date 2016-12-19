@@ -2,6 +2,7 @@ package fr.univ.annuaire.test.manager;
 
 import static org.junit.Assert.*;
 
+import org.junit.AfterClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,11 @@ public class ProfilManagerTest {
 	}
 
 	
+	@Test(timeout = 2000)
+	public void testGet(){
+		assertNotNull(profilManager.getDao());
+	}
+	
 	@Test
 	public void updateFailWrongID() {
 		Personne pers = new Personne();
@@ -66,7 +72,7 @@ public class ProfilManagerTest {
 	}
 	
 	
-//	@Test(timeout = 2000)
+//	@AfterClass
 //	public void deletePerson(){
 //		Personne pers = new Personne();
 //		pers.setId(88);
