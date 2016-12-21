@@ -31,35 +31,25 @@ public class DaoPersonnesTest {
 	
 	@Test (timeout = 2000)
 	public void findPersonByID() throws DaoException{
-		Personne pers = dao.findPersonByID(80);
-		
-		Personne p = new Personne();
-		p.setId(80);
-		p.setFirstName("test                ");
-		p.setLastName("test                ");
-		p.setEmail("test.test@gmail.com");
-		p.setWebSite("monbeausiteweb.com");
-		p.setBirthDate("1989-05-23");
-		p.setPassWord("test");
-		p.setIdGroup("57");
-		assertTrue(p.isEquals(pers));
+		Personne pers = dao.findPersonByID(89);
+		assertNotNull(pers);
 	}
 	
 	
-	@Test (timeout = 2000)
+	@Test (timeout = 2500)
 	public void findPersonByEmail() throws DaoException{
 		String email = "test.test@gmail.com";
 		Personne pers = dao.findPersonByEmail(email);
 		
 		Personne p = new Personne();
-		p.setId(80);
-		p.setFirstName("test                ");
-		p.setLastName("test                ");
+		p.setId(88);
+		p.setFirstName("test");
+		p.setLastName("code-Bien");
 		p.setEmail("test.test@gmail.com");
-		p.setWebSite("monbeausiteweb.com");
-		p.setBirthDate("1989-05-23");
+		p.setWebSite("monbeausite.com");
+		p.setBirthDate("2012-12-12");
 		p.setPassWord("test");
-		p.setIdGroup("57");
+		p.setIdGroup("default");
 
 		assertTrue(p.isEquals(pers));
 	}
@@ -88,13 +78,13 @@ public class DaoPersonnesTest {
 	}
 	
 	
-	@Test (timeout = 2000)
+	@Test (timeout = 2500)
 	public void insertPerson() throws DaoException{
 		Personne p = new Personne();
 		p.setFirstName("jean");
 		p.setLastName("charles louis emile");
 		p.setEmail("jean.riolait@live.de");
-		p.setIdGroup("57");
+		p.setIdGroup("default");
 		p.setBirthDate("1989-05-23");
 		p.setWebSite("monbeausiteweb.com");
 		p.setPassWord("password");
@@ -103,27 +93,27 @@ public class DaoPersonnesTest {
 	}
 	
 
-	@Test (timeout = 2000)
+	@Test (timeout = 2500)
 	public void updatePerson() throws DaoException{
 		Personne p = new Personne();
-		p.setId(75);
-		p.setFirstName("jean-modifier       ");
+		p.setId(89);
+		p.setFirstName("jean-modifier");
 		p.setLastName("charles louis emile ");
 		p.setEmail("jean.riolait@live.de");
-		p.setIdGroup("57");
+		p.setIdGroup("default");
 		p.setBirthDate("1997-06-06");
 		p.setWebSite("monbeausiteweb.com");
 		p.setPassWord("password");
 		
 		dao.updatePerson(p);
 		
-		assertTrue(p.isEquals(dao.findPersonByID(75)) );
+		assertTrue(p.isEquals(dao.findPersonByID(89)) );
 	}
 
 
 	@Test (timeout = 2000)
 	public void findAllPersonsInGroup(){
-		Collection<Personne> personnes = dao.findAllPersonsInGroup("57");
+		Collection<Personne> personnes = dao.findAllPersonsInGroup("default");
 		assertNotEquals(0, personnes.size());
 	}
 	

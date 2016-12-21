@@ -7,7 +7,7 @@ import fr.univ.annuaire.utility.EmailUtility;
 public class EmailTest {
 	
 
-	@Test
+	@Test(timeout = 2500)
 	public void test() {
 		EmailUtility.sendEmail("votre.email@gmail.com", "password");
 	}

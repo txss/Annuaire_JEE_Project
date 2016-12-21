@@ -68,7 +68,7 @@ public class JdbcToolsPGTest {
 		String website = "testdusiteinternet.com";
 		String password = "josef";
 		Date birthday = new Date(initAndGetCalendar(22, 2, 1993).getTimeInMillis());
-		String idgroup = "M2FSIL2016";
+		String idgroup = "default";
 
 		assertNull(newTool.executeUpdate(query, lastname, firstname, email, website, birthday, password, idgroup));
 	}//insertPrepared()
@@ -100,14 +100,24 @@ public class JdbcToolsPGTest {
 	}//selectSimpleOnTableGroupes()
 	
 	
-	@Test(timeout = 2000)
-	public void insertPreparedOnTableGroupes() throws SQLException, ParseException {
+	@Test(timeout = 2000, expected = SQLException.class)
+	public void insertPreparedOnTableGroupesExist() throws SQLException, ParseException {
 		String query = 	"INSERT INTO \"GROUPE\"(id_group, name_group)"+
 						"VALUES (?, ?)";
 		String id = "M2ID2016";
 		String name = "M2 ID 2015/2016";
 
-		assertNull(newTool.executeUpdate(query, id, name));
+		assertNotNull(newTool.executeUpdate(query, id, name));
 	}//insertPreparedOnTableGroupes()
 	
+	
+	@Test(timeout = 2000)
+	public void insertPreparedOnTableGroupes() throws SQLException, ParseException {
+		String query = 	"INSERT INTO \"GROUPE\"(id_group, name_group)"+
+						"VALUES (?, ?)";
+		String id = "M2ID2020";
+		String name = "M2 ID 2019/2020";
+
+		assertNull(newTool.executeUpdate(query, id, name));
+	}//insertPreparedOnTableGroupes()
 }

@@ -87,9 +87,18 @@ public class LoginManagerTest {
 		pers.setIdGroup("default");
 		pers.setWebSite("");
 		pers.setBirthDate("2012-12-12");
-		pers.setEmail("jean.code-bien@gmail.com");
+		pers.setEmail("jean.code-bien1@gmail.com");
 		
 		assertTrue(loginManager.saveNewPerson(pers));
 	}
 	
+	@Test (timeout = 2500)
+	public void getPerson(){
+		assertNotNull(loginManager.getPerson("test.test@gmail.com"));
+	}
+	
+	@Test (timeout = 2500)
+	public void getPersonNull(){
+		assertNull(loginManager.getPerson("existPas@gmail.com"));
+	}
 }

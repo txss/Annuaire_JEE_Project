@@ -7,8 +7,7 @@
 		<h3>Bonjour ${pers.firstName}!</h3>
 
 		<h5>
-			Vos informations personnel: <a href="edit"><span
-				class="glyphicon glyphicon-pencil"></span></a>
+			Vos informations personnel:
 		</h5>
 
 		<table id="infos_perso">
@@ -50,6 +49,7 @@
 	</div>
 
 	<div class="row">
+		<a href="edit" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span> Modifier mon profil</a>
 		<a href="/Annuaire/actions/group/add_group" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Ajouter un groupe </a>
 		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#confirmErase"><span class="glyphicon glyphicon-remove" style="color: red;"></span> Effacer mon compte</button>
 	</div>
